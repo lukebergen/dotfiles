@@ -1,0 +1,6 @@
+" entry point for config. ~/.vimrc should just source this file or symlink to it
+so ~/.vim/rcs/setup
+so ~/.vim/rcs/settings
+so ~/.vim/rcs/bindings
+so ~/.vim/rcs/styles
+so ~/.vim/rcs/custom

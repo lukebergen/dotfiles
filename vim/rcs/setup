@@ -1,0 +1,23 @@
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+
+call vundle#rc()
+
+Plugin 'gmarik/vundle'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'kien/ctrlp.vim'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'rking/ag.vim'
+Plugin 'mkitt/tabline.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'skalnik/vim-vroom'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-surround'
+Plugin 'fatih/vim-go'
+Plugin 'tpope/vim-rails'
+Plugin 'mattn/emmet-vim'
+Plugin 'wting/rust.vim'
+
+syntax on
+filetype plugin indent on

@@ -1,0 +1,51 @@
+set backspace=indent,eol,start
+set showcmd
+set showmode
+set laststatus=2
+set statusline=%f%m%=%l/%L:%c
+
+" enable 256 color for molokai
+set t_Co=256
+colorscheme molokai
+
+set noswapfile
+set nobackup
+set splitright
+set splitbelow
+set encoding=utf-8
+set autowrite
+set autoread
+set ignorecase
+set smartcase
+set noequalalways
+" set list
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+
+" disable auto commenting on next line
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/log/*,*/source_maps/*
+
+set suffixesadd+=.js,.js.coffee,.coffee
+
+set wrap
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set smarttab
+set expandtab
+
+let g:ctrlp_show_hidden=1
+
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif

@@ -1,0 +1,52 @@
+let mapleader=","
+inoremap jk <ESC>
+
+" easymotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+nmap s <Plug>(easymotion-s)
+" map <Leader>j <Plug>(easymotion-j)
+" map <Leader>k <Plug>(easymotion-k)
+
+nnoremap <Leader>n :Explore<CR>
+nnoremap <Leader>t :tabnew<CR>
+nnoremap <Leader>p arequire 'pry'; binding.pry #$<ESC>
+inoremap <Leader>p require 'pry'; binding.pry #$
+nnoremap <silent> <leader>b :CtrlPBuffer<cr>
+
+" leader mappings for common split creation/nav
+nnoremap <Leader>v :vnew<cr>
+nnoremap <Leader>h :new<cr>
+nnoremap <Leader>sv :vsp<cr>
+nnoremap <Leader>sh :sp<cr>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+nnoremap + :resize +10<CR>
+nnoremap - :resize -10<CR>
+nnoremap <C-A> :vertical resize -10<CR>
+nnoremap <C-D> :vertical resize +10<CR>
+
+" quick tab navigation
+nnoremap <Leader>1 1gt
+nnoremap <Leader>2 2gt
+nnoremap <Leader>3 3gt
+nnoremap <Leader>4 4gt
+nnoremap <Leader>5 5gt
+nnoremap <Leader>6 6gt
+
+" better code-completion navigation
+inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "j"
+inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "k"
+
+" remap <Leader>r. I like running rake in another iterm window and would rather use r for redraw! since I habitually cmd+k and sometimes mistakenly do so in vim
+nnoremap <Leader>r :redraw!<CR>
+inoremap <Leader>r <C-O>:redraw!<CR>
+
+" leader mapping for clearing search because highlighting is ugly
+nnoremap <Leader>c :nohl<return>
+
+" quick editing/sourcing of vim rc files
+nnoremap <Leader>ev :vsp ~/.vim/rcs/<cr>
+nnoremap <Leader>sov :source ~/.vim/rcs/vimrc<cr>

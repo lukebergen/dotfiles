@@ -1,0 +1,21 @@
+eval "$(rbenv init - --no-rehash)"
+
+alias be="bundle exec"
+alias fs="foreman start"
+alias befs="bundle exec foreman start"
+alias befr="bundle exec foreman run"
+alias gs="git status -s"
+alias gb="git branch"
+alias gc="git checkout \$1"
+alias gl="git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --no-merges \$1"
+alias gd="git diff"
+alias lal="ls -al"
+alias es_off="launchctl unload /Users/lukebergen/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist"
+alias es_on="launchctl load /Users/lukebergen/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist"
+alias file_serve="ruby -run -e httpd . -p \$1"
+alias fix_video="sudo killall VDCAssistant"
+
+export EDITOR=vim
+
+export GOPATH=$HOME/code/go
+export PATH=$PATH:$GOPATH/bin
