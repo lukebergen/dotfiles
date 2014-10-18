@@ -6,7 +6,6 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 brew install caskroom/cask/brew-cask
 
-brew install brew-cask
 brew install ctags
 brew install elasticsearch
 brew install git
