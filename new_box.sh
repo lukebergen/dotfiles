@@ -19,16 +19,20 @@ brew install the_silver_searcher
 brew install vim
 brew install wget
 
-brew cask install google-chrome
+brew cask install caffeine
+brew cask install disk-inventory-x
 brew cask install dropbox
-brew cask install onepassword
-brew cask install iterm2
+brew cask install flux
 brew cask install gas-mask
+brew cask install gimp
+brew cask install google-chrome
 brew cask install gpgtools
+brew cask install iterm2
 brew cask install limechat
-brew cask install skype
+brew cask install onepassword
 brew cask install skitch
-brew cask install atom
+brew cask install skype
+brew cask install whatsapp-pocket
 
 # install ohmyzsh
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.dotfiles/zsh/oh-my-zsh
