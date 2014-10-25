@@ -4,10 +4,6 @@ set showmode
 set laststatus=2
 set statusline=%f%m%=%l/%L:%c
 
-" enable 256 color for molokai
-set t_Co=256
-colorscheme molokai
-
 set noswapfile
 set nobackup
 set splitright

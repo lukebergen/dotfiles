@@ -18,6 +18,7 @@ brew install redis
 brew install the_silver_searcher
 brew install vim
 brew install wget
+brew install zsh
 
 brew cask install caffeine
 brew cask install disk-inventory-x
@@ -34,10 +35,13 @@ brew cask install skitch
 brew cask install skype
 brew cask install whatsapp-pocket
 
+# install vundle
+git clone https://github.com/gmarik/Vundle.vim.git ~/.dotfiles/vim/bundle/Vundle.vim
+
 # install ohmyzsh
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.dotfiles/zsh/oh-my-zsh
 cp ~/.dotfiles/zsh/themes/lukebergen.zsh-theme ~/.dotfiles/zsh/oh-my-zsh/themes/
 
 # link everything up
-ln -s ~/.vim.rc ~/.dotfiles/vim/rcs/vimrc
+ln -s ~/.vimrc ~/.dotfiles/vim/rcs/vimrc
 ln -s ~/.zsh.rc ~/.dotfiles/zsh/zshrc

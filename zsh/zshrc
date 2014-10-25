@@ -1,5 +1,5 @@
 # oh-my-zsh setup
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/.dotfiles/zsh/oh-my-zsh
 plugins=(git z)
 export ZSH_THEME=lukebergen
 source $ZSH/oh-my-zsh.sh
