@@ -9,6 +9,7 @@ brew install git
 brew install gnupg
 brew install go
 brew install imagemagick
+brew install keybase
 brew install mercurial
 brew install node
 brew install nvm
