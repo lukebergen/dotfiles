@@ -18,8 +18,6 @@ export PATH=$PATH:$GOPATH/bin
 eval "$(rbenv init - --no-rehash)"
 
 # aliases
-alias mysql=/usr/local/mysql/bin/mysql
-alias mysqladmin=/usr/local/mysql/bin/mysqladmin
 alias be="bundle exec"
 alias fs="foreman start"
 alias befs="bundle exec foreman start"
@@ -34,13 +32,17 @@ alias es_off="launchctl unload /Users/lukebergen/Library/LaunchAgents/homebrew.m
 alias es_on="launchctl load /Users/lukebergen/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist"
 alias file_serve="ruby -run -e httpd . -p \$1"
 alias fix_video="sudo killall VDCAssistant"
-# alias np="printf '\033]2;%s\033\\' \$1"
+
+alias hydra_production="REVIEWED_SEARCH_ENV=production ELASTICSEARCH_INDEX=products_production ELASTICSEARCH_KEY=SbDQLCyENCgTD9RdXL ELASTICSEARCH_URL=http://cerebro-production.herokuapp.com:80 ELASTICSEARCH_USER=cerebro API_URL=https://api.reviewed.com/api/v1 befr rails s -p 3001"
 
 # miscelanious configuration stuff
 export PGDATA="/usr/local/var/postgres"
 export EDITOR=vim
 
 export ARCHFLAGS="-arch x86_64"
+
+unsetopt inc_append_history
+unsetopt share_history
 
 # setup nvm
 [[ -s /Users/lukebergen/.nvm/nvm.sh ]] && . /Users/lukebergen/.nvm/nvm.sh # This loads NVM

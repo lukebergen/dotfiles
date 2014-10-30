@@ -23,7 +23,10 @@ brew install postgresql
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 
 brew install rbenv
+
 brew install redis
+
+
 brew install ruby-build
 brew install the_silver_searcher
 brew install vim
