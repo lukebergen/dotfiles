@@ -1,6 +1,7 @@
 command! Subl execute "!subl %"
 command! Ctags execute "!ctags -R"
 command! Clear execute "tabnew | tabonly"
+command! Json execute ":%!python -m 'json.tool'"
 
 set number
 function! NumberToggle()
@@ -12,3 +13,11 @@ function! NumberToggle()
 endfunc
 
 nnoremap <Leader>l :call NumberToggle()<cr>
+
+function! DeleteHiddenBuffers()
+    let tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        silent execute 'bwipeout' buf
+    endfor
+endfunction

@@ -1,5 +1,7 @@
 let mapleader=","
 inoremap jk <ESC>
+inoremap Jk <ESC>
+inoremap JK <ESC>
 
 " easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
