@@ -50,5 +50,5 @@ inoremap <Leader>r <C-O>:redraw!<CR>
 nnoremap <Leader>c :nohl<return>
 
 " quick editing/sourcing of vim rc files
-nnoremap <Leader>ev :vsp ~/.vim/rcs/<cr>
-nnoremap <Leader>sov :source ~/.vim/rcs/vimrc<cr>
+nnoremap <Leader>ev :vsp ~/.dotfiles/vim/rcs/<cr>
+nnoremap <Leader>sov :source ~/.dotfiles/vim/rcs/vimrc<cr>
