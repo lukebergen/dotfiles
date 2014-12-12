@@ -17,7 +17,6 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-surround'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-rails'
-Plugin 'mattn/emmet-vim'
 Plugin 'wting/rust.vim'
 
 syntax on
