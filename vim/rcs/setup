@@ -1,23 +1,26 @@
+set nocompatible
 filetype off                   " required!
 
 set rtp+=~/.dotfiles/vim
-set rtp+=~/.dotfiles/vim/bundle/vundle.vim
+set rtp+=~/.dotfiles/vim/bundle/Vundle.vim
 
-call vundle#rc('~/.dotfiles/vim/bundle')
+call vundle#begin('~/.dotfiles/vim/bundle')
 
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
+
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'rking/ag.vim'
 Plugin 'mkitt/tabline.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'skalnik/vim-vroom'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-surround'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-rails'
 Plugin 'wting/rust.vim'
+Plugin 'janko-m/vim-test'
 
+call vundle#end()
 syntax on
 filetype plugin indent on

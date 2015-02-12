@@ -68,3 +68,6 @@ unsetopt share_history
 #     zle set-local-history 0
 # }
 # zle -N down-line-or-local-history
+
+# added by travis gem
+[ -f /Users/lukebergen/.travis/travis.sh ] && source /Users/lukebergen/.travis/travis.sh

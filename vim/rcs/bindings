@@ -9,6 +9,10 @@ nmap s <Plug>(easymotion-s)
 " map <Leader>j <Plug>(easymotion-j)
 " map <Leader>k <Plug>(easymotion-k)
 
+" vim-test
+nmap <Leader>s :TestNearest<CR>
+nmap <Leader>S :TestSuite<CR>
+
 nnoremap <Leader>n :Explore<CR>
 nnoremap <Leader>t :tabnew<CR>
 nnoremap <Leader>p arequire 'pry'; binding.pry #$<ESC>

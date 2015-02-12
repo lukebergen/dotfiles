@@ -2,6 +2,7 @@
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 brew install caskroom/cask/brew-cask
+brew tap caskroom/versions
 
 brew install ctags
 
@@ -25,7 +26,6 @@ ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 brew install rbenv
 
 brew install redis
-
 
 brew install ruby-build
 brew install the_silver_searcher
