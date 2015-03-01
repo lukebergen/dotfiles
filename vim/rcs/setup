@@ -19,7 +19,10 @@ Plugin 'tpope/vim-surround'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-rails'
 Plugin 'wting/rust.vim'
+Plugin 'tpope/vim-rbenv'
 Plugin 'janko-m/vim-test'
+Plugin 'tpope/vim-dispatch'
+Plugin 'benmills/vimux'
 
 call vundle#end()
 syntax on

@@ -46,6 +46,7 @@ brew cask install limechat
 brew cask install onepassword
 brew cask install skitch
 brew cask install skype
+brew cask install vlc
 brew cask install whatsapp-pocket
 
 gem install bundler
@@ -54,10 +55,10 @@ gem install jekyll
 # install vundle
 git clone https://github.com/gmarik/Vundle.vim.git ~/.dotfiles/vim/bundle/Vundle.vim
 
-# install ohmyzsh
-git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.dotfiles/zsh/oh-my-zsh
-cp ~/.dotfiles/zsh/themes/lukebergen.zsh-theme ~/.dotfiles/zsh/oh-my-zsh/themes/
+# install antigen
+curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > ~/.dotfiles/zsh/antigen.zsh
 
 # link everything up
-ln -s ~/.vimrc ~/.dotfiles/vim/rcs/vimrc
-ln -s ~/.zsh.rc ~/.dotfiles/zsh/zshrc
+ln -s ~/.dotfiles/vim/rcs/vimrc ~/.vimrc
+ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc
+ln -s ~/.dotfiles/zsh/zshenv ~/.zshenv

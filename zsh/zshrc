@@ -1,12 +1,13 @@
-# oh-my-zsh setup
-export ZSH=$HOME/.dotfiles/zsh/oh-my-zsh
-plugins=(git z)
-export ZSH_THEME=lukebergen
-source $ZSH/oh-my-zsh.sh
+# antigen setup/config
+source ~/.dotfiles/zsh/antigen.zsh
+antigen use oh-my-zsh
+antigen bundle z
+antigen bundle git
+# antigen bundle git/git contrib/completion/git-completion.zsh
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen theme lukebergen/dotfiles zsh/themes/lukebergen
 
-# TODO: remove this if things aren't broken after a couple weeks
-# export PATH="/Users/lukebergen/.nvm/v0.11.10/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/Users/lukebergen/.rbenv/bin:/Users/lukebergen/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:/Users/lukebergen/code/go/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
+antigen apply
 
 # PATH setup
 export PATH="$PATH:/usr/local/bin:/usr/local/sbin"        # local bins and such
@@ -16,6 +17,9 @@ export PATH=$PATH:$GOPATH/bin
 
 # init rbenv
 eval "$(rbenv init - --no-rehash)"
+
+# init gop
+eval "$(gop --init)"
 
 # aliases
 alias be="bundle exec"
@@ -27,13 +31,11 @@ alias gb="git branch"
 alias gc="git checkout \$1"
 alias gl="git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --no-merges \$1"
 alias gd="git diff"
-alias lal="ls -al"
+alias ll="ls -al"
 alias es_off="launchctl unload /Users/lukebergen/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist"
 alias es_on="launchctl load /Users/lukebergen/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist"
 alias file_serve="ruby -run -e httpd . -p \$1"
 alias fix_video="sudo killall VDCAssistant"
-
-alias hydra_production="REVIEWED_SEARCH_ENV=production ELASTICSEARCH_INDEX=products_production ELASTICSEARCH_KEY=SbDQLCyENCgTD9RdXL ELASTICSEARCH_URL=http://cerebro-production.herokuapp.com:80 ELASTICSEARCH_USER=cerebro API_URL=https://api.reviewed.com/api/v1 befr rails s -p 3001"
 
 # miscelanious configuration stuff
 export PGDATA="/usr/local/var/postgres"
@@ -46,28 +48,6 @@ unsetopt share_history
 
 # setup nvm
 [[ -s /Users/lukebergen/.nvm/nvm.sh ]] && . /Users/lukebergen/.nvm/nvm.sh # This loads NVM
-
-# TODO: remove this if things aren't broken after a couple weeks
-
-# if [[ "${terminfo[kcuu1]}" != ""  ]]; then
-#   # bindkey "${key[Up]}" up-line-or-local-history
-#   # bindkey "${key[Down]}" down-line-or-local-history
-#   bindkey "${terminfo[kcuu1]}" up-line-or-local-history
-#   bindkey "${terminfo[kcud1]}" down-line-or-local-history
-# fi
-# 
-# up-line-or-local-history() {
-#     zle set-local-history 1
-#     zle up-line-or-history
-#     zle set-local-history 0
-# }
-# zle -N up-line-or-local-history
-# down-line-or-local-history() {
-#     zle set-local-history 1
-#     zle down-line-or-history
-#     zle set-local-history 0
-# }
-# zle -N down-line-or-local-history
 
 # added by travis gem
 [ -f /Users/lukebergen/.travis/travis.sh ] && source /Users/lukebergen/.travis/travis.sh

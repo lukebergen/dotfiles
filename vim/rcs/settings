@@ -34,6 +34,10 @@ set expandtab
 
 let g:ctrlp_show_hidden=1
 
+let g:test#strategy='dispatch'
+
+let g:go_fmt_command = "goimports"
+
 " The Silver Searcher
 if executable('ag')
   " Use ag over grep

@@ -10,8 +10,8 @@ nmap s <Plug>(easymotion-s)
 " map <Leader>k <Plug>(easymotion-k)
 
 " vim-test
-nmap <Leader>s :TestNearest<CR>
-nmap <Leader>S :TestSuite<CR>
+nmap <Leader>st :TestNearest<CR>
+nmap <Leader>St :TestSuite<CR>
 
 nnoremap <Leader>n :Explore<CR>
 nnoremap <Leader>t :tabnew<CR>
@@ -48,7 +48,6 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "k"
 
 " remap <Leader>r. I like running rake in another iterm window and would rather use r for redraw! since I habitually cmd+k and sometimes mistakenly do so in vim
 nnoremap <Leader>r :redraw!<CR>
-inoremap <Leader>r <C-O>:redraw!<CR>
 
 " leader mapping for clearing search because highlighting is ugly
 nnoremap <Leader>c :nohl<return>
