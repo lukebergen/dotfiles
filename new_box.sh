@@ -79,3 +79,8 @@ ln -s ~/.dotfiles/vim/rcs/vimrc ~/.vimrc
 ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc
 ln -s ~/.dotfiles/zsh/zshenv ~/.zshenv
 ln -s ~/.dotfiles/.Rprofile ~/.Rprofile
+
+# some final up
+git config --global user.name "Luke Bergen"
+git config --global user.email lukeabergen@gmail.com
+git config --global core.editor vim
