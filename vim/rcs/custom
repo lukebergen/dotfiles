@@ -2,6 +2,7 @@ command! Subl execute "!subl %"
 command! Ctags execute "!ctags -R"
 command! Clear execute "tabnew | tabonly"
 command! Json execute ":%!python -m 'json.tool'"
+command! AllCtags execute "!ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)"
 
 set number
 function! NumberToggle()
@@ -14,6 +15,7 @@ endfunc
 
 nnoremap <Leader>l :call NumberToggle()<cr>
 
+command! Dbuff execute "call DeleteHiddenBuffers()"
 function! DeleteHiddenBuffers()
     let tpbl=[]
     call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')

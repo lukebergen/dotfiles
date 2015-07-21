@@ -23,6 +23,8 @@ Plugin 'tpope/vim-rbenv'
 Plugin 'janko-m/vim-test'
 Plugin 'tpope/vim-dispatch'
 Plugin 'benmills/vimux'
+Plugin 'diepm/vim-rest-console'
+Plugin 'rizzatti/dash.vim'
 
 call vundle#end()
 syntax on

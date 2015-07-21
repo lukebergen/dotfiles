@@ -19,7 +19,7 @@ export PATH=$PATH:$GOPATH/bin
 eval "$(rbenv init - --no-rehash)"
 
 # init gop
-eval "$(gop --init)"
+eval "$(gop --shell-init)"
 
 # aliases
 alias be="bundle exec"
@@ -36,6 +36,8 @@ alias es_off="launchctl unload /Users/lukebergen/Library/LaunchAgents/homebrew.m
 alias es_on="launchctl load /Users/lukebergen/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist"
 alias file_serve="ruby -run -e httpd . -p \$1"
 alias fix_video="sudo killall VDCAssistant"
+
+alias R="R --silent"
 
 # miscelanious configuration stuff
 export PGDATA="/usr/local/var/postgres"

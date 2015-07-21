@@ -1,14 +1,20 @@
 # install homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+# STOP: (xcode will install some stuff now)
+
 brew install caskroom/cask/brew-cask
 brew tap caskroom/versions
 
 brew install ctags
 
 brew cask install java
+
+# STOP: first time using cask so it does a thing
+
 brew install elasticsearch
 ln -sfv /usr/local/opt/elasticsearch/*.plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist
 
 brew install git
 brew install gnupg
@@ -19,13 +25,17 @@ brew install keybase
 brew install mercurial
 brew install node
 brew install nvm
+brew install phantomjs
 
 brew install postgresql
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 
 brew install rbenv
 
 brew install redis
+ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
 
 brew install ruby-build
 brew install the_silver_searcher
@@ -41,14 +51,20 @@ brew cask install gas-mask
 brew cask install gimp
 brew cask install google-chrome
 brew cask install gpgtools
+
+# STOP: requires password
+
 brew cask install iterm2
 brew cask install limechat
-brew cask install onepassword
+brew cask install 1password
+brew cask install screenhero
 brew cask install skitch
 brew cask install skype
 brew cask install vlc
 brew cask install whatsapp-pocket
 
+
+# STOP: install most recent version of ruby
 gem install bundler
 gem install jekyll
 
@@ -62,3 +78,4 @@ curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh >
 ln -s ~/.dotfiles/vim/rcs/vimrc ~/.vimrc
 ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc
 ln -s ~/.dotfiles/zsh/zshenv ~/.zshenv
+ln -s ~/.dotfiles/.Rprofile ~/.Rprofile

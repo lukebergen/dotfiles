@@ -28,11 +28,8 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
-nnoremap + :resize +10<CR>
-nnoremap - :resize -10<CR>
-nnoremap <C-A> :vertical resize -10<CR>
-nnoremap <C-D> :vertical resize +10<CR>
+command! Vhide execute "resize 0"
+command! Hide execute "vertical resize 0"
 
 " quick tab navigation
 nnoremap <Leader>1 1gt

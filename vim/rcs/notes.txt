@@ -1,0 +1,1 @@
+:verbose imap <C-k>  " show if/where a binding was bound

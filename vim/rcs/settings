@@ -24,6 +24,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/log/*,*/source_maps/*
 
 set suffixesadd+=.js,.js.coffee,.coffee
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 set wrap
 set tabstop=2
