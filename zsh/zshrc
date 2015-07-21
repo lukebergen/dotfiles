@@ -13,13 +13,11 @@ antigen apply
 export PATH="$PATH:/usr/local/bin:/usr/local/sbin"        # local bins and such
 export PATH="$PATH:$HOME/.rbenv/bin:$HOME/.rbenv/shims"   # rbenv
 export GOPATH=$HOME/code/go
+export GOROOT=$HOME/code/go
 export PATH=$PATH:$GOPATH/bin
 
 # init rbenv
 eval "$(rbenv init - --no-rehash)"
-
-# init gop
-eval "$(gop --shell-init)"
 
 # aliases
 alias be="bundle exec"
