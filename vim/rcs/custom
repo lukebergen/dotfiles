@@ -1,7 +1,7 @@
 command! Subl execute "!subl %"
 command! Ctags execute "!ctags -R"
 command! Clear execute "tabnew | tabonly"
-command! Json execute ":%!python -m 'json.tool'"
+command! Json execute ":%!json_pp"
 command! AllCtags execute "!ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)"
 
 set number
