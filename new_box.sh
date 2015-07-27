@@ -46,6 +46,7 @@ brew install zsh
 brew cask install caffeine
 brew cask install disk-inventory-x
 brew cask install dropbox
+brew cask install flint
 brew cask install flux
 brew cask install gas-mask
 brew cask install gimp
@@ -59,6 +60,7 @@ brew cask install limechat
 brew cask install 1password
 brew cask install screenhero
 brew cask install skitch
+brew cask install slack
 brew cask install skype
 brew cask install vlc
 brew cask install whatsapp-pocket
