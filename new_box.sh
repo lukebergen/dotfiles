@@ -86,3 +86,4 @@ ln -s ~/.dotfiles/.Rprofile ~/.Rprofile
 git config --global user.name "Luke Bergen"
 git config --global user.email lukeabergen@gmail.com
 git config --global core.editor vim
+git config --global init.templatedir '~/.dotfiles/git/git-templates'
