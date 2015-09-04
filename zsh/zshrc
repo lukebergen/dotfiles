@@ -33,10 +33,10 @@ alias gd="git diff"
 alias ll="ls -al"
 alias es_off="launchctl unload /Users/lukebergen/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist"
 alias es_on="launchctl load /Users/lukebergen/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist"
-alias file_serve="ruby -run -e httpd . -p \$1"
+alias serve="ruby -run -e httpd . -p \$1"
 alias fix_video="sudo killall VDCAssistant"
-
 alias R="R --silent"
+alias vimx='vim -x --cmd "set cryptmethod=blowfish2" --cmd "set nobackup" --cmd "set noswapfile" --cmd "set viminfo=\"\"" -u NONE'
 
 # miscelanious configuration stuff
 export PGDATA="/usr/local/var/postgres"
