@@ -50,6 +50,10 @@ export ARCHFLAGS="-arch x86_64"
 unsetopt inc_append_history
 unsetopt share_history
 
+# This fixes the <enter> inserting ^M instead of actually sending enter to some programs issue that came up for god knows what reason
+stty icrnl
+stty sane
+
 # setup nvm
 [[ -s /Users/lukebergen/.nvm/nvm.sh ]] && . /Users/lukebergen/.nvm/nvm.sh # This loads NVM
 
