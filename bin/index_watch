@@ -1,0 +1,9 @@
+#!/bin/bash
+APP=$1
+while true; do
+  res=`heroku ps -a $APP  | grep reindex`
+  if [ "$res" = "" ]; then
+    say 'reindex is complete'
+  fi
+  sleep 30
+done
