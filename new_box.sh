@@ -82,6 +82,7 @@ ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc
 ln -s ~/.dotfiles/zsh/zshenv ~/.zshenv
 ln -s ~/.dotfiles/.Rprofile ~/.Rprofile
 ln -s ~/.dotfiles/irbrc ~/.irbrc
+ln -s ~/.dotfiles/git/gitconfig ~/.gitconfig
 
 # some final up
 git config --global user.name "Luke Bergen"
