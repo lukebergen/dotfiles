@@ -2,7 +2,7 @@
 source ~/.dotfiles/zsh/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle z
-antigen bundle git
+# antigen bundle git
 # antigen bundle git/git contrib/completion/git-completion.zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen theme lukebergen/dotfiles zsh/themes/lukebergen
