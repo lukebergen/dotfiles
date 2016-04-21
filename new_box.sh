@@ -20,8 +20,9 @@ brew install heroku-toolbelt
 brew install imagemagick
 brew install keybase
 brew install mercurial
-brew install node
-brew install nvm
+
+# manually install node because fuck homebrew + npm
+
 brew install phantomjs
 
 brew install postgresql
