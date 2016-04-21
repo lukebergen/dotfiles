@@ -13,6 +13,7 @@ antigen apply
 export PATH="$PATH:/usr/local/bin:/usr/local/sbin"        # local bins and such
 export PATH="$PATH:$HOME/.rbenv/bin:$HOME/.rbenv/shims"   # rbenv
 export PATH="$PATH:$HOME/.dotfiles/bin"                   # personal scripts and such
+export PATH="$PATH:$HOME/.npm-packages/bin"                   # npm -g installed things
 
 export GOPATH=$HOME/code/go
 export GOROOT=/usr/local/opt/go/libexec
