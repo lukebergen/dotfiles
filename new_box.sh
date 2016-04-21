@@ -3,9 +3,6 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 # STOP: (xcode will install some stuff now)
 
-brew install caskroom/cask/brew-cask
-brew tap caskroom/versions
-
 brew install ctags
 
 brew cask install java
