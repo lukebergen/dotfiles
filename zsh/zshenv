@@ -1,3 +1,5 @@
+# consider removing this file entirely. Not using vim-spec anymore and the eval line causes an error
+
 # Needed for vim-spec to behave properly
-export PATH="$PATH:$HOME/.rbenv/bin:$HOME/.rbenv/shims"   # rbenv
-eval "$(rbenv init - --no-rehash)"
+#export PATH="$PATH:$HOME/.rbenv/bin:$HOME/.rbenv/shims"   # rbenv
+#eval "$(rbenv init - --no-rehash)" # was giving "command not found: rbenv" errors and haven't been using vim-spec
