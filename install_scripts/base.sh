@@ -13,11 +13,13 @@ brew install the_silver_searcher
 brew install vim
 brew install zsh
 
-brew cask install google-chrome
+brew cask install iterm2-beta
 
 # STOP: first time using cask so i does a thing
+echo 'first time using cask so wait for that to do its GUI thing then press enter to continue'
+read
 
-brew cask install iterm2-beta
+brew cask install google-chrome
 
 # install vundle
 git clone https://github.com/gmarik/Vundle.vim.git ~/.dotfiles/vim/bundle/Vundle.vim
