@@ -10,8 +10,6 @@ brew install heroku-toolbelt
 brew install keybase
 brew install mercurial
 
-# manually install node because fuck homebrew + npm
-
 brew install phantomjs
 brew install postgresql
 brew services start postgresql
@@ -20,5 +18,9 @@ brew install redis
 brew services start redis
 brew install wget
 
-# STOP: install most recent version of ruby
+rbenv install 2.3.1
+
 gem install bundler
+
+# manually install node because fuck homebrew + npm
+echo "if you need node on this box, install it/npm manually because I'm still figuring out automating that in a non-painful way"
