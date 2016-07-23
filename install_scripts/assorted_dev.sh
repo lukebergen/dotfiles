@@ -1,24 +1,22 @@
-brew install ctags
+rbenv install 2.3.1
 
 brew cask install java
 
+brew install ctags
 brew install elasticsearch
-brew services start elasticsearch
 brew install gnupg
 brew install go
 brew install heroku-toolbelt
 brew install keybase
 brew install mercurial
-
 brew install phantomjs
 brew install postgresql
-brew services start postgresql
-
 brew install redis
-brew services start redis
 brew install wget
 
-rbenv install 2.3.1
+brew services start elasticsearch
+brew services start postgresql
+brew services start redis
 
 gem install bundler
 
