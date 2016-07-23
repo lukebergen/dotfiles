@@ -41,6 +41,7 @@ alias fix_video="sudo killall VDCAssistant"
 alias R="R --silent"
 alias vimx='vim -x --cmd "set cryptmethod=blowfish2" --cmd "set nobackup" --cmd "set noswapfile" --cmd "set viminfo=\"\"" -u NONE'
 alias dotfiles="vim ~/.dotfiles"
+alias dockclean='docker rm $(docker ps -a -q -f status=exited)'
 
 # miscelanious configuration stuff
 export PGDATA="/usr/local/var/postgres"
