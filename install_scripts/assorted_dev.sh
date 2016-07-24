@@ -12,6 +12,7 @@ brew install mercurial
 brew install phantomjs
 brew install postgresql
 brew install redis
+brew install tree
 brew install wget
 
 brew services start elasticsearch
