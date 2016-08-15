@@ -1,4 +1,5 @@
 # antigen setup/config
+cd # TODO: figure out why this sometimes starts new sessions at /
 source ~/.dotfiles/zsh/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle z
@@ -20,6 +21,9 @@ export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
+# Ignore commands that start with a space (curling with passwords, etc...)
+setopt HIST_IGNORE_SPACE
+
 # init rbenv
 eval "$(rbenv init - --no-rehash)"
 
@@ -34,8 +38,6 @@ alias gc="git checkout \$1"
 alias gl="git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --no-merges \$1"
 alias gd="git diff"
 alias ll="ls -al"
-alias es_off="launchctl unload /Users/lukebergen/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist"
-alias es_on="launchctl load /Users/lukebergen/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist"
 alias serve="ruby -run -e httpd . -p \$1"
 alias fix_video="sudo killall VDCAssistant"
 alias R="R --silent"
@@ -57,7 +59,7 @@ stty icrnl
 stty sane
 
 # setup nvm
-[[ -s /Users/lukebergen/.nvm/nvm.sh ]] && . /Users/lukebergen/.nvm/nvm.sh # This loads NVM
+# [[ -s /Users/lukebergen/.nvm/nvm.sh ]] && . /Users/lukebergen/.nvm/nvm.sh # This loads NVM
 
 # added by travis gem
-[ -f /Users/lukebergen/.travis/travis.sh ] && source /Users/lukebergen/.travis/travis.sh
+# [ -f /Users/lukebergen/.travis/travis.sh ] && source /Users/lukebergen/.travis/travis.sh
