@@ -32,6 +32,10 @@ nnoremap <C-W>0 <C-W><C-\|><C-W><C-_>
 command! Vhide execute "resize 0"
 command! Hide execute "vertical resize 0"
 
+" movement mappings
+nnoremap <Up> k<C-Y>
+nnoremap <Down> j<C-E>
+
 " quick tab navigation
 nnoremap <Leader>1 1gt
 nnoremap <Leader>2 2gt
@@ -51,5 +55,5 @@ nnoremap <Leader>r :redraw!<CR>
 nnoremap <Leader>c :nohl<return>
 
 " quick editing/sourcing of vim rc files
-nnoremap <Leader>ev :e ~/.dotfiles/vim/rcs/<cr>
+nnoremap <Leader>ev :e ~/.dotfiles/vim/rcs/<cr>:cd ~/.dotfiles/vim/rcs/<cr>
 nnoremap <Leader>sov :source ~/.dotfiles/vim/rcs/vimrc<cr>
