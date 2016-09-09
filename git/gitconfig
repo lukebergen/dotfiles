@@ -15,3 +15,5 @@
 	helper = osxkeychain
 [init]
 	templatedir = ~/.dotfiles/git/git-templates
+[diff]
+	compactionHeuristic = true
