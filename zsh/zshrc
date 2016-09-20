@@ -59,7 +59,8 @@ stty icrnl
 stty sane
 
 # setup nvm
-# [[ -s /Users/lukebergen/.nvm/nvm.sh ]] && . /Users/lukebergen/.nvm/nvm.sh # This loads NVM
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
 
 # added by travis gem
 # [ -f /Users/lukebergen/.travis/travis.sh ] && source /Users/lukebergen/.travis/travis.sh
