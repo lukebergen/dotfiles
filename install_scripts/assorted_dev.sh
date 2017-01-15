@@ -14,6 +14,7 @@ brew install postgresql
 brew install redis
 brew install tree
 brew install wget
+brew install node
 
 brew services start elasticsearch
 brew services start postgresql
