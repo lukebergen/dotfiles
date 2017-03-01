@@ -44,6 +44,7 @@ alias R="R --silent"
 alias vimx='vim -x --cmd "set cryptmethod=blowfish2" --cmd "set nobackup" --cmd "set noswapfile" --cmd "set viminfo=\"\"" -u NONE'
 alias dotfiles="vim ~/.dotfiles"
 alias dockclean='docker rm $(docker ps -a -q -f status=exited); docker rmi $(docker images -f "dangling=true" -q)'
+alias rc='vim ~/.dotfiles/zsh/zshrc'
 
 # miscelanious configuration stuff
 export PGDATA="/usr/local/var/postgres"
