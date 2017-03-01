@@ -25,6 +25,7 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'benmills/vimux'
 Plugin 'diepm/vim-rest-console'
 Plugin 'rizzatti/dash.vim'
+Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()
 syntax on

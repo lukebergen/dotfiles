@@ -19,7 +19,7 @@ nnoremap <Leader>p arequire 'pry'; binding.pry #$<ESC>
 inoremap <Leader>p require 'pry'; binding.pry #$
 nnoremap <silent> <leader>b :CtrlPBuffer<cr>
 
-" leader mappings for common split creation/nav
+" leader mappings for common split/window creation/nav
 nnoremap <Leader>v :vnew<cr>
 nnoremap <Leader>h :new<cr>
 nnoremap <Leader>sv :vsp<cr>
