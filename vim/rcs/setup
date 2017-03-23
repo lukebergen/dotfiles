@@ -18,6 +18,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-rbenv'
 " Plugin 'rizzatti/dash.vim'  " should probably re-visit dash at some point...
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'mattn/emmet-vim'
 
 call vundle#end()
 syntax on
