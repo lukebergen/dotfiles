@@ -10,21 +10,13 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'kien/ctrlp.vim'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'rking/ag.vim'
-Plugin 'mkitt/tabline.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-surround'
-Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-rails'
-Plugin 'wting/rust.vim'
 Plugin 'tpope/vim-rbenv'
-Plugin 'janko-m/vim-test'
-Plugin 'tpope/vim-dispatch'
-Plugin 'benmills/vimux'
-Plugin 'diepm/vim-rest-console'
-Plugin 'rizzatti/dash.vim'
+" Plugin 'rizzatti/dash.vim'  " should probably re-visit dash at some point...
 Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()
