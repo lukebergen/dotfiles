@@ -22,5 +22,9 @@ brew services start redis
 
 gem install bundler
 
+# Probably something here to install latest version of python
+pip install virtualenv
+pip install virtualenvwrapper
+
 # manually install node because fuck homebrew + npm
 echo "if you need node on this box, install it/npm manually because I'm still figuring out automating that in a non-painful way"
