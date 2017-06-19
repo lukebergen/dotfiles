@@ -19,7 +19,10 @@ Plugin 'tpope/vim-rbenv'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'mattn/calendar-vim'
+Plugin 'vimwiki/vimwiki'
 
 call vundle#end()
+
 syntax on
 filetype plugin indent on
