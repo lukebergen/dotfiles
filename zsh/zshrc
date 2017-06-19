@@ -14,13 +14,20 @@ antigen apply
 export PATH="$PATH:/usr/local/bin:/usr/local/sbin"        # local bins and such
 export PATH="$PATH:$HOME/.rbenv/bin:$HOME/.rbenv/shims"   # rbenv
 export PATH="$PATH:$HOME/.dotfiles/bin"                   # personal scripts and such
-export PATH="$PATH:$HOME/.npm-packages/bin"                   # npm -g installed things
+export PATH="$PATH:$HOME/.npm-packages/bin"               # npm -g installed things
 
+# Go stuff
 export GOPATH=$HOME/code/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
+# Android stuff
+export ANDROID_HOME=${HOME}/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+
+# Python stuff
 export WORKON_HOME=~/.python-envs
 source /usr/local/bin/virtualenvwrapper.sh
 
