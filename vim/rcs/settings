@@ -15,7 +15,6 @@ set ignorecase
 set smartcase
 set noequalalways
 set mouse=a
-set termguicolors
 
 " set list
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
