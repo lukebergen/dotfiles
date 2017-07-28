@@ -1,14 +1,6 @@
-# antigen setup/config
 cd # TODO: figure out why this sometimes starts new sessions at /
-source ~/.dotfiles/zsh/antigen.zsh
-antigen use oh-my-zsh
-antigen bundle z
-# antigen bundle git
-# antigen bundle git/git contrib/completion/git-completion.zsh
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen theme lukebergen/dotfiles zsh/themes/lukebergen
 
-antigen apply
+source ~/.dotfiles/zsh/themes/luke-bergen.zsh
 
 # PATH setup
 export PATH="$PATH:/usr/local/bin:/usr/local/sbin"        # local bins and such
@@ -47,7 +39,7 @@ alias gb="git branch"
 alias gc="git checkout \$1"
 alias gl="git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --no-merges \$1"
 alias gd="git diff"
-alias ll="ls -al"
+alias ll="ls -alG"
 #alias serve="ruby -run -e httpd . -p \$1"
 alias fix_video="sudo killall VDCAssistant"
 alias R="R --silent"
@@ -64,6 +56,10 @@ export ARCHFLAGS="-arch x86_64"
 
 unsetopt inc_append_history
 unsetopt share_history
+
+# Plugins
+source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.dotfiles/zsh/plugins/z/z.sh
 
 # This fixes the <enter> inserting ^M instead of actually sending enter to some programs issue that came up for god knows what reason
 stty icrnl
