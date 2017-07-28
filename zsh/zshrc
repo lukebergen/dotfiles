@@ -20,8 +20,8 @@ export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 
 # Python stuff
-export WORKON_HOME=~/.python-envs
-source /usr/local/bin/virtualenvwrapper.sh
+#export WORKON_HOME=~/.python-envs
+#source /usr/local/bin/virtualenvwrapper.sh
 
 # Ignore commands that start with a space (curling with passwords, etc...)
 setopt HIST_IGNORE_SPACE
