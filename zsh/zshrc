@@ -1,3 +1,6 @@
+# uncomment this and last two lines of this file in order to see total rc loading time
+#s=$(perl -MTime::HiRes -e 'printf("%.0f\n",Time::HiRes::time()*1000)')
+
 cd # TODO: figure out why this sometimes starts new sessions at /
 
 source ~/.dotfiles/zsh/themes/luke-bergen.zsh
@@ -67,3 +70,6 @@ stty sane
 
 # added by travis gem
 # [ -f /Users/lukebergen/.travis/travis.sh ] && source /Users/lukebergen/.travis/travis.sh
+
+#e=$(perl -MTime::HiRes -e 'printf("%.0f\n",Time::HiRes::time()*1000)')
+#echo "load time: $(expr $e - $s)"
