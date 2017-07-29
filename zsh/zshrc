@@ -61,6 +61,7 @@ unsetopt inc_append_history
 unsetopt share_history
 
 # Plugins
+# TODO: Need a better way to do this. Maybe git submodules?
 source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.dotfiles/zsh/plugins/z/z.sh
 
