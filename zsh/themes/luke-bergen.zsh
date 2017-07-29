@@ -16,10 +16,14 @@ function git_bit() {
   local res=$?
   if [ $res = 0 ]; then
     STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
-    BRANCH=$(command git rev-parse --abbrev-ref HEAD)
+    BRANCH=$(command git rev-parse --abbrev-ref HEAD 2> /dev/null)
+    #BRANCH="hi"
 
     if [ $BRANCH = "HEAD" ]; then
-      BRANCH=$(git rev-parse --short HEAD)
+      BRANCH=$(git rev-parse --short HEAD 2> /dev/null)
+      if [ $? = 128 ]; then
+        BRANCH="<norev>"
+      fi
     fi
 
     if [[ -n $STATUS ]]; then
