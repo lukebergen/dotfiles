@@ -12,7 +12,9 @@ colors=(
 
 # Git prompt
 function git_bit() {
-  if [ -d .git ]; then
+  git status > /dev/null 2>&1
+  local res=$?
+  if [ $res = 0 ]; then
     STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
     BRANCH=$(command git rev-parse --abbrev-ref HEAD)
 
