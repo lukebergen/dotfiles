@@ -15,8 +15,8 @@ function git_bit() {
   git status > /dev/null 2>&1
   local res=$?
   if [ $res = 0 ]; then
-    STATUS=$(command git status --porcelain 2> /dev/null | tail -n1)
-    BRANCH=$(command git rev-parse --abbrev-ref HEAD 2> /dev/null)
+    STATUS=$(git status --porcelain 2> /dev/null | tail -n1)
+    BRANCH=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
     #BRANCH="hi"
 
     if [ $BRANCH = "HEAD" ]; then
