@@ -1,23 +1,21 @@
 # Colors
 typeset -A colors
 colors=(
-  white "\033[38;5;15m"
-  blue "\033[38;5;4m"
-  red "\033[38;5;1m"
-  yellow "\033[38;5;11m"
-  green "\033[38;5;2m"
-  reset "\033[38;5;15m" # Just a shortcut for "white"
+  white "%{\033[38;5;15m%}"
+  #blue "%{\033[38;5;4m%}"
+  blue "%{\033[38;2;0;0;255m%}" # example of using RGB for even more granularity apparently
+  red "%{\033[38;5;1m%}"
+  yellow "%{\033[38;5;11m%}"
+  green "%{\033[38;5;2m%}"
+  reset "%{\033[0m%}"
 )
-
 
 # Git prompt
 function git_bit() {
   git status > /dev/null 2>&1
-  local res=$?
-  if [ $res = 0 ]; then
+  if [ $? = 0 ]; then
     STATUS=$(git status --porcelain 2> /dev/null | tail -n1)
     BRANCH=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
-    #BRANCH="hi"
 
     if [ $BRANCH = "HEAD" ]; then
       BRANCH=$(git rev-parse --short HEAD 2> /dev/null)
@@ -25,6 +23,8 @@ function git_bit() {
         BRANCH="<norev>"
       fi
     fi
+
+    #REPO=$(git )
 
     if [[ -n $STATUS ]]; then
       echo "$colors[blue]($colors[red]$BRANCH $colors[yellow]✗$colors[blue]) $colors[green]$ $colors[reset]"
@@ -34,8 +34,6 @@ function git_bit() {
   else
     echo "$colors[green]$ $colors[reset]"
   fi
-
-  echo $result
 }
 
 setopt promptsubst
