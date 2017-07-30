@@ -24,7 +24,12 @@ function git_bit() {
       fi
     fi
 
-    #REPO=$(git )
+    REPO=$(basename $(git remote show -n origin | grep Push | cut -d: -f2- | cut -d. -f2))
+    if [[ $REPO = "origin" ]]; then
+      REPO="untracked"
+    fi
+
+    # Can't decide if/where to put the repo name in the prompt.... TODO: think on this
 
     if [[ -n $STATUS ]]; then
       echo "$colors[blue]($colors[red]$BRANCH $colors[yellow]✗$colors[blue]) $colors[green]$ $colors[reset]"
