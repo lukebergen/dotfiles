@@ -29,6 +29,8 @@ curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh >
 
 # link everything up
 ln -s ~/.dotfiles/vim/rcs/vimrc ~/.vimrc
+mkdir -p ~/.vim
+ln -s ~/.dotfiles/vim/syntax ~/.vim
 ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc
 ln -s ~/.dotfiles/zsh/zshenv ~/.zshenv
 ln -s ~/.dotfiles/.Rprofile ~/.Rprofile
