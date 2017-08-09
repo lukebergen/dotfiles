@@ -50,6 +50,7 @@ alias vimx='vim -x --cmd "set cryptmethod=blowfish2" --cmd "set nobackup" --cmd 
 alias dotfiles="vim ~/.dotfiles"
 alias dockclean='docker rm $(docker ps -a -q -f status=exited); docker rmi $(docker images -f "dangling=true" -q)'
 alias rc='vim ~/.dotfiles/zsh/zshrc'
+alias xml_pp='xmllint --format -'
 
 # miscelanious configuration stuff
 export PGDATA="/usr/local/var/postgres"
