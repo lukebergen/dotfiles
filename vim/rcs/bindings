@@ -57,3 +57,6 @@ nnoremap <Leader>c :nohl<return>
 " quick editing/sourcing of vim rc files
 nnoremap <Leader>ev :e ~/.dotfiles/vim/rcs/<cr>:cd ~/.dotfiles/vim/rcs/<cr>
 nnoremap <Leader>sov :source ~/.dotfiles/vim/rcs/vimrc<cr>
+
+" useful one-liner for seeing what highlighting group is currently under the cursor
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'

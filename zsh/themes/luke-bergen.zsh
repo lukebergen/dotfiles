@@ -3,7 +3,7 @@ typeset -A colors
 colors=(
   white "%{\033[38;5;15m%}"
   #blue "%{\033[38;5;4m%}"
-  blue "%{\033[38;2;0;0;255m%}" # example of using RGB for even more granularity apparently
+  blue "%{\033[38;2;50;150;256m%}" # example of using RGB for even more granularity apparently
   red "%{\033[38;5;1m%}"
   yellow "%{\033[38;5;11m%}"
   green "%{\033[38;5;2m%}"

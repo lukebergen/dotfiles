@@ -280,3 +280,6 @@ call s:h("cDefine",                     { "fg": s:green })
 
 " text
 call s:h("StateOfBeing",  {"fg": s:red})
+
+" netrw
+call s:h("netrwExe",                     { "fg": s:red })
