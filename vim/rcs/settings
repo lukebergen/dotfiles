@@ -16,6 +16,8 @@ set smartcase
 set noequalalways
 set mouse=a
 
+set incsearch
+
 " set list
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 
