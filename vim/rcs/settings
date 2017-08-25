@@ -45,6 +45,13 @@ let g:test#strategy='dispatch'
 
 let g:go_fmt_command = "goimports"
 
+" vim-wiki stuff
+let wiki_1 = {}
+let wiki_2 = {'path': '~/vimwiki/personal/'}
+let wiki_3 = {'path': '~/vimwiki/mm/'}
+
+let g:vimwiki_list = [wiki_1, wiki_2, wiki_3]
+
 " The Silver Searcher
 if executable('ag')
   " Use ag over grep

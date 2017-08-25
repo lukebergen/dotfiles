@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+wiki = ARGV[0]
+
+wiki_n = nil
+if wiki == "p"
+  wiki_n = 2
+elsif wiki == "m"
+  wiki_n = 3
+end
+
+if wiki_n.nil?
+  puts "pass either p or n to load either personal wiki or mm wiki"
+else
+  exe = "vim -c 'execute \"normal #{wiki_n}\\<Plug>VimwikiIndex\"'"
+  exec exe
+end
