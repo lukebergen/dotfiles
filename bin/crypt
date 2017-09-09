@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+
+require 'openssl'
+require 'optparse'
+
+text = nil
+mode = nil
+passphrase = nil
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: crypt --passphrase passphrase --encrypt|--decrypt text"
+
+  opts.on("-e", "--encrypt CLEARTEXT", "encrypt cleartext with a passphrase") do |v|
+    text = v
+    mode = :encrypt
+  end
+
+  opts.on("-d", "--decrypt CIPHERTEXT", "decrypt ciphertext with a passphrase") do |v|
+    text = v
+    mode = :decrypt
+  end
+
+  opts.on("-p", "--passphrase PASSPHRASE", "passphrase to use for encryption/decryption") do |v|
+    passphrase = v
+  end
+end
+
+parser.parse!(ARGV)
+
+if mode.nil? || passphrase.nil? || text.nil?
+  puts parser
+  exit 1
+end
+
+cipher = OpenSSL::Cipher.new("aes-256-cbc")
+
+key = Digest::SHA1.hexdigest(passphrase)[0..31]
+
+if mode == :encrypt
+  cipher.encrypt
+  iv = cipher.random_iv
+  cipher.iv = iv
+  cipher.key = key
+
+  encrypted = cipher.update(text)
+  encrypted << cipher.final
+
+  puts "-- #{[iv].pack('m')[0..-2]} --\n" + [encrypted].pack('m') + "\n-- END --"
+else
+  cipher.decrypt
+  lines = text.split("\n")
+  cipher.iv = lines[0][3..-4].unpack('m')[0]
+  cipher.key = key
+
+  clear = cipher.update(lines[1..-2].join("\n").unpack('m')[0])
+  clear << cipher.final
+
+  puts clear
+end
