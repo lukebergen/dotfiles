@@ -55,7 +55,7 @@ function! Encrypt() range
   let cb_save = &clipboard
   set clipboard&
   normal! ""gvd
-  let selection = getreg('"')
+  let selection = substitute(getreg('"'), "'", "<single-quote>", "g")
   call setreg('"', reg_save, regtype_save)
   let &clipboard = cb_save
 
@@ -80,5 +80,6 @@ function! Decrypt() range
   let pass = inputsecret('Password: ')
 
   let result = system("crypt -p '" . pass . "' -d '" . selection . "'")
-  call append(line('v') - 1, split(result, "\n"))
+  let subbed = substitute(result, "<single-quote>", "'", "g")
+  call append(line('v') - 1, split(subbed, "\n"))
 endfunction
