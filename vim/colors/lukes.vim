@@ -97,6 +97,7 @@ call s:h("VertSplit",     { "fg": s:darkgrey,   "bg": s:darkblack })
 call s:h("LineNr",        { "fg": s:grey,       "bg": s:lightblack })
 call s:h("CursorLineNr",  { "fg": s:orange,     "bg": s:lightblack })
 call s:h("SignColumn",    {                     "bg": s:lightblack })
+call s:h("QuickFixLine",  { "fg": s:black,      "bg": s:aqua  })
 
 " misc
 call s:h("SpecialKey",    { "fg": s:pink })
