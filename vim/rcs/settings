@@ -15,6 +15,7 @@ set ignorecase
 set smartcase
 set noequalalways
 set mouse=a
+set cursorline
 
 set incsearch
 
