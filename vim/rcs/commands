@@ -8,7 +8,6 @@ command! Hex execute "%!xxd"
 command! Nohex execute "%!xxd -r"
 
 set number
-set relativenumber " Let's try relativenumber by default for a while
 function! NumberToggle()
   if(&relativenumber == 1)
     set norelativenumber
