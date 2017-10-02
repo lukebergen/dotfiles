@@ -58,6 +58,10 @@ if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
 
+  " Prevents shell commands (like ag) from producing output on the termial (such that when you quit vim you see all kinds of ag output)
+  " Try this for a while but this might have unintended consequences to other commands. If other stuff breaks, remove
+  let &shellpipe="&>"
+
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore-case -g ""'
 
