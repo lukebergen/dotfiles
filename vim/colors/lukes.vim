@@ -18,8 +18,6 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let colors_name = "lukes"
-
 function! s:h(group, style)
   let s:ctermformat = "NONE"
   let s:guiformat = "NONE"
