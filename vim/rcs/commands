@@ -6,6 +6,7 @@ command! Xml execute ":set syntax=xml | %!xmllint --format --recover -"
 command! AllCtags execute "!ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)"
 command! Hex execute "%!xxd"
 command! Nohex execute "%!xxd -r"
+command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 set number
 function! NumberToggle()
