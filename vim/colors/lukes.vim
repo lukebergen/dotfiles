@@ -4,6 +4,9 @@
 " URL:        https://github.com/lukebergen/dotfiles
 " License:    MIT
 "
+" See https://misc.flogisoft.com/bash/tip_colors_and_formatting for a cterm color code reference.
+" TODO: replace cterm color codes with RGB alternative
+"
 " Initialisation
 " --------------
 
