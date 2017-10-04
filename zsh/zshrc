@@ -22,6 +22,12 @@ export ANDROID_HOME=${HOME}/Library/Android/sdk
 export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 
+# Stupidness shortcuts
+export A0W3=accounts-work3-auth0-dev-default
+export A0W2=accounts-work2-auth0-dev-default
+export A0W1=accounts-work1-auth0-dev-default
+export A0DEV=accounts-auth0-dev-default
+
 # Python stuff
 #export WORKON_HOME=~/.python-envs
 #source /usr/local/bin/virtualenvwrapper.sh
