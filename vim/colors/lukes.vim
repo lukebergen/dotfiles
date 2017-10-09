@@ -45,7 +45,6 @@ endfunction
 " Palettes
 " --------
 
-
 let s:white       = { "gui": "#E8E8E3", "cterm": "252" }
 let s:truewhite   = { "gui": "#E8E8E3", "cterm": "231" }
 let s:black       = { "gui": "#272822", "cterm": "234" }
@@ -99,6 +98,8 @@ call s:h("LineNr",        { "fg": s:grey,       "bg": s:lightblack })
 call s:h("CursorLineNr",  { "fg": s:orange,     "bg": s:lightblack })
 call s:h("SignColumn",    {                     "bg": s:lightblack })
 call s:h("QuickFixLine",  { "fg": s:black,      "bg": s:aqua  })
+call s:h("SpellBad",      { "bg": s:red  })
+call s:h("SpellCap",      { "bg": s:purple  })
 
 " misc
 call s:h("SpecialKey",    { "fg": s:pink })
