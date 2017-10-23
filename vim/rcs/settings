@@ -48,6 +48,8 @@ let g:test#strategy='dispatch'
 
 let g:go_fmt_command = "goimports"
 
+set fillchars+=vert:│
+
 " vim-wiki stuff
 let wiki_1 = {}
 let wiki_2 = {'path': '~/vimwiki/personal/'}
