@@ -58,6 +58,7 @@ let wiki_3 = {'path': '~/vimwiki/mm/'}
 let g:vimwiki_list = [wiki_1, wiki_2, wiki_3]
 
 " The Silver Searcher
+" See https://gist.github.com/manasthakur/5afd3166a14bbadc1dc0f42d070bd746 for some details
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
