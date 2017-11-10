@@ -9,15 +9,7 @@ command! Nohex execute "%!xxd -r"
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 set number
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber
-  else
-    set relativenumber
-  endif
-endfunc
-
-nnoremap <Leader>l :call NumberToggle()<cr>
+nnoremap <Leader>l :set relativenumber!<CR>
 
 command! Dbuff execute "call DeleteHiddenBuffers()"
 command! Debuff execute "call DeleteHiddenBuffers()"
