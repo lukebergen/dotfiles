@@ -106,6 +106,7 @@ call s:h("SpecialKey",    { "fg": s:pink })
 call s:h("Title",         { "fg": s:yellow })
 "call s:h("Directory",     { "fg": s:aqua })
 call s:h("Directory",     { "fg": s:brightgreen })
+call s:h("ExtraWhitespace", { "bg": s:red })
 
 " diff
 call s:h("DiffAdd",       { "fg": s:addfg,      "bg": s:addbg })
