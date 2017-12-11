@@ -15,7 +15,9 @@ set ignorecase
 set smartcase
 set noequalalways
 set mouse=a
-"set cursorline
+set showtabline=2
+
+" Make it so cursorline only moves around in active buffer
 au BufEnter * setlocal cursorline
 au BufLeave * setlocal nocursorline
 
@@ -31,6 +33,11 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/log/*,*/source_maps/*
 
 set suffixesadd+=.js,.js.coffee,.coffee
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" Ugh.. Most of the time when dealing with mustache files it's mostly javascript (and .secrets files are json).
+" All of this is MM AMC project specific. Should look into autocmd's, can they be made to be directory specific?
+autocmd BufNewFile,BufReadPost *.mustache set filetype=javascript
+autocmd BufNewFile,BufReadPost *.secrets set filetype=JSON
 
 set wrap
 set tabstop=2
