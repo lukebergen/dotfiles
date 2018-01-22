@@ -35,6 +35,16 @@ export A0DEV=accounts-auth0-dev-default
 # Ignore commands that start with a space (curling with passwords, etc...)
 setopt HIST_IGNORE_SPACE
 
+# Stuff to enable ctrl-x ctrl-e to edit current command in editor
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
+# Vi style:
+# zle -N edit-command-line
+# bindkey -M vicmd v edit-command-line
+
 # init rbenv
 eval "$(rbenv init - --no-rehash)"
 

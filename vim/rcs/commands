@@ -7,6 +7,7 @@ command! AllCtags execute "!ctags -R --languages=ruby --exclude=.git --exclude=l
 command! Hex execute "%!xxd"
 command! Nohex execute "%!xxd -r"
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+command! Js execute "set filetype=javascript"
 
 set number
 nnoremap <Leader>l :set relativenumber!<CR>
