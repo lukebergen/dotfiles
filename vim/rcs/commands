@@ -1,5 +1,3 @@
-command! Subl execute "!subl %"
-command! Ctags execute "!ctags -R"
 command! Clear execute "tabnew | tabonly"
 command! Json execute ":%!json_pp --json_opt=canonical,pretty"
 command! Xml execute ":set syntax=xml | %!xmllint --format --recover -"

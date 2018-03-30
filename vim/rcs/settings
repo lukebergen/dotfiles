@@ -34,10 +34,10 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/log/*,*/source_maps/*
 set suffixesadd+=.js,.js.coffee,.coffee
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-" Ugh.. Most of the time when dealing with mustache files it's mostly javascript (and .secrets files are json).
-" All of this is MM AMC project specific. Should look into autocmd's, can they be made to be directory specific?
-autocmd BufNewFile,BufReadPost *.mustache set filetype=javascript
-autocmd BufNewFile,BufReadPost *.secrets set filetype=JSON
+" The new regex engine in vim >= 703 makes ruby syntax hilighting crazy slow for some reason
+if v:version >= 703
+  autocmd FileType ruby setlocal regexpengine=1
+endif
 
 set wrap
 set tabstop=2
