@@ -13,7 +13,7 @@ brew install the_silver_searcher
 brew install vim
 brew install zsh
 
-brew cask install iterm2-beta
+brew cask install iterm2
 
 # STOP: first time using cask so i does a thing
 echo 'first time using cask so wait for that to do its GUI thing then press enter to continue'
