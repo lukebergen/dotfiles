@@ -12,6 +12,7 @@ brew install rbenv
 brew install the_silver_searcher
 brew install vim
 brew install zsh
+brew install autojump
 
 brew cask install iterm2
 

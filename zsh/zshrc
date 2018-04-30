@@ -75,14 +75,10 @@ unsetopt share_history
 # Plugins
 # TODO: Need a better way to do this. Maybe git submodules?
 source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.dotfiles/zsh/plugins/z/z.sh
 
 # This fixes the <enter> inserting ^M instead of actually sending enter to some programs issue that came up for god knows what reason
 stty icrnl
 stty sane
 
-# added by travis gem
-# [ -f /Users/lukebergen/.travis/travis.sh ] && source /Users/lukebergen/.travis/travis.sh
-
-#e=$(perl -MTime::HiRes -e 'printf("%.0f\n",Time::HiRes::time()*1000)')
-#echo "load time: $(expr $e - $s)"
+# Load auto-jump. It may replace z plugin
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh

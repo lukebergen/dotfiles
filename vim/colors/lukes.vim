@@ -46,7 +46,8 @@ endfunction
 " --------
 
 let s:white       = { "gui": "#E8E8E3", "cterm": "252" }
-let s:truewhite   = { "gui": "#E8E8E3", "cterm": "231" }
+let s:dimwhite    = { "gui": "#9E9E9E", "cterm": "247" }
+let s:truewhite   = { "gui": "#FFFFFF", "cterm": "231" }
 let s:black       = { "gui": "#272822", "cterm": "234" }
 let s:trueblack   = { "gui": "#272822", "cterm": "16" }
 let s:lightblack  = { "gui": "#2D2E27", "cterm": "235" }
@@ -164,8 +165,9 @@ call s:h("SpecialComment",{ "fg": s:aqua })
 call s:h("Tag",           { "fg": s:pink })
 "        Debug"
 
-call s:h("Todo",          { "fg": s:darkred, "bg": s:darkgrey,   "format": "bold,italic" })
-call s:h("Comment",       { "fg": s:warmgrey})
+call s:h("Todo",          { "fg": s:red, "bg": s:dimwhite,   "format": "bold,italic" })
+"call s:h("Comment",       { "fg": s:warmgrey})
+call s:h("Comment",       { "fg": s:dimwhite})
                          
 call s:h("Underlined",    { "fg": s:green })
 call s:h("Ignore",        {})
