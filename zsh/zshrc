@@ -11,6 +11,9 @@ export PATH="$PATH:$HOME/.rbenv/bin:$HOME/.rbenv/shims"   # rbenv
 export PATH="$PATH:$HOME/.dotfiles/bin"                   # personal scripts and such
 export PATH="$PATH:$HOME/.npm-packages/bin"               # npm -g installed things
 
+# Old postgres version :-/
+export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
+
 # Go stuff
 export GOPATH=$HOME/code/go
 export GOROOT=/usr/local/opt/go/libexec
