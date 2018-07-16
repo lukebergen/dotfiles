@@ -17,3 +17,7 @@
 	templatedir = ~/.dotfiles/git/git-templates
 [diff]
 	compactionHeuristic = true
+[alias]
+	co = checkout
+	s  = status -s
+  br  = branch
