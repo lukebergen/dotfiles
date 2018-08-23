@@ -45,7 +45,7 @@ set shiftwidth=2
 set softtabstop=2
 set smarttab
 set expandtab
-set foldmethod=syntax
+set foldmethod=manual
 set foldlevel=99
 
 let g:ctrlp_show_hidden=1
