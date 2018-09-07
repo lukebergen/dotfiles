@@ -7,6 +7,8 @@ command! Hex execute "%!xxd"
 command! Nohex execute "%!xxd -r"
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|botright cwindow|redraw!
 command! Js execute "set filetype=javascript"
+command! Spell execute "set spell | set nocursorline"
+command! NoSpell execute "set nospell | set cursorline"
 
 set number
 nnoremap <Leader>l :set relativenumber!<CR>
