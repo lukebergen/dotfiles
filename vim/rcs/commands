@@ -5,7 +5,7 @@ command! AllCtags execute "!ctags -R --languages=ruby --exclude=.git --exclude=l
 command! Ctags execute "!ag -l | ctags --links=no -L-"
 command! Hex execute "%!xxd"
 command! Nohex execute "%!xxd -r"
-command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|botright cwindow|redraw!
+command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|botright cwindow|setlocal nocursorline|redraw!
 command! Js execute "set filetype=javascript"
 command! Spell execute "set spell | set nocursorline"
 command! NoSpell execute "set nospell | set cursorline"

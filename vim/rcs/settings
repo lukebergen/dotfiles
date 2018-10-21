@@ -18,8 +18,8 @@ set mouse=a
 set showtabline=2
 
 " Make it so cursorline only moves around in active buffer
-au BufEnter * setlocal cursorline
-au BufLeave * setlocal nocursorline
+autocmd BufEnter * if &filetype != "qf" | setlocal cursorline
+autocmd BufLeave * setlocal nocursorline
 
 set incsearch
 
