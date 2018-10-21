@@ -62,6 +62,7 @@ let s:pink        = { "gui": "#F92772", "cterm": "197" }
 let s:green       = { "gui": "#A6E22D", "cterm": "77" }
 let s:brightgreen = { "gui": "#A6E22D", "cterm": "47" }
 let s:aqua        = { "gui": "#66d9ef", "cterm": "81" }
+let s:lightcyan   = { "gui": "#AFD7D7", "cterm": "152" }
 let s:yellow      = { "gui": "#E6DB74", "cterm": "186" }
 let s:orange      = { "gui": "#FD9720", "cterm": "208" }
 let s:purple      = { "gui": "#ae81ff", "cterm": "141" }
@@ -74,7 +75,7 @@ let s:delbg       = { "gui": "#f75f5f", "cterm": "167" }
 let s:changefg    = { "gui": "#d7d7ff", "cterm": "189" }
 let s:changebg    = { "gui": "#5f5f87", "cterm": "60" }
 
-" Highlighting 
+" Highlighting
 " ------------
 
 " editor
@@ -83,8 +84,8 @@ call s:h("ColorColumn",   {                     "bg": s:lightblack })
 call s:h("CursorColumn",  {                     "bg": s:lightblack2 })
 call s:h("CursorLine",    {                     "bg": s:black })
 call s:h("NonText",       { "fg": s:lightgrey })
-call s:h("StatusLine",    { "fg": s:grey,   "bg": s:lightblack,        "format": "reverse" })
-call s:h("StatusLineNC",  { "fg": s:lightblack,   "bg": s:grey,     "format": "reverse" })
+call s:h("StatusLine",    { "fg": s:lightcyan,  "bg": s:black,        "format": "reverse" })
+call s:h("StatusLineNC",  { "fg": s:grey,       "bg": s:black,     "format": "reverse" })
 call s:h("TabLine",       { "fg": s:white,      "bg": s:darkblack,    "format": "reverse" })
 call s:h("Visual",        {                     "bg": s:lightgrey })
 call s:h("Search",        { "fg": s:black,      "bg": s:yellow })
