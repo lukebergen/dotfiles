@@ -58,10 +58,8 @@ let g:go_fmt_command = "goimports"
 set fillchars+=vert:│
 
 " vim-wiki stuff
-let wiki_1 = {}
-let wiki_2 = {'path': '~/vimwiki/personal/'}
-let wiki_3 = {'path': '~/vimwiki/mm/'}
-let g:vimwiki_list = [wiki_1, wiki_2, wiki_3]
+let wiki = {'path': '~/Dropbox (Personal)/vimwiki/'}
+let g:vimwiki_list = [wiki]
 let g:vimwiki_listsyms = ' .oO√'
 
 " The Silver Searcher
