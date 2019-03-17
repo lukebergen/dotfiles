@@ -239,21 +239,21 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>269 327 606 456 0 0 1280 800 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>330 305 620 392 0 0 1280 777 </string>
+	<string>330 306 620 392 0 0 1280 800 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 153 606 469 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>269 301 770 429 0 0 1280 777 </string>
+	<string>269 312 918 452 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1280 800 0 0 1280 777 </string>
+	<string>0 301 920 470 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 0 1280 800 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>0 307 920 470 0 0 1280 777 </string>
-	<key>NSWindow Frame iTerm Window 3</key>
 	<string>0 0 1280 800 0 0 1280 777 </string>
+	<key>NSWindow Frame iTerm Window 3</key>
+	<string>0 307 920 470 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>257 252 920 468 0 0 1280 777 </string>
+	<string>257 238 920 470 0 0 1280 777 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1702,7 +1702,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-06-23T08:38:40Z</date>
+	<date>2019-03-06T04:49:39Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -1729,6 +1729,12 @@
 	<false/>
 	<key>TmuxDashboardLimit</key>
 	<integer>10</integer>
+	<key>ToolbeltTools</key>
+	<array>
+		<string>Command History</string>
+		<string>Paste History</string>
+		<string>Notes</string>
+	</array>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
 	<key>URLHandlersByGuid</key>
@@ -1756,6 +1762,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.0beta3</string>
+	<string>3.2.7beta3</string>
 </dict>
 </plist>
