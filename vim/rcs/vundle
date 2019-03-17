@@ -22,6 +22,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'mattn/calendar-vim'
 Plugin 'vimwiki/vimwiki'
 Plugin 'sjl/gundo.vim.git'
+Plugin 'elixir-editors/vim-elixir'
 
 call vundle#end()
 
