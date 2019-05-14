@@ -59,6 +59,7 @@ alias gd="git diff"
 alias ll="ls -al"
 #alias serve="ruby -run -e httpd . -p \$1"
 alias fix_video="sudo killall VDCAssistant"
+alias fix_audio="sudo killall coreaudiod"
 alias R="R --silent"
 alias vimx='vim -x --cmd "set cryptmethod=blowfish2" --cmd "set nobackup" --cmd "set noswapfile" --cmd "set viminfo=\"\"" -u NONE'
 alias vimw="vim -c 'VimwikiIndex'"

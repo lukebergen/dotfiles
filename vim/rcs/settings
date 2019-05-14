@@ -48,6 +48,16 @@ set expandtab
 set foldmethod=manual
 set foldlevel=99
 
+" linters/formatters
+let g:ale_set_highlights = 0
+"let g:ale_fixers = {
+"\   'javascript': ['prettier'],
+"\   'css': ['prettier'],
+"\}
+""set formatprg=prettier\ --stdin
+"let g:ale_linters = {'javascript': ['eslint']}
+"let g:ale_sign_column_always = 1
+
 let g:ctrlp_show_hidden=1
 
 let g:test#strategy='dispatch'
