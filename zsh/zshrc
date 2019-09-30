@@ -36,11 +36,17 @@ setopt HIST_IGNORE_SPACE
 autoload -U edit-command-line
 # Emacs style
 zle -N edit-command-line
-bindkey '^xe' edit-command-line
-bindkey '^x^e' edit-command-line
+bindkey "^xe" edit-command-line
+bindkey "^x^e" edit-command-line
 # Vi style:
 # zle -N edit-command-line
 # bindkey -M vicmd v edit-command-line
+
+# Bindings to make up and down search command history based on currently typed text
+autoload -U history-beginning-search-backward
+autoload -U history-beginning-search-forward
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
 
 # init rbenv
 eval "$(rbenv init - --no-rehash)"

@@ -17,6 +17,8 @@ set noequalalways
 set mouse=a
 set showtabline=2
 
+set nomodeline " https://threatpost.com/linux-command-line-editors-high-severity-bug/145569/
+
 " Make it so cursorline only moves around in active buffer
 autocmd WinEnter * if &filetype != "qf" | setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
