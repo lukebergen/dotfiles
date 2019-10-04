@@ -24,6 +24,7 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'sjl/gundo.vim.git'
 Plugin 'elixir-editors/vim-elixir'
 Plugin 'isRuslan/vim-es6'
+Plugin 'w0rp/ale'
 
 call vundle#end()
 

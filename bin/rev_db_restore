@@ -1,0 +1,3 @@
+#!/bin/bash
+
+psql -c 'DROP DATABASE reviewed_the_guide_development' postgres && psql -c 'CREATE DATABASE reviewed_the_guide_development' postgres && pg_restore --verbose --clean --no-acl --no-owner --jobs 4 -h localhost -U lukebergen -d reviewed_the_guide_development ~/dbdump/production/reviewed_the_guide_production.dump

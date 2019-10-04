@@ -1,0 +1,3 @@
+#!/bin/bash
+
+wget -O ~/dbdump/production/reviewed_the_guide_production.dump `heroku pg:backups public-url -a the-guide-production`

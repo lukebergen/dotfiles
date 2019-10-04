@@ -17,6 +17,10 @@ nnoremap <Leader>n :Explore<CR>
 nnoremap <Leader>t :tabnew<CR>
 nnoremap <Leader>p arequire 'pry'; binding.pry #$<ESC>
 inoremap <Leader>p require 'pry'; binding.pry #$
+
+nnoremap <Leader>rp arequire 'pry-remote'; binding.remote_pry #$<ESC>
+inoremap <Leader>rp require 'pry-remote'; binding.remote_pry #$
+
 nnoremap <silent> <leader>b :CtrlPBuffer<cr>
 
 " leader mappings for common split/window creation/nav
