@@ -60,6 +60,8 @@ nnoremap <Leader>sov :source ~/.dotfiles/vim/rcs/vimrc<cr>
 
 " useful one-liner for seeing what highlighting group is currently under the cursor
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Plugins
 nnoremap <Leader>u :GundoToggle<CR>
