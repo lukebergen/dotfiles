@@ -71,8 +71,11 @@ let g:go_fmt_command = "goimports"
 set fillchars+=vert:│
 
 " vim-wiki stuff
-let wiki = {'path': '~/Dropbox (Personal)/vimwiki/'}
-let g:vimwiki_list = [wiki]
+let default_wiki = {'path': '~/Dropbox (Personal)/vimwiki/default/'}
+let reviewed = {'path': '~/Dropbox (Personal)/vimwiki/reviewed/'}
+let othana = {'path': '~/Dropbox (Personal)/vimwiki/othana/'}
+let g:vimwiki_list = [default_wiki, reviewed, othana]
+
 let g:vimwiki_listsyms = ' .oO√'
 let g:vimwiki_table_auto_fmt = 0 " Disable auto formatting tables (it's screwing up my maps)
 let g:vimwiki_dir_link = 'index'
