@@ -15,6 +15,9 @@ hi Visual term=reverse cterm=reverse guibg=Grey
 " Some overrides from the molokai theme
 hi Normal          ctermfg=252 ctermbg=232
 
+" Override from es6 syntax highlighting plugin
+hi javaScriptFuncExp ctermfg=252 ctermbg=232
+
 "hi QuickFixLine term=reverse ctermfg=28 ctermbg=128 guifg=#FFFFFF guibg=#000000
 
 " Show trailing whitespace and spaces before a tab:
