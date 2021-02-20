@@ -10,6 +10,7 @@ export PATH="$PATH:/usr/local/bin:/usr/local/sbin"        # local bins and such
 export PATH="$PATH:$HOME/.rbenv/bin:$HOME/.rbenv/shims"   # rbenv
 export PATH="$PATH:$HOME/.dotfiles/bin"                   # personal scripts and such
 export PATH="$PATH:$HOME/.npm-packages/bin"               # npm -g installed things
+export PATH="/usr/local/opt/openssl/bin:$PATH"            # stop using os-provided openssl
 
 # Old postgres version :-/
 export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
@@ -74,6 +75,7 @@ alias dockclean='docker rm $(docker ps -a -q -f status=exited); docker rmi $(doc
 alias rc='vim ~/.dotfiles/zsh/zshrc'
 alias xml_pp='xmllint --format -'
 alias ctags="`brew --prefix`/bin/ctags"
+alias ver="vercel"
 
 # miscelanious configuration stuff
 export PGDATA="/usr/local/var/postgres"

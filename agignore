@@ -2,4 +2,4 @@ source_maps
 assets/images
 /log/
 *.tmp
-/public/assets
+node_modules
