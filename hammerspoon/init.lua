@@ -1,0 +1,61 @@
+hs.hotkey.bind({"alt", "ctrl"}, "space", function()
+  if (hs.spotify.isRunning()) then
+    hs.spotify.playpause()
+  end
+end)
+
+hs.hotkey.bind({"alt"}, "l", function()
+  hs.eventtap.keyStrokes("λ")
+end)
+
+hs.hotkey.bind({"alt"}, "r", function()
+  hs.reload()
+end)
+
+-- vim registers in native osx
+c = hs.hotkey.modal.new('alt', 'c')
+v = hs.hotkey.modal.new('alt', 'v')
+strings = {}
+registers = {"a", "s", "d", "f", "g", "h", "h", "h", "h", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
+
+hs.hotkey.bind("alt", "d", function()
+  for k, v in pairs(strings) do
+    print(string.format("%s: %s", k, v))
+  end
+end)
+
+c:bind('', 'escape', function() c:exit() end)
+v:bind('', 'escape', function() v:exit() end)
+
+hs.fnutils.each(registers, function(char)
+  c:bind('', char, function()
+    el = hs.uielement.focusedElement()
+    if el then
+      strings[char] = el:selectedText()
+    end
+    c:exit()
+  end)
+
+  v:bind('', char, function()
+    v:exit()
+    hs.eventtap.keyStrokes(strings[char])
+  end)
+end)
+
+mb = hs.menubar.new(true)
+mb:setTitle("CV")
+
+clear = function() 
+  strings = {}
+end
+mb:setMenu(function() 
+  menu = {{title = "clear", fn = clear}, {title = "-----", disabled = true}}
+
+  l = 3
+  for k, v in pairs(strings) do
+    menu[l] = {title = k .. ": " .. v, disabled = true }
+    l = l + 1
+  end
+
+  return menu
+end)
