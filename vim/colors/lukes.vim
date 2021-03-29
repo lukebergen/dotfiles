@@ -109,6 +109,7 @@ call s:h("Title",         { "fg": s:yellow })
 "call s:h("Directory",     { "fg": s:aqua })
 call s:h("Directory",     { "fg": s:brightgreen })
 call s:h("ExtraWhitespace", { "bg": s:red })
+call s:h("Space",         { "fg": s:lightgrey })
 
 " diff
 call s:h("DiffAdd",       { "fg": s:addfg,      "bg": s:addbg })

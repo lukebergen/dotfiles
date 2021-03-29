@@ -26,7 +26,7 @@ autocmd WinLeave * setlocal nocursorline
 set incsearch
 
 " set list
-set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<,space:•
 
 " disable auto commenting on next line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
