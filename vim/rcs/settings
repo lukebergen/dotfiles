@@ -1,0 +1,116 @@
+runtime macros/matchit.vim
+
+set backspace=indent,eol,start
+set showcmd
+set showmode
+set laststatus=2
+set statusline=%f%m%=%l/%L:%c
+
+set noswapfile
+set nobackup
+set splitright
+set splitbelow
+set encoding=utf-8
+set autowrite
+set autoread
+set ignorecase
+set smartcase
+set noequalalways
+set mouse=a
+set showtabline=2
+
+set nomodeline " https://threatpost.com/linux-command-line-editors-high-severity-bug/145569/
+
+" Make it so cursorline only moves around in active buffer
+autocmd WinEnter * if &filetype != "qf" && &diff == 0 | setlocal cursorline
+autocmd WinEnter * if &filetype == "qf" || &diff != 0 | setlocal nocursorline
+autocmd WinLeave * setlocal nocursorline
+
+set incsearch
+
+" set list
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<,space:•
+
+" disable auto commenting on next line
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+set wildignore+=*/.git,*/tmp/*,*.so,*.swp,*.zip,*/log/*,*/source_maps/*
+
+set suffixesadd+=.js,.js.coffee,.coffee
+autocmd BufNewFile,BufReadPost *.svelte set syntax=html
+autocmd BufEnter *.png,*.jpg,*gif exec "! imgcat ".expand("%")
+
+" The new regex engine in vim >= 703 makes ruby syntax hilighting crazy slow for some reason
+if v:version >= 703
+  autocmd FileType ruby setlocal regexpengine=1
+  autocmd FileType typescript setlocal regexpengine=0
+endif
+
+set wrap
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set smarttab
+set expandtab
+set foldmethod=manual
+set foldlevel=99
+
+" linters/formatters
+let g:ale_linters = {
+\   'javascript': ['standard'],
+\}
+let g:ale_fixers = {'javascript': ['standard']}
+"let g:ale_set_highlights = 0
+"let g:ale_fixers = {
+"\   'javascript': ['prettier'],
+"\   'css': ['prettier'],
+"\}
+""set formatprg=prettier\ --stdin
+"let g:ale_linters = {'javascript': ['eslint']}
+"let g:ale_sign_column_always = 1
+
+let g:ctrlp_show_hidden=1
+
+let g:test#strategy='dispatch'
+
+let g:go_fmt_command = "goimports"
+
+set fillchars+=vert:│
+
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+
+" vim-wiki stuff
+let default_wiki = {'path': '~/Library/CloudStorage/Dropbox/vimwiki/default/'}
+let reviewed = {'path': '~/Library/CloudStorage/Dropbox/vimwiki/reviewed/'}
+let othana = {'path': '~/Library/CloudStorage/Dropbox/vimwiki/othana/'}
+let thoughts = {'path': '~/Library/CloudStorage/Dropbox/vimwiki/thoughts/'}
+let g:vimwiki_list = [default_wiki, othana, thoughts, reviewed]
+
+let g:vimwiki_listsyms = ' .oO√'
+let g:vimwiki_table_auto_fmt = 0 " Disable auto formatting tables (it's screwing up my maps)
+let g:vimwiki_dir_link = 'index'
+
+" Trying out ripgrep as a silver search replacement
+" See https://elliotekj.com/posts/2016/11/22/setup-ctrlp-to-use-ripgrep-in-vim/
+if executable('rg')
+  set grepprg=rg\ -S\ --vimgrep
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+endif
+
+" The Silver Searcher
+" See https://gist.github.com/manasthakur/5afd3166a14bbadc1dc0f42d070bd746 for some details
+" if executable('ag')
+"   " Use ag over grep
+"   set grepprg=ag\ --nogroup\ --nocolor
+" 
+"   " Prevents shell commands (like ag) from producing output on the termial (such that when you quit vim you see all kinds of ag output)
+"   " Try this for a while but this might have unintended consequences to other commands. If other stuff breaks, remove
+"   let &shellpipe="&>"
+" 
+"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore-case -g ""'
+" 
+"   " ag is fast enough that CtrlP doesn't need to cache
+"   let g:ctrlp_use_caching = 0
+" endif
