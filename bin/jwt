@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+const args = process.argv;
+const jwt = args[2];
+
+if (!jwt) {
+  console.log("No token given");
+  process.exit(1);
+}
+
+const [header, body, sig] = jwt.split(".");
+
+if (!header || !body || !sig) {
+  console.log("does not appear to be a well-formatted jwt");
+  process.exit(1);
+}
+
+const bodyParsed = atob(body);
+console.log(JSON.parse(bodyParsed, null, 2));
+
+process.exit(0);

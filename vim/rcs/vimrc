@@ -1,0 +1,9 @@
+" entry point for config. ~/.vimrc should just source this file or symlink to it
+
+set nocompatible               " Cus reasons, http://stackoverflow.com/questions/5845557/in-a-vimrc-is-set-nocompatible-completely-useless
+
+so ~/.dotfiles/vim/rcs/vundle     " Plugins
+so ~/.dotfiles/vim/rcs/settings   " vim setting changes/configuration
+so ~/.dotfiles/vim/rcs/bindings   " key bindings and interaction changes
+so ~/.dotfiles/vim/rcs/styles     " stylistic changes/theming/etc...
+so ~/.dotfiles/vim/rcs/commands   " additional commands/functionality

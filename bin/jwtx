@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+const args = process.argv;
+const idOrAccess = args[2];
+if (!["id", "access"].includes(idOrAccess)) {
+  console.log("usage: jwtx (id|access) <contents-of-okta-token-storage>");
+  process.exit(1);
+}
+
+const jsonStr = args[3];
+const blob = JSON.parse(jsonStr);
+const key = `${idOrAccess}Token`;
+const jwt = blob[key][key];
+
+if (!jwt) {
+  console.log("No token given");
+  process.exit(1);
+}
+
+const [header, body, sig] = jwt.split(".");
+
+if (!header || !body || !sig) {
+  console.log("does not appear to be a well-formatted jwt");
+  process.exit(1);
+}
+
+const bodyParsed = atob(body);
+console.log("signature valid: ???")
+console.log(JSON.parse(bodyParsed, null, 2));
+
+process.exit(0);

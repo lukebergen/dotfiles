@@ -1,0 +1,9 @@
+:verbose imap <C-k>  " show if/where a binding was bound
+
+vimwiki stuff
+,ww     -> open wiki index
+,wi     -> open today
+,w,w    -> open todays diary entry
+,wi     -> open diary index
+,w,i    -> when in diary index, generate links from diary entries
+Cal<CR> -> Toggle calendar on side

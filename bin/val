@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+const go = async (code) => {
+  const token = "REDACTED"
+  const options = {method: "POST", body: `{"code": "${code}"}`, headers: {'Content-Type': 'applications/json', authentication: token}};
+  console.log("options: ", options);
+  const resp = await fetch("https://api.val.town/run", options);
+  const body = await resp.json();
+  console.log(body);
+}
+
+const code = process.argv[2];
+if (!code) {
+  console.log("gotta give me something to eval");
+} else {
+  go(code);
+}
