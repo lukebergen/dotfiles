@@ -60,3 +60,21 @@ vim.filetype.add({
 --vim.g.vimwiki_listsyms = ' .oO√'
 --vim.g.vimwiki_table_auto_fmt = 0 -- Disable auto formatting tables (it's screwing up my maps)
 --vim.g.vimwiki_dir_link = 'index'
+
+-- vimwiki stuff
+-- also check plugins.lua for some stuff that has to be initialized there
+
+vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = "*/diary/[0-9-]*.wiki", callback = function()
+  local template = {}
+  local today = os.date("!%Y-%m-%d")
+  -- TODO: this could be cleaner. Also, figure out, from usage, what a good starting template might look like
+  table.insert(template, string.format("[[/]] > [[/diary/diary|diary]] > %s", today))
+  table.insert(template, string.format("= %s =", today))
+  table.insert(template, ":private-1:")
+  table.insert(template, "")
+  table.insert(template, "== Today ==")
+  table.insert(template, "")
+  table.insert(template, "== Next ==")
+  table.insert(template, "")
+  vim.api.nvim_buf_set_lines(0, 0, 0, false, template)
+end})
