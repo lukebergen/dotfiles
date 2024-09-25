@@ -146,7 +146,7 @@ hs.fnutils.each(registers, function(char)
   end)
 end)
 
-mb = hs.menubar.new(true)
+--[[mb = hs.menubar.new(true)
 mb:setTitle("CV")
 
 clear = function()
@@ -163,3 +163,4 @@ mb:setMenu(function()
 
   return menu
 end)
+--]]

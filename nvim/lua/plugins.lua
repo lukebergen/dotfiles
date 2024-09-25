@@ -11,8 +11,24 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require("lazy").setup("plugins")
+--[[
 require("lazy").setup({
-  'folke/which-key.nvim',
+  {"EdenEast/nightfox.nvim",
+    config = function()
+      vim.cmd('set termguicolors')
+      vim.cmd('set background=dark')
+      vim.cmd('colorscheme terafox')
+
+      vim.opt.statusline = '%f%m%=%l/%L:%c'
+
+      -- color overrides
+      vim.cmd("hi Normal guibg=NONE")
+      vim.cmd("hi NormalNC guibg=NONE")
+    end
+  },
+  -- TODO: figure out why which-key window isn't popping up
+  -- 'folke/which-key.nvim',
   --'nvim-tree/nvim-web-devicons',
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
@@ -33,6 +49,13 @@ require("lazy").setup({
   },
   "tpope/vim-unimpaired",
   "tpope/vim-fugitive",
+
+  -- revisit `olrtg/nvim-emmet` once we've figured out lsp
+  --{"mattn/emmet-vim",
+  --  config = function()
+  --    vim.g.user_emmet_leader_key = '<C-B>'
+  --  end
+  --},
   --{
   --    'nvim-lualine/lualine.nvim',
   --    dependencies = { 'nvim-tree/nvim-web-devicons' }
@@ -56,6 +79,8 @@ require("lazy").setup({
     end
   }
 })
+
+--]]
 
 --return require('packer').startup(function(use)
 --  -- Packer can manage itself

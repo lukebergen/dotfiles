@@ -2,6 +2,7 @@
 vim.g.ctrlp_show_hidden = 1
 
 vim.opt.modeline = false -- see https://threatpost.com/linux-command-line-editors-high-severity-bug/145569/
+vim.opt.statusline = '%f%m%=%l/%L:%c'
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -34,6 +35,7 @@ vim.g.ctrlp_use_caching = 0
 
 vim.opt.cursorline = true
 
+-- TODO: can we clean this up by just using highlight group "cursorlineNC" (NC being "Not Current")
 vim.api.nvim_create_autocmd({"WinEnter"}, {
   callback = function()
     vim.opt_local.cursorline = true

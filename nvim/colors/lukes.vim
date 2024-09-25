@@ -10,6 +10,7 @@
 " Initialisation
 " --------------
 
+
 let g:colors_name = "lukes"
 
 if !has("gui_running") && &t_Co < 256
@@ -17,7 +18,9 @@ if !has("gui_running") && &t_Co < 256
 endif
 
 set background=dark
-"hi clear
+hi clear
+
+hi Normal ctermbg=None
 
 if exists("syntax_on")
   syntax reset
@@ -293,5 +296,4 @@ call s:h("StateOfBeing",  {"fg": s:red})
 
 " netrw
 call s:h("netrwExe",                     { "fg": s:red })
-call s:h("netrwDir",                     { "fg": s:aqua })
-
+"call s:h("netrwDir",                     { "fg": s:aqua })

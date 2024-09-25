@@ -1,6 +1,6 @@
 -- todo: look into cleaner way to do this. Or at least do some research
 -- or maybe just give in and use lualine (currently installed)
-vim.opt.statusline = '%f%m%=%l/%L:%c'
+--vim.opt.statusline = '%f%m%=%l/%L:%c'
 
 -- mmmmaaaaaassive todo: redo this in lua
 --vim.cmd.colorscheme("lukes")
@@ -82,11 +82,15 @@ vim.opt.statusline = '%f%m%=%l/%L:%c'
 --   extensions = {}
 -- }
 
-vim.cmd("set notermguicolors")
-vim.cmd("colorscheme lukes")
+--vim.cmd("set notermguicolors")
+--vim.cmd("colorscheme lukes")
 
-vim.cmd("hi Normal ctermbg=NONE")
-vim.cmd("hi NormalNC ctermbg=NONE")
+--vim.cmd("hi Normal ctermbg=NONE")
+--vim.cmd("hi NormalNC ctermbg=NONE")
+
+--vim.cmd('set termguicolors')
+--vim.cmd('set background=light')
+--vim.cmd('colorscheme zenbones')
 
 
 --vim.cmd("hi TabLineFill ctermfg=161 ctermbg=16")

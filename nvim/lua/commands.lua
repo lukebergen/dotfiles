@@ -10,3 +10,13 @@ vim.api.nvim_create_user_command('Xml', function()
   vim.opt.syntax = "xml"
   vim.cmd("%!xmllint --format --recover -")
 end, {})
+
+function show_hi()
+  local line = vim.fn.line(".")
+  local col = vim.fn.col(".")
+  local synID = vim.fn.synID(line, col, 1)
+  local synName = vim.fn.synIDattr(synID, "name")
+  local transName = vim.fn.synIDattr(vim.fn.synIDtrans(synID), "name")
+  
+  print(synName .. " -> " .. transName)
+end

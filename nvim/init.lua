@@ -3,6 +3,5 @@ vim.g.mapleader = ","
 
 require("plugins")
 require("settings")
-require("mappings")
+require("keymaps")
 require("commands")
-require("styles")

@@ -63,4 +63,4 @@ vim.keymap.set('n', '<DOWN>', '<C-e>')
 
 -- overriding plugins to make use of their mappings for myself (or keep default behavior like c-y)
 vim.keymap.set('n', '<C-Z><C-R>', '<Plug>NetrwRefresh') -- gotta re-map this one away from netrw before we can use it below
-vim.g.user_emmet_leader_key='<C-B>'
+--vim.g.user_emmet_leader_key='<C-B>'
