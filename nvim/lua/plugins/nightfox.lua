@@ -31,13 +31,15 @@
 --]]
 return {
   {
-    "EdenEast/nightfox.nvim",
+    "EdenEast/nightfox.nvim", version = "*",
     config = function()
 
       -- let s:lightcyan   = { "gui": "#AFD7D7", "cterm": "152" }
       -- let s:dimwhite    = { "gui": "#9E9E9E", "cterm": "247" }
 
       -- not terribly useful since I can't then make use of these new custom colors... :(
+      -- actually, working now. Either needed to upgrade to latest version OR, seems like "palette.<colorname>" maybe?
+      -- e.g. `netrwDir = { fg = "palette.magenta.dim" }` works
       local palettes = {
         all = {
           dimwhite = "#9e9e9e",
@@ -54,8 +56,12 @@ return {
           TabLineSel = { fg = "white", bg = "NONE" },
           TabLineFill = { fg = "black", bg = "fg2" },
           StatusLine = { fg = "white", bg = "fg3" },
-          StatusLineNC = { fg = "bg3", bg = "fg2" },
+          StatusLineNC = { fg = "white", bg = "sel0" },
+          --StatusLine = { fg = "bg3", bg = "lightcyan" },
           CursorLine = { bg = "bg1" },
+          --netrwDir = { fg = "palette.magenta.dim" },
+          netrwDir = { fg = "pink" },
+          netrwExe = { fg = "red" },
         }
       }
 

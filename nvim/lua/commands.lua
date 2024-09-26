@@ -20,3 +20,4 @@ function show_hi()
   
   print(synName .. " -> " .. transName)
 end
+vim.keymap.set('n', '<Leader>i', '<CMD>lua print(show_hi())<CR>')
