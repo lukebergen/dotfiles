@@ -80,3 +80,16 @@ vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = "*/diary/[0-9-]*.wiki", c
   table.insert(template, "")
   vim.api.nvim_buf_set_lines(0, 0, 0, false, template)
 end})
+
+
+--vim.opt.cmdheight = 0
+--vim.api.nvim_create_autocmd("CmdlineEnter", {
+--  callback = function()
+--    vim.opt.cmdheight = 1
+--  end,
+--})
+--vim.api.nvim_create_autocmd("CmdlineLeave", {
+--  callback = function()
+--    vim.opt.cmdheight = 0
+--  end,
+--})

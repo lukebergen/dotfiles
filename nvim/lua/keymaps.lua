@@ -5,21 +5,21 @@ vim.keymap.set('i', 'Jk', '<ESC>')
 vim.keymap.set('i', 'JK', '<ESC>')
 
 -- window management
-vim.keymap.set('n', '<Leader>v', ':vnew<CR>')
-vim.keymap.set('n', '<Leader>h', ':new<CR>')
-vim.keymap.set('n', '<Leader>sv', ':vsplit<CR>')
-vim.keymap.set('n', '<Leader>sh', ':split<CR>')
+vim.keymap.set('n', '<Leader>v', '<CMD>vnew<CR>')
+vim.keymap.set('n', '<Leader>h', '<CMD>new<CR>')
+vim.keymap.set('n', '<Leader>sv', '<CMD>vsplit<CR>')
+vim.keymap.set('n', '<Leader>sh', '<CMD>split<CR>')
 vim.keymap.set('n', '<C-H>', '<C-W><C-H>')
 vim.keymap.set('n', '<C-J>', '<C-W><C-J>')
 vim.keymap.set('n', '<C-K>', '<C-W><C-K>')
 vim.keymap.set('n', '<C-L>', '<C-W><C-L>')
-vim.keymap.set('n', '<Leader>n', ':Explore<CR>')
-vim.keymap.set('n', '<Leader>ev', ':Vexplore!<CR>')
-vim.keymap.set('n', '<Leader>eh', ':Hexplore<CR>')
+vim.keymap.set('n', '<Leader>n', '<CMD>Explore<CR>')
+vim.keymap.set('n', '<Leader>ev', '<CMD>Vexplore!<CR>')
+vim.keymap.set('n', '<Leader>eh', '<CMD>Hexplore<CR>')
 vim.keymap.set('n', '<C-W>0', '<C-W>_<C-W>|')
 
 -- tab management
-vim.keymap.set('n', '<Leader>t', ':tabnew<CR>')
+vim.keymap.set('n', '<Leader>t', '<CMD>tabnew<CR>')
 vim.keymap.set('n', '<Leader>1', '1gt')
 vim.keymap.set('n', '<Leader>2', '2gt')
 vim.keymap.set('n', '<Leader>3', '3gt')
@@ -56,8 +56,8 @@ end, {remap=true})
 --]]
 
 -- misc
-vim.keymap.set('n', '<Leader>r', ':mode<CR>')
-vim.keymap.set('n', '<Leader>c', ':nohl<CR>')
+vim.keymap.set('n', '<Leader>r', '<CMD>mode<CR>')
+vim.keymap.set('n', '<Leader>c', '<CMD>nohl<CR>')
 vim.keymap.set('n', '<UP>', '<C-y>')
 vim.keymap.set('n', '<DOWN>', '<C-e>')
 
