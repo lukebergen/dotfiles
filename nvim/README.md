@@ -35,6 +35,8 @@ Each file under the lua/plugins/ directory is a lazy-nvim plugin spec. See [lazy
 
 ## Some Handy Built-in and Plugin Commands
 
-:Inspect  =>  inspect syntax/highlight group of whatever the cursor is currently on (useful for changing colors in the colorscheme)
-:InspectTree  => show the treesitter parse of the current buffer (not _super_ useful for anything, but pretty cool)
-:Lazy  => bring up the Lazy plugin manager interface
+:Inspect         =>  inspect syntax/highlight group of whatever the cursor is currently on (useful for changing colors in the colorscheme)
+:InspectTree     => show the treesitter parse of the current buffer (not _super_ useful for anything, but pretty cool)
+:Lazy            => bring up the Lazy plugin manager interface
+:SessionSave     => save the current session (saves based on pwd)
+:SessionRestore  => load the saved session (if one exists) based on pwd
