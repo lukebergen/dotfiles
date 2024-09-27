@@ -3,5 +3,6 @@ zsh/local
 vim/bundle
 .DS_Store
 local
+hammerspoon/registers.txt
 
 gitbackup
