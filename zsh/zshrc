@@ -3,7 +3,7 @@ cd
 # Uncomment this and the last 2 lines to see total RC load time
 # startLoadTime=`gdate +%s.%N`
 
-[ -f ~/.dotfiles/zsh/local/pre.zsh ] && source ~/.dotfiles/zsh/local/pre.zsh
+[ -f ~/.local/share/zsh/pre.zsh ] && source ~/.local/share/zsh/pre.zsh
 
 source ~/.dotfiles/zsh/themes/luke-bergen.zsh
 
@@ -149,4 +149,4 @@ function n() {
 stty icrnl
 stty sane
 
-[ -f ~/.dotfiles/zsh/local/post.zsh ] && source ~/.dotfiles/zsh/local/post.zsh
+[ -f ~/.local/share/zsh/post.zsh ] && source ~/.local/share/zsh/post.zsh
