@@ -1,0 +1,38 @@
+return {
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    build = ":Copilot auth",
+    lazy = false,
+    priority = 100, -- lower because it's not important that it load faster than anything else. In fact, we can wait for a while for it to load most of the time
+    enabled = function()
+      return os.getenv("COPILOT_AVAILABLE") == "true"
+    end,
+    opts = {
+      suggestion = {
+        enabled = true,
+        auto_trigger = false,
+        hide_during_completion = true,
+        debounce = 75,
+        keymap = {
+          accept = "<C-k>",
+          accept_word = false,
+          accept_line = false,
+          next = "<C-l>",
+          prev = "<C-h>",
+          dismiss = "<C-j>", --"<C-]>",
+        },
+      },
+      panel = { enabled = false },
+      copilot_node_command = "node_insecure",
+      --filetypes = {
+      --  markdown = true,
+      --  help = true,
+      --},
+    },
+  },
+  -- others to consider:
+  --   copilot-cmp (requires nvim-cmp)
+  --   copilot-chat
+  --   edgy?? (I guess it's a window layout editor/creator/manager and copilot-chat can work with it?)
+}
