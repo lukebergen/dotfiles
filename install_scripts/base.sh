@@ -39,7 +39,6 @@ ln -s ~/.dotfiles/vim/syntax ~/.vim
 ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc
 ln -s ~/.dotfiles/zsh/zshenv ~/.zshenv
 ln -s ~/.dotfiles/git/gitconfig ~/.gitconfig
-ln -s ~/.dotfiles/git/gitconfig ~/.agignore
 
 brew install the_silver_searcher
 brew install autojump
