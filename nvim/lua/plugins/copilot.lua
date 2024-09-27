@@ -31,6 +31,25 @@ return {
       --},
     },
   },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    enabled = function()
+      return os.getenv("COPILOT_AVAILABLE") == "true"
+    end,
+    -- see `:help CopilotChat` for more info
+     pts = {
+      debug = false, -- Enable debugging
+      clear_chat_on_new_prompt = true,
+      -- See Configuration section for rest
+    },
+    -- See Commands section for default commands if you want to lazy load on them
+  },
   -- others to consider:
   --   copilot-cmp (requires nvim-cmp)
   --   copilot-chat

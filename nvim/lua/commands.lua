@@ -11,3 +11,7 @@ vim.api.nvim_create_user_command('Xml', function()
   vim.opt.syntax = "xml"
   vim.cmd("%!xmllint --format --recover -")
 end, {})
+
+vim.api.nvim_create_user_command('ClearVirt', function()
+  vim.api.nvim_buf_clear_namespace(0, -1, 0, -1)
+end, {})
