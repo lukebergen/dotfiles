@@ -3,5 +3,5 @@ vim.g.mapleader = ","
 
 require("plug")
 require("settings")
-require("keymaps")
 require("commands")
+require("keymaps")

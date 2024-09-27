@@ -29,6 +29,7 @@
     sel0    = "#293e40", -- Popup bg, visual selection bg
     sel1    = "#425e5e", -- Popup sel bg, search bg
 --]]
+
 return {
   {
     "EdenEast/nightfox.nvim", version = "*",
@@ -60,8 +61,11 @@ return {
           --StatusLine = { fg = "bg3", bg = "lightcyan" },
           CursorLine = { bg = "bg1" },
           --netrwDir = { fg = "palette.magenta.dim" },
-          netrwDir = { fg = "pink" },
-          netrwExe = { fg = "red" },
+          netrwDir = { fg = "palette.blue.bright" },
+          netrwExe = { fg = "palette.red.bright" },
+          MatchParen = { fg = "palette.red.bright" },
+          gitcommitSummary = { fg = "palette.blue.bright" },
+          HopNextKey = { fg = "palette.red.bright" },
         }
       }
 
