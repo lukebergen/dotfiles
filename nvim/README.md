@@ -19,19 +19,32 @@ This is easily one of the more complicated sections of this dotfiles repo. So gi
 
 ## Plugins
 
+### Random notes
 Each file under the lua/plugins/ directory is a lazy-nvim plugin spec. See [lazy-nvim spec](https://lazy.folke.io/spec) documentation for more info.
 
+In the spec, the init function is run before the plugin loads even if the the plugin is configured to load lazily. The config function is run after the plugin has loaded.
+
+### Plugins installed
 - auto-session - manages automatically saving/reloading sessions for a given working directory
 - fugitive     - :replace-me: old git plugin
 - hop          - handy little plugin to make it easy to jump to specific places in a buffer
 - init         - required as the starting point for all the other plugins I guess?
 - nightfox     - colorscheme jazz
 - polyglot     - syntax/highlight files. Mostly just for old/obscure things that don't have tree-sitter support for yet
-- surround     - handy key mappings to surround words with quotes, change parens to brackets, etc. See its docs for more
+- surround     - :replace-me: ? (with echasnovski/mini.surround) handy key mappings to surround words with quotes, change parens to brackets, etc. See its docs for more
 - telescope    - :must-have: fuzzy finder over lists. That's super generic. Just check out the [docs](https://github.com/nvim-telescope/telescope.nvim) for all the handy stuff you can do with it. (I use `ff` a hundred times a day)
+  - telescope-media-files (for showing previews of media files (images require chafa binary to be installed))
 - treesitter   - experimental at this point but seems like the future of syntax-based stuff like highlighting and whatnot
 - unimpaired   - some handy key mappings. See [docs](https://github.com/tpope/vim-unimpaired) for everything. I mostly just use it for `]q`, `[q`, `]s`, and `[s`
 - vimwiki      - :replace-me: ? A bunch of bindings and all kinds of stuff to make it easy to manage a little wiki for note taking, diary, task management, etc. Maybe replace with kiwi if I can reproduce everything I like about the old school vimwiki?
+
+
+### To look into
+- pwntester/octo.nvim
+- nvim-telekasten/telekasten.nvim (vimwiki replacement?)
+  - calendar-vim
+- mistweaverco/kulala.nvim
+- L3MON4D3/LuaSnip
 
 ## Some Handy Built-in and Plugin Commands
 

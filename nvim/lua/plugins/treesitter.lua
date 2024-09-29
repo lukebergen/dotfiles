@@ -18,19 +18,21 @@ return {
       indent = { enable = true },
       -- Ensure these language parsers are installed
       ensure_installed = {
-        "lua",
-        "vim",
-        "vimdoc",
-        "comment",
-        --"plantuml",  -- ehhhh we'll let polyglot handle it the old-school way
-        "query",
-        "javascript",
-        "typescript",
-        "python",
         "c",
         "cpp",
+        "comment",
+        "javascript",
+        "typescript",
+        "json",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "python",
+        "query",
         "rust",
-        "json"
+        "vim",
+        "vimdoc",
+        --"plantuml",  -- ehhhh we'll let polyglot handle it the old-school way
       },
 
       -- some example configuration
