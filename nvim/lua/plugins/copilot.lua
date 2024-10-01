@@ -39,11 +39,12 @@ return {
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
     build = "make tiktoken", -- Only on MacOS or Linux
+    cmd = "CopilotChat",
     enabled = function()
       return os.getenv("COPILOT_AVAILABLE") == "true"
     end,
     -- see `:help CopilotChat` for more info
-     pts = {
+    opts = {
       debug = false, -- Enable debugging
       clear_chat_on_new_prompt = true,
       -- See Configuration section for rest
