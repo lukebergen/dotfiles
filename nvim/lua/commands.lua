@@ -20,3 +20,7 @@ vim.api.nvim_create_user_command("RC", function()
   vim.cmd('lcd ~/.dotfiles/nvim')
   vim.cmd('e .')
 end, {})
+
+vim.api.nvim_create_user_command("CC", function()
+  vim.cmd('CopilotChat')
+end, {})
