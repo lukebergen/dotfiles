@@ -26,7 +26,7 @@ return {
         vim.g.vimwiki_table_auto_fmt = 0 -- Disable auto formatting tables (it's screwing up my maps)
       end
 
-      vim.g.vimwiki_dir_link = 'index'
+      -- vim.g.vimwiki_dir_link = 'index'
     end
   }
 }

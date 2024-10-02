@@ -21,6 +21,15 @@ vim.api.nvim_create_user_command("RC", function()
   vim.cmd('e .')
 end, {})
 
+vim.api.nvim_create_user_command('VimwikiDiaryGenerateIndex', function()
+  vim.cmd("VimwikiDiaryIndex")
+  vim.cmd("VimwikiDiaryGenerateLinks")
+  vim.cmd("write! diary/index.md")
+  vim.cmd("edit diary/index.md")
+  vim.cmd("!rm diary/diary.md")
+end, {})
+
 vim.api.nvim_create_user_command("CC", function()
   vim.cmd('CopilotChat')
 end, {})
+
