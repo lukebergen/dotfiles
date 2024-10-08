@@ -38,17 +38,18 @@ return {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
+    lazy = false,
+    priority = 100, -- lower because it's not important that it load faster than anything else. In fact, we can wait for a while for it to load most of the time
     build = "make tiktoken", -- Only on MacOS or Linux
     cmd = "CopilotChat",
+    opts = {
+      debug = false,
+      clear_chat_on_new_prompt = true,
+    },
     enabled = function()
       return os.getenv("COPILOT_AVAILABLE") == "true"
     end,
     -- see `:help CopilotChat` for more info
-    opts = {
-      debug = false, -- Enable debugging
-      clear_chat_on_new_prompt = true,
-      -- See Configuration section for rest
-    },
     -- See Commands section for default commands if you want to lazy load on them
   },
   -- others to consider:
