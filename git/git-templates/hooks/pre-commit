@@ -1,0 +1,6 @@
+#!/bin/sh
+if test $(git diff --cached | grep -F "#\$" | wc -c) != 0
+then
+	echo 'Found instance of "#$". Did you leave a pry in or something?'
+	exit 1
+fi

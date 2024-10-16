@@ -1,0 +1,44 @@
+local function open_nvim_tree(data)
+  local function is_file(path)
+    local stat = vim.loop.fs_stat(path)
+    return stat and stat.type == "file" or false
+  end
+
+  -- Open the tree if a directory is given
+  if not is_file(data.file) then
+    require("nvim-tree.api").tree.open()
+  end
+end
+
+return {
+  {
+    "nvim-tree/nvim-tree.lua",
+    config = function()
+      require("nvim-tree").setup({
+        view = {
+          width = 30,
+          side = "left",
+        },
+        actions = {
+          open_file = {
+            quit_on_open = false,
+            window_picker = {
+              enable = false,
+            },
+          },
+        },
+      })
+
+      vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+
+      vim.keymap.set("n", "<leader>e", function()
+        if vim.bo.filetype == "nvim-tree" then
+          vim.cmd.wincmd("p")
+        else
+          require("nvim-tree.api").tree.toggle()
+        end
+      end, { noremap = true, silent = true, desc = "Toggle Nvim-tree" })
+
+    end,
+  },
+}

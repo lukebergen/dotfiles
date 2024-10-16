@@ -1,0 +1,10 @@
+.git.bak
+zsh/oh-my-zsh
+zsh/local
+vim/bundle
+.DS_Store
+local
+hammerspoon/registers.txt
+
+gitbackup
+mm-test-users.lua

@@ -1,0 +1,83 @@
+let mapleader=","
+inoremap <nowait> jk <ESC>
+inoremap <nowait> Jk <ESC>
+inoremap <nowait> jK <ESC>
+inoremap <nowait> JK <ESC>
+
+" easymotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+nmap s <Plug>(easymotion-s)
+" map <Leader>j <Plug>(easymotion-j)
+" map <Leader>k <Plug>(easymotion-k)
+
+" vim-test
+nmap <Leader>st :TestNearest<CR>
+nmap <Leader>St :TestSuite<CR>
+
+nnoremap <Leader>n :Explore<CR>
+nnoremap <Leader>t :tabnew<CR>
+nnoremap <expr> <Leader>p ':!npm run plant-docs; open ' . substitute(@%, '.puml', '.png', 'g') . '<CR>'
+
+nnoremap <Leader>db iconsole.log("[DEBUG] ");<ESC>2hi
+inoremap <Leader>db console.log("[DEBUG] ");<ESC>2hi
+
+nnoremap <silent> <leader>b :CtrlPBuffer<cr>
+
+nnoremap <Leader>ll :set nocursorline!<CR>
+
+nnoremap <Leader>dn :diffthis<CR>
+nnoremap <Leader>df :diffoff<CR>
+
+" leader mappings for common split/window creation/nav
+nnoremap <Leader>v :vnew<cr>
+nnoremap <Leader>h :new<cr>
+nnoremap <Leader>sv :vsp<cr>
+nnoremap <Leader>sh :sp<cr>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-z><C-r> <Plug>NetrwRefresh " This maps netrw's refresh action to something other than <C-l> (which we use below)
+nnoremap <C-L> <C-W><C-L>
+nmap <unique> z<c-r> <Plug>NetrwRefresh " Need to do this so netrw's bindings don't steal <c-l>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-W>0 <C-W><C-_>:vertical resize<CR>
+nnoremap <C-W>i <C-W><C-\|>
+command! Vhide execute "resize 0"
+command! Hide execute "vertical resize 0"
+
+" movement mappings
+nnoremap <Up> k<C-Y>
+nnoremap <Down> j<C-E>
+
+" quick tab navigation
+nnoremap <Leader>1 1gt
+nnoremap <Leader>2 2gt
+nnoremap <Leader>3 3gt
+nnoremap <Leader>4 4gt
+nnoremap <Leader>5 5gt
+nnoremap <Leader>6 6gt
+
+" netrw
+nnoremap π <C-W>z
+
+" better code-completion navigation
+inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "j"
+inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "k"
+
+" remap <Leader>r. I like running rake in another iterm window and would rather use r for redraw! since I habitually cmd+k and sometimes mistakenly do so in vim
+nnoremap <Leader>r :redraw!<CR>
+
+" leader mapping for clearing search because highlighting is ugly
+nnoremap <Leader>c :nohl<return>
+
+" quick editing/sourcing of vim rc files
+nnoremap <Leader>ev :e ~/.dotfiles/vim/rcs/<cr>:cd ~/.dotfiles/vim/rcs/<cr>
+nnoremap <Leader>sov :source ~/.dotfiles/vim/rcs/vimrc<cr>
+
+" useful one-liner for seeing what highlighting group is currently under the cursor
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" Plugins
+nnoremap <Leader>u :GundoToggle<CR>
+let g:user_emmet_leader_key='<C-B>'

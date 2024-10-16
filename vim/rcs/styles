@@ -1,0 +1,33 @@
+colorscheme lukes
+set t_Co=256  " vim-monokai now only support 256 colours in terminal.
+
+set hlsearch
+if $TERM_PROGRAM =~ "iTerm"
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+endif
+
+" Fix visual selections overly light color
+hi Visual term=reverse cterm=reverse guibg=Grey
+
+" Some overrides from the molokai theme
+hi Normal          ctermfg=252 ctermbg=232
+
+
+function CustHi()
+  " Override from es6 syntax highlighting plugin
+  hi javaScriptFuncExp ctermfg=252 ctermbg=232
+
+  "hi QuickFixLine term=reverse ctermfg=28 ctermbg=128 guifg=#FFFFFF guibg=#000000
+
+  " Show trailing whitespace and spaces before a tab:
+  hi ExtraWhitespace ctermbg=196
+  match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+  " TODO: Figure out how to make this work with gray for spaces
+  hi Space ctermfg=237
+  2match Space / /
+endfunction
+
+autocmd WinEnter * call CustHi()
+call CustHi()

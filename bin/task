@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ "$1" = "ls" ] || [ "$1" = "" ]
+then
+  for f in ~/Library/CloudStorage/Dropbox/taskell/*.md; do
+    echo "- $(basename $f .md)"
+  done
+else
+  pushd ~ > /dev/null
+  taskell "Library/CloudStorage/Dropbox/taskell/$1.md"
+  popd > /dev/null
+fi

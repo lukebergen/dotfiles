@@ -1,0 +1,119 @@
+command! Clear execute "tabnew | tabonly"
+command! Json execute ":%!jq -S ." | normal ggVG=
+command! Xml execute ":set syntax=xml | %!xmllint --format --recover -"
+command! AllCtags execute "!ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)"
+command! Ctags execute "!ag -l | ctags --links=no -L-"
+command! Hex execute "%!xxd"
+command! Nohex execute "%!xxd -r"
+command! -nargs=+ -complete=file -bar Rg silent! grep! <args>|botright cwindow|setlocal nocursorline|redraw!
+command! Js execute "set filetype=javascript"
+command! Spell execute "setlocal spell | set nocursorline"
+command! NoSpell execute "setlocal nospell | set cursorline"
+command! Col execute "set cursorcolumn!"
+
+set number
+nnoremap <Leader>l :set relativenumber!<CR>
+
+command! Dbuff execute "call DeleteHiddenBuffers()"
+command! Debuff execute "call DeleteHiddenBuffers()"
+function! DeleteHiddenBuffers()
+    let tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        silent execute 'bwipeout' buf
+    endfor
+endfunction
+
+" Vimwiki stuff
+autocmd BufRead,BufNewFile *.wiki set filetype=vimwiki
+function! ToggleCalendar()
+  execute ":Calendar"
+  if exists("g:calendar_open")
+    if g:calendar_open == 1
+      execute "q"
+      unlet g:calendar_open
+    else
+      g:calendar_open = 1
+    end
+  else
+    let g:calendar_open = 1
+  end
+endfunction
+command! Cal execute "call ToggleCalendar()"
+command! Html execute "VimwikiAll2HTML"
+
+" Random stuff
+command! -range Encrypt execute "call Encrypt()"
+command! -range Decrypt execute "call Decrypt()"
+
+" TODO: Clean this up. These two have so much overlap and could be DRYed up.
+function! Encrypt() range
+  let reg_save = getreg('"')
+  let regtype_save = getregtype('"')
+  let cb_save = &clipboard
+  set clipboard&
+  normal! ""gvd
+  let selection = substitute(getreg('"'), "'", "<single-quote>", "g")
+  call setreg('"', reg_save, regtype_save)
+  let &clipboard = cb_save
+
+  call inputsave()
+  let pass = inputsecret('Password: ')
+
+  let result = system("crypt -p '" . pass . "' -e '" . selection . "'")
+  call append(line('v') - 1, split(result, "\n"))
+endfunction
+
+function! Decrypt() range
+  let reg_save = getreg('"')
+  let regtype_save = getregtype('"')
+  let cb_save = &clipboard
+  set clipboard&
+  normal! ""gvd
+  let selection = getreg('"')
+  call setreg('"', reg_save, regtype_save)
+  let &clipboard = cb_save
+
+  call inputsave()
+  let pass = inputsecret('Password: ')
+
+  let result = system("crypt -p '" . pass . "' -d '" . selection . "'")
+  let subbed = substitute(result, "<single-quote>", "'", "g")
+  call append(line('v') - 1, split(subbed, "\n"))
+endfunction
+
+function! Redir(cmd, rng, start, end)
+	for win in range(1, winnr('$'))
+		if getwinvar(win, 'scratch')
+			execute win . 'windo close'
+		endif
+	endfor
+	if a:cmd =~ '^!'
+		let cmd = a:cmd =~' %'
+			\ ? matchstr(substitute(a:cmd, ' %', ' ' . expand('%:p'), ''), '^!\zs.*')
+			\ : matchstr(a:cmd, '^!\zs.*')
+		if a:rng == 0
+			let output = systemlist(cmd)
+		else
+			let joined_lines = join(getline(a:start, a:end), '\n')
+			let cleaned_lines = substitute(shellescape(joined_lines), "'\\\\''", "\\\\'", 'g')
+			let output = systemlist(cmd . " <<< $" . cleaned_lines)
+		endif
+	else
+		redir => output
+		execute a:cmd
+		redir END
+		let output = split(output, "\n")
+	endif
+	vnew
+	let w:scratch = 1
+	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
+	call setline(1, output)
+endfunction
+
+command! -nargs=1 -complete=command -bar -range Redir silent call Redir(<q-args>, <range>, <line1>, <line2>)
+
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
+    return synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfunction

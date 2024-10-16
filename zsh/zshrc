@@ -1,0 +1,162 @@
+# start in home directory
+cd
+# Uncomment this and the last 2 lines to see total RC load time
+# startLoadTime=`gdate +%s.%N`
+
+[ -f ~/.local/share/zsh/pre.zsh ] && source ~/.local/share/zsh/pre.zsh
+
+source ~/.dotfiles/zsh/themes/luke-bergen.zsh
+
+# these are supposed to be the defaults, but I like to be explicit
+export XDG_CONFIG_HOME=~/.config/
+export XDG_DATA_HOME=~/.local/share/
+
+# currently only used by SDL2
+export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/lib:/usr/local/lib"
+
+# PATH setup
+export PATH="$PATH:/usr/local/bin:/usr/local/sbin"        # local bins and such
+export PATH="$PATH:$HOME/.local/bin"
+#export PATH="$PATH:$HOME/.rbenv/bin:$HOME/.rbenv/shims"   # rbenv
+export PATH="$PATH:$HOME/.dotfiles/bin"                   # personal scripts and such
+#export PATH="$PATH:$HOME/.nodenv/versions/16.1.0/bin"
+#export PATH="/usr/local/opt/node@16/bin:$PATH"
+export PATH="/usr/local/opt/node@18/bin:$PATH"
+export PATH="$PATH:/usr/local/Cellar/python@3.9/3.9.1_7/Frameworks/Python.framework/Versions/3.9/bin"
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
+# Old postgres version :-/
+#export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
+#export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@14/bin:$PATH"
+
+# Go stuff
+export GOPATH=$HOME/code/go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+
+# Curl override
+export PATH="/usr/local/opt/curl/bin:$PATH"
+
+# Racket stuff
+export PATH=$PATH:/Applications/Racket\ v8.0/bin
+
+# Python stuff
+#export WORKON_HOME=~/.python-envs
+#source /usr/local/bin/virtualenvwrapper.sh
+alias pip=pip3
+alias python=python3
+
+# Ignore commands that start with a space (curling with passwords, etc...)
+setopt HIST_IGNORE_SPACE
+setopt CHASE_LINKS
+
+
+# Stuff to enable ctrl-x ctrl-e to edit current command in editor
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey "^xe" edit-command-line
+bindkey "^x^e" edit-command-line
+# Vi style:
+# zle -N edit-command-line
+# bindkey -M vicmd v edit-command-line
+
+# Bindings to make up and down search command history based on currently typed text
+autoload -U history-beginning-search-backward
+autoload -U history-beginning-search-forward
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+
+# aliases
+# alias be="bundle exec"
+# alias fs="foreman start"
+# alias befs="bundle exec foreman start"
+# alias befr="bundle exec foreman run"
+alias gs="git status -s"
+alias gb="git branch"
+alias gc="git checkout \$1"
+alias gl="git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --no-merges \$1"
+alias glm="git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" \$1"
+alias gd="git diff"
+alias ll="ls -al"
+#alias serve="ruby -run -e httpd . -p \$1"
+alias fix_video="sudo killall VDCAssistant"
+alias fix_audio="sudo killall coreaudiod"
+alias R="R --silent"
+alias vimx='vim -x --cmd "set cryptmethod=blowfish2" --cmd "set nobackup" --cmd "set noswapfile" --cmd "set viminfo=\"\"" -u NONE'
+alias vimw="nvim -c 'VimwikiIndex'"
+alias vim="nvim"
+alias oldvim="command vim"
+alias dotfiles="vim ~/.dotfiles"
+alias dockclean='docker rm $(docker ps -a -q -f status=exited); docker rmi $(docker images -f "dangling=true" -q)'
+alias xml_pp='xmllint --format -'
+alias pcp="rsync -r --progress"
+alias ctags="`brew --prefix`/bin/ctags"
+alias rgf='rg --files | rg'
+alias ver="vercel"
+alias ibrew="arch -x86_64 /usr/local/bin/brew"
+alias trustbin="sudo xattr -dr com.apple.quarantine $1"
+
+function rc() {
+  if [ "$1" = "vim" ] || [ "$1" = "v" ]
+  then
+    pushd ~/.dotfiles/nvim/ > /dev/null
+    nvim ./
+    popd > /dev/null
+  elif [ "$1" = "z" ] || [ "$1" = "zsh" ]
+  then
+    pushd ~/.dotfiles/zsh > /dev/null
+    nvim ./zshrc
+    popd > /dev/null
+  else
+    pushd ~/.dotfiles/ > /dev/null
+    nvim ./
+    popd > /dev/null
+  fi
+}
+
+function task() {
+  if [ "$1" = "ls" ] || [ "$1" = "" ]
+  then
+    for f in ~/Documents/taskell/*.md; do
+      echo "- $(basename $f .md)"
+    done
+  else
+    pushd ~ > /dev/null
+    taskell "Documents/taskell/$1.md"
+    popd > /dev/null
+  fi
+}
+
+# miscelanious configuration stuff
+#export PGDATA="/usr/local/var/postgres"
+export EDITOR=nvim
+
+export ARCHFLAGS="-arch x86_64"
+
+unsetopt inc_append_history
+unsetopt share_history
+
+# Plugins
+# TODO: Need a better way to do this. Maybe git submodules?
+source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source <(fzf --zsh)
+
+# Load auto-jump
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
+function n() {
+  node -e "console.log($*)"
+}
+
+
+# This fixes the <enter> inserting ^M instead of actually sending enter to some programs issue that came up for god knows what reason
+stty icrnl
+stty sane
+
+[ -f ~/.local/share/zsh/post.zsh ] && source ~/.local/share/zsh/post.zsh

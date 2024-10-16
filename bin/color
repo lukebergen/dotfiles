@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+fg = ARGV[0]
+bg = ARGV[1]
+
+str = "\033[38;5;#{fg}m"
+if bg
+  str << "\033[48;5;#{bg}m"
+end
+
+puts str + "color"

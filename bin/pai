@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+
+if (process.argv.length === 2) {
+  console.log("perplexity.ai cli. Usage: pai 'question'");
+  process.exit(0);
+}
+
+const question = process.argv[2];
+
+const secretsFile = `${process.env.XDG_DATA_HOME}/secrets/perplexity`;
+const token = fs.readFileSync(secretsFile).toString().trim();
+
+const go = async () => {
+  const resp = await fetch("https://api.perplexity.ai/chat/completions", {
+    method: "POST",
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      "model": "llama-3.1-sonar-small-128k-online",
+      "messages": [{
+        "role": "system",
+        "content": "Be accurate, precise, and concise."
+      }, {
+        "role": "user",
+        "content": question
+      }]
+    })
+  });
+
+  const json = await resp.json();
+  const result = json.choices[0].message.content;
+  console.log(result);
+};
+
+go();
