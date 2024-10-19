@@ -13,6 +13,7 @@ brew install neovim
 brew install zsh
 brew install fzf
 brew install autojump
+brew install glow
 
 # finally, we can grab all our dotfiles and link them up
 git clone https://github.com/lukebergen/dotfiles.git

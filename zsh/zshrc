@@ -91,7 +91,6 @@ alias vimx='vim -x --cmd "set cryptmethod=blowfish2" --cmd "set nobackup" --cmd 
 alias vimw="nvim -c 'VimwikiIndex'"
 alias vim="nvim"
 alias oldvim="command vim"
-alias dotfiles="vim ~/.dotfiles"
 alias dockclean='docker rm $(docker ps -a -q -f status=exited); docker rmi $(docker images -f "dangling=true" -q)'
 alias xml_pp='xmllint --format -'
 alias pcp="rsync -r --progress"
@@ -100,6 +99,22 @@ alias rgf='rg --files | rg'
 alias ver="vercel"
 alias ibrew="arch -x86_64 /usr/local/bin/brew"
 alias trustbin="sudo xattr -dr com.apple.quarantine $1"
+
+DEFAULT_OLLAMA_MODEL='qwen2.5'
+alias ol="ollama run $DEFAULT_OLLAMA_MODEL"  # default
+alias ols='ollama run $DEFAULT_OLLAMA_MODEL "Answer succinctly and concisely in as few words as reasonable\n\n"' # *s*hort
+
+# *m*arkdown
+function olm() {
+  ol $1 | glow -
+}
+
+# *m*arkdown *s*hort
+function olms() {
+  ols $1 | glow -
+}
+
+alias md='glow -'
 
 function rc() {
   if [ "$1" = "vim" ] || [ "$1" = "v" ]

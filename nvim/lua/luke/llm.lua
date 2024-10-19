@@ -4,47 +4,42 @@ local function insert_text(text)
   local line = vim.api.nvim_win_get_cursor(0)[1]
   local col = vim.api.nvim_win_get_cursor(0)[2]
   vim.api.nvim_buf_set_text(0, line - 1, col, line - 1, col, {text})
+  vim.api.nvim_win_set_cursor(0, {line, col + #text})
 end
 
 local query = function(prompt)
-  local curl = string.format([[curl -s -X POST http://localhost:11434/api/generate -d '{ "model": "codellama", "prompt": "%s" }']], prompt)
-
+  local curl = string.format([[curl -s -N -X POST http://localhost:11434/api/generate -d '{ "model": "codellama", "prompt": "%s" }']], prompt)
   curl = string.gsub(curl, "\n", "\\n")
+
+  print("curl: " .. curl)
+
   local handle = io.popen(curl)
 
-  --local win_id = vim.api.nvim_open_win(0, false, {
-  --  relative = 'editor',
-  --  width = 30,
-  --  height = vim.o.lines,
-  --  col = vim.o.columns / 2,
-  --  row = 1,
-  --  style = 'minimal',
-  --  border = 'rounded',
-  --})
-
   vim.api.nvim_command('vnew')
-  local new_buffer_id = vim.api.nvim_get_current_buf()
 
-  --vim.api.nvim_set_current_win(win_id)
+  --local processLine = function()
+  --  local line = handle:read("*line")
+  --  print("line: " .. line)
+  --  if line then
+  --    local object = json.decode(line)
+  --    --vim.schedule(function()
+  --      vim.api.nvim_put({object.response}, "c", true, true)
+  --    --end)
+  --    -- Schedule the next read with a small delay
+  --    vim.defer_fn(processLine, 1)
+  --  else
+  --    handle:close()
+  --  end
+  --end
+  --processLine()
 
-  local i = 0
   for line in handle:lines() do
     local object = json.decode(line)
-    --insert_text(object.resposne)
     vim.schedule(function()
       if (object.response and object.response ~= "") then
         vim.api.nvim_put({object.response}, "c", true, true)
       end
     end)
-    -- Process each line of the response as it comes in
-    --vim.api.nvim_buf_set_lines(0, -1, -1, false, {line})
-    --local object = json.decode(line)
-    --local lines = {}
-    --for line in object.response:gmatch("[^\r\n]*") do
-    --  print(line)
-    --  table.insert(lines, line)
-    --end
-    --vim.api.nvim_buf_set_lines(0, -1, -1, false, lines)
   end
   
   handle:close()
