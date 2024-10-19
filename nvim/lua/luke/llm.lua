@@ -11,7 +11,7 @@ local query = function(prompt)
   local curl = string.format([[curl -s -N -X POST http://localhost:11434/api/generate -d '{ "model": "codellama", "prompt": "%s" }']], prompt)
   curl = string.gsub(curl, "\n", "\\n")
 
-  print("curl: " .. curl)
+  --print("curl: " .. curl)
 
   local handle = io.popen(curl)
 
@@ -33,16 +33,16 @@ local query = function(prompt)
   --end
   --processLine()
 
-  for line in handle:lines() do
-    local object = json.decode(line)
-    vim.schedule(function()
+
+  vim.schedule(function()
+    for line in handle:lines() do
+      local object = json.decode(line)
       if (object.response and object.response ~= "") then
         vim.api.nvim_put({object.response}, "c", true, true)
       end
-    end)
-  end
-  
-  handle:close()
+    end
+    handle:close()
+  end)
 end
 
 -- maybe in future we can pull from other things like the full buffer or even other open buffers?
