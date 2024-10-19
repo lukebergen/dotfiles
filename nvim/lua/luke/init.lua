@@ -5,14 +5,30 @@ end
 require("luke.commands")
 require("luke.keymaps")
 
-function test()
-  vim.api.nvim_put({"start"}, "c", true, true)
+local curl = require('plenary.curl')
+local json = require("lib.lunajson")
+
+local function process_chunk(chunk)
+  -- Process each chunk of data here
+  -- For example, append it to a buffer
   vim.schedule(function()
-    vim.api.nvim_put({"inside"}, "c", true, true)
+    local lines = vim.split(chunk, "\n")
+    vim.api.nvim_buf_set_lines(0, -1, -1, false, lines)
   end)
-  vim.api.nvim_put({"end"}, "c", true, true)
 end
 
-vim.api.nvim_create_user_command("Test", function(opts)
-  test()
-end, {})
+local function streamResponse()
+  curl.post({
+    url = "http://localhost:11434/api/generate",
+    stream = true,
+    body = '{"model": "codellama", "prompt": "write a fib function in lua"}',
+    callback = function(data, callback)
+      if data then
+        process_chunk(data)
+      end
+      callback()
+    end,
+  })
+end
+
+vim.api.nvim_create_user_command('TestNewThing', streamResponse, {})
