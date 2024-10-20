@@ -66,6 +66,7 @@ return {
           MatchParen = { fg = "palette.red.bright" },
           gitcommitSummary = { fg = "palette.blue.bright" },
           HopNextKey = { fg = "palette.red.bright" },
+          SpecialKey = { bg = "palette.magenta.bright", fg = "palette.white.bright" },
         }
       }
 
