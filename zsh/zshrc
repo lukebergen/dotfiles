@@ -165,6 +165,16 @@ source <(fzf --zsh)
 # Load auto-jump
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
+jp() {
+  pushd -q $(pwd)
+  if [[ ${1} == -* ]] && [[ ${1} != "--" ]]; then
+    autojump ${@}
+    return
+  else
+    j $(pwd) ${@}
+  fi
+}
+
 function n() {
   node -e "console.log($*)"
 }

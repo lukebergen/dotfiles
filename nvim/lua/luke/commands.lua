@@ -12,6 +12,14 @@ vim.api.nvim_create_user_command('Xml', function()
   vim.cmd("%!xmllint --format --recover -")
 end, {})
 
+vim.api.nvim_create_user_command('Hex', function()
+  vim.cmd("%!xxd")
+end, {})
+
+vim.api.nvim_create_user_command('Nohex', function()
+  vim.cmd("%!xxd -r")
+end, {})
+
 vim.api.nvim_create_user_command('ClearVirt', function()
   vim.api.nvim_buf_clear_namespace(0, -1, 0, -1)
 end, {})
