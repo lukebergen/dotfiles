@@ -1,10 +1,18 @@
 local json = require("lib.lunajson")
 
-local query = function(prompt)
+local query = function(prompt, newWindow)
   --local curlArgs = string.format([[curl -s -N -X POST http://localhost:11434/api/generate -d '{ "model": "codellama", "prompt": "%s" }']], prompt)
 
-  vim.cmd("vnew")
-  prompt = string.gsub(prompt, "\n", "\\n")
+  local outputBuffer = vim.api.nvim_get_current_buf()
+
+  if newWindow then
+    local startingWindow = vim.api.nvim_get_current_win()
+    vim.cmd("vnew")
+    outputBuffer = vim.api.nvim_get_current_buf()
+    vim.api.nvim_set_current_win(startingWindow)
+  end
+
+  prompt = string.gsub(prompt, "\n", "\\n"):gsub('"', "\\\"")
   local curlArgs = {
     "-s",
     "-N",
@@ -23,21 +31,18 @@ local query = function(prompt)
     args = curlArgs,
     stdio = {stdin, stdout, stderr}
   }, function(code, signal)
-    -- on exit
+    print("on exit")
   end)
 
   vim.uv.read_start(stdout, function(err, data)
     if data then
       vim.schedule(function()
         local object = json.decode(data)
-        if object.response:find("\n") then
-          print("nil found")
-        end
-        local cleaned = object.response:gsub("\n", "\n")
+        local cleaned = object.response
         if cleaned then
-          --vim.api.nvim_put({cleaned}, "c", true, true)
-          vim.api.nvim_put(vim.split(cleaned, "\n"), "c", true, true)
-          --vim.api.nvim_buf_set_lines(0, -1, -1, false, vim.split(cleaned, "\n"))
+          local lastLine = vim.api.nvim_buf_get_lines(outputBuffer, -2, -1, false)[1] or ""
+          local newLastLine = vim.split(lastLine .. cleaned, "\n")
+          vim.api.nvim_buf_set_lines(outputBuffer, -2, -1, false, newLastLine)
         end
       end)
     end
@@ -61,6 +66,18 @@ Given this context, please answer the following question:
 
 %s
   ]], context, input)
+end
+
+local codeOnlyPrompt = function(input, context)
+  return string.format([[
+You are a helpful and skilled programmer. You only respond with code. You do not include backticks to demarcate chunks of code. The code you provide is syntactically correct and complete on its own unless it refers to something in context.
+Here is some context:
+
+---
+%s
+---
+
+Given this context, write code for the following: %s]], context, input)
 end
 
 local getContext = function(opts)
@@ -88,9 +105,20 @@ vim.api.nvim_create_user_command("LLM", function(opts)
   local input = opts.args
   local context = getContext(opts)
   local prompt = promptFrom(input, context)
-  query(prompt)
+  query(prompt, true)
 end, {
   nargs = '?',
   range = true,
   desc = 'Prompt an LLM'
+})
+
+vim.api.nvim_create_user_command("C", function(opts)
+  print("still working on that one")
+  --local input = opts.args
+  --local context = ""
+  --local prompt = promptFrom(input, context)
+  --query(prompt, false)
+end, {
+  nargs = '?',
+  desc = 'Write some code in the current buffer'
 })
