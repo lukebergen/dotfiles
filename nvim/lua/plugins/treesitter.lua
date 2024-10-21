@@ -39,15 +39,15 @@ return {
       -- some example configuration
 
       -- Enable incremental selection
-      --incremental_selection = {
-      --  enable = true,
-      --  keymaps = {
-      --    init_selection = "<C-space>",
-      --    node_incremental = "<C-space>",
-      --    scope_incremental = "<C-s>",
-      --    node_decremental = "<C-backspace>",
-      --  },
-      --},
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<C-space>",
+          node_incremental = "<C-space>",
+          scope_incremental = "<C-s>",
+          node_decremental = "<C-backspace>",
+        },
+      },
       ---- Enable text objects
       --textobjects = {
       --  select = {
