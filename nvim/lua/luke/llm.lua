@@ -1,7 +1,10 @@
 local json = require("lib.lunajson")
 
-local query = function(prompt, newWindow)
+local query = function(prompt, opts) --newWindow, skipBackticks)
   --local curlArgs = string.format([[curl -s -N -X POST http://localhost:11434/api/generate -d '{ "model": "codellama", "prompt": "%s" }']], prompt)
+
+  local newWindow = opts.newWindow ~= false
+  local skipBackticks = opts.skipBackticks == true
 
   local outputBuffer = vim.api.nvim_get_current_buf()
 
@@ -31,7 +34,7 @@ local query = function(prompt, newWindow)
     args = curlArgs,
     stdio = {stdin, stdout, stderr}
   }, function(code, signal)
-    print("on exit")
+    -- on exit
   end)
 
   vim.uv.read_start(stdout, function(err, data)
@@ -39,7 +42,7 @@ local query = function(prompt, newWindow)
       vim.schedule(function()
         local object = json.decode(data)
         local cleaned = object.response
-        if cleaned then
+        if cleaned and (not skipBackticks or not cleaned:find("^```")) then
           local lastLine = vim.api.nvim_buf_get_lines(outputBuffer, -2, -1, false)[1] or ""
           local newLastLine = vim.split(lastLine .. cleaned, "\n")
           vim.api.nvim_buf_set_lines(outputBuffer, -2, -1, false, newLastLine)
@@ -56,13 +59,11 @@ local promptFrom = function(input, context)
 You are a helpful and skilled programmer who answers questions simply and concisely.
 Here is some context:
 
----
 %s
----
 
 ---
+
 Given this context, please answer the following question:
----
 
 %s
   ]], context, input)
@@ -70,7 +71,7 @@ end
 
 local codeOnlyPrompt = function(input, context)
   return string.format([[
-You are a helpful and skilled programmer. You only respond with code. You do not include backticks to demarcate chunks of code. The code you provide is syntactically correct and complete on its own unless it refers to something in context.
+You are a helpful and skilled programmer. You only respond with code. You do not include backticks to demarcate chunks of code. The code you provide is syntactically correct and complete on its own unless it refers to something in context. Do not include backticks.
 Here is some context:
 
 ---
@@ -105,7 +106,7 @@ vim.api.nvim_create_user_command("LLM", function(opts)
   local input = opts.args
   local context = getContext(opts)
   local prompt = promptFrom(input, context)
-  query(prompt, true)
+  query(prompt, {newWindow = true})
 end, {
   nargs = '?',
   range = true,
@@ -113,12 +114,23 @@ end, {
 })
 
 vim.api.nvim_create_user_command("C", function(opts)
-  print("still working on that one")
-  --local input = opts.args
-  --local context = ""
-  --local prompt = promptFrom(input, context)
-  --query(prompt, false)
+  local input = opts.args
+  local context = getContext(opts)
+  local prompt = codeOnlyPrompt(input, context)
+  query(prompt, {newWindow = true, skipBackticks = true})
 end, {
   nargs = '?',
-  desc = 'Write some code in the current buffer'
+  range = true,
+  desc = 'Prompt an LLM'
 })
+
+--vim.api.nvim_create_user_command("C", function(opts)
+--  print("still working on that one")
+--  --local input = opts.args
+--  --local context = ""
+--  --local prompt = promptFrom(input, context)
+--  --query(prompt, false)
+--end, {
+--  nargs = '?',
+--  desc = 'Write some code in the current buffer'
+--})
