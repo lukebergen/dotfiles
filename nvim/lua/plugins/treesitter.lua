@@ -22,6 +22,7 @@ return {
         "c",
         "cpp",
         "comment",
+        "html",
         "javascript",
         "typescript",
         "json",
