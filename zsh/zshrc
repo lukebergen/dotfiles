@@ -101,8 +101,10 @@ alias ibrew="arch -x86_64 /usr/local/bin/brew"
 alias trustbin="sudo xattr -dr com.apple.quarantine $1"
 
 DEFAULT_OLLAMA_MODEL='llama3.2:latest'
+DEFAULT_OLLAMA_CODE_MODEL='codellama:latest'
 alias ol="ollama run $DEFAULT_OLLAMA_MODEL"  # default
 alias ols='ollama run $DEFAULT_OLLAMA_MODEL "Answer succinctly and concisely in as few words as reasonable\n\n"' # *s*hort
+alias olc='ollama run $DEFAULT_OLLAMA_CODE_MODEL "Answer succinctly and concisely in as few words as resonable\n\n"' *c*ode
 
 # *m*arkdown
 function olm() {
