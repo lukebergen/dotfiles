@@ -18,6 +18,7 @@ vim.opt.number = true
 vim.opt.showtabline = 2
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.scrolloff = 3
 
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   pattern = {"*"}, -- file types that we don't want newlines to continue a comment
