@@ -21,6 +21,7 @@ return {
       ensure_installed = {
         "c",
         "cpp",
+        "csv",
         "comment",
         "html",
         "javascript",
