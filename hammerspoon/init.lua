@@ -18,8 +18,6 @@ local function safeRequire(moduleName)
   end
 end
 
-local userChoices = safeRequire("mm-test-users")
-
 -------------
 -- hotkeys --
 -------------
@@ -166,19 +164,20 @@ hs.fnutils.each(registers, function(char)
   end)
 end)
 
-userChooserCb = function(choice)
-  local tempPasteboard = hs.pasteboard.getContents()
-  hs.pasteboard.setContents(choice.email)
-  hs.eventtap.keyStroke("cmd", "v")
-  hs.pasteboard.setContents(strings["p"]) -- for convenience, if we've just inserted a test user, probably about to login...
-  userChooser:query("")
-  hs.timer.doAfter(5, function()
-    hs.pasteboard.setContents(tempPasteboard)
-  end)
-end
 
+-- begin MM specific stuff (if applicable)
+local userChoices = safeRequire("mm-test-users") -- only local to MM machine
 if userChoices then
-  userChooser = hs.chooser.new(userChooserCb)
+  userChooser = hs.chooser.new(function(choice)
+    local tempPasteboard = hs.pasteboard.getContents()
+    hs.pasteboard.setContents(choice.email)
+    hs.eventtap.keyStroke("cmd", "v")
+    hs.pasteboard.setContents(strings["p"]) -- for convenience, if we've just inserted a test user, probably about to login...
+    userChooser:query("")
+    hs.timer.doAfter(5, function()
+      hs.pasteboard.setContents(tempPasteboard)
+    end)
+  end)
   userChooser:choices(userChoices)
   userChooser:bgDark(true)
   userChooser:searchSubText(true)
