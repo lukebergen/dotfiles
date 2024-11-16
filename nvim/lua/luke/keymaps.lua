@@ -57,9 +57,22 @@ end, {remap=true})
 
 -- misc
 vim.keymap.set('n', '<Leader>r', '<CMD>mode<CR>')
-vim.keymap.set('n', '<Leader>c', '<CMD>nohl<CR><CMD>ClearVirt<CR>')
+vim.keymap.set('n', '<Leader>c', '<CMD>nohl<CR>')
 vim.keymap.set('n', '<UP>', '<C-y>')
 vim.keymap.set('n', '<DOWN>', '<C-e>')
+
+-- Move selected lines down
+vim.keymap.set("v", "J", function()
+  local count = vim.v.count1
+  return string.format(":m '>+%d<CR>gv=gv", count)
+end, { expr = true })
+
+-- Move selected lines up
+vim.keymap.set("v", "K", function()
+  local count = vim.v.count1
+  return string.format(":m '<-%d<CR>gv=gv", count + 1)
+end, { expr = true })
+
 
 -- overriding plugins to make use of their mappings for myself (or keep default behavior like c-y)
 vim.keymap.set('n', '<C-Z><C-R>', '<Plug>NetrwRefresh') -- gotta re-map this one away from netrw before we can use it below
