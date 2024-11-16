@@ -95,7 +95,6 @@ vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = "*/diary/[0-9-]*.{wiki,md
   vim.api.nvim_buf_set_lines(0, 0, 0, false, template)
 end})
 
-
 --vim.opt.cmdheight = 0
 --vim.api.nvim_create_autocmd("CmdlineEnter", {
 --  callback = function()

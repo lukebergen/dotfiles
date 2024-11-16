@@ -164,6 +164,7 @@ hs.fnutils.each(registers, function(char)
   end)
 end)
 
+-- perma-reminder note thingy? (like, sticky-note that's editable and also show/hidable with a couple keybinds?)
 
 -- begin MM specific stuff (if applicable)
 local userChoices = safeRequire("mm-test-users") -- only local to MM machine
