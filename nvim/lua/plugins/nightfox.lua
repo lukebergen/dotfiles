@@ -50,7 +50,7 @@ return {
 
       local groups = {
         all = {
-          WinSeparator = { fg = "white", bg = NONE },
+          WinSeparator = { fg = "bg3", bg = NONE },
           Normal = { fg = "fg1", bg = "NONE",  },
           NormalNC = { fg = "fg1", bg = "NONE" },
           TabLine = { fg = "black", bg = "fg2" },
