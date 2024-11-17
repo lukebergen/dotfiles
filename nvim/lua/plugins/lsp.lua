@@ -1,9 +1,15 @@
--- default to hiding diagnostic virtual_text with a keymap to toggle it
-vim.diagnostic.config({virtual_text = false})
+vim.diagnostic.config({
+  virtual_text = false, -- default to false, below keymap will toggle it
+  float = {
+    focusable = false,
+    --close_events = {"CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave"},
+  },
+})
 vim.keymap.set('n', '<leader>d', function()
   local current = vim.diagnostic.config().virtual_text
   vim.diagnostic.config({virtual_text = not current})
 end)
+vim.api.nvim_set_keymap('n', '<Esc>', 'hl', {noremap = true, silent = true}) -- not the most elegant. TODO: figure out a "proper" way to do this I guess?
 
 return {
   {
