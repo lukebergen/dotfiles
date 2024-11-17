@@ -67,6 +67,12 @@ return {
           gitcommitSummary = { fg = "palette.blue.bright" },
           HopNextKey = { fg = "palette.red.bright" },
           SpecialKey = { bg = "palette.magenta.bright", fg = "palette.white.bright" },
+          -- TODO: come back to this and figure out how to make it highlight todos but not in the dumb way where you can't even read it
+          ["@text.todo.comment"] = { bg = "palette.magenta.bright", fg = "palette.white.bright" },
+--          ["@comment.error"] = { fg = "palette.fg1", bg = "palette.bg3" }, -- error-type comments (e.g. `ERROR`, `FIXME`, `DEPRECATED:`)
+--          ["@comment.warning"] = { fg = "palette.bg1", bg = "palette.diag.warn" }, -- warning-type comments (e.g. `WARNING:`, `FIX:`, `HACK:`)
+--          ["@comment.todo"] = { fg = "palette.bg1", bg = "palette.diag.hint" }, -- todo-type comments (e.g. `TODO:`, `WIP:`, `FIXME:`)
+--          ["@comment.note"] = { fg = "palette.bg1", bg = "palette.diag.info" }, -- note-type comments (e.g. `NOTE:`, `INFO:`, `XXX`)
         }
       }
 

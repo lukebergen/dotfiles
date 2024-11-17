@@ -37,7 +37,7 @@ local query = function(prompt, opts) --newWindow, skipBackticks)
     -- on exit
   end)
 
-  vim.uv.read_start(stdout, function(err, data)
+  vim.uv.read_start(stdout, function(_, data)
     if data then
       vim.schedule(function()
         local object = json.decode(data)
