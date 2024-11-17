@@ -16,6 +16,8 @@
 	<false/>
 	<key>CommandSelection</key>
 	<true/>
+	<key>CompactMinimalTabBarHeight</key>
+	<real>22</real>
 	<key>Control</key>
 	<integer>1</integer>
 	<key>CopyLastNewline</key>
@@ -179,7 +181,9 @@
 	<key>HotkeyModifiers</key>
 	<integer>1179914</integer>
 	<key>HotkeyTermAnimationDuration</key>
-	<real>0.15000000596046448</real>
+	<real>0.10000000149011612</real>
+	<key>HotkeyWindowFloatsAboveOtherWindows</key>
+	<false/>
 	<key>IRMemory</key>
 	<integer>4</integer>
 	<key>JobName</key>
@@ -190,6 +194,16 @@
 	<integer>2</integer>
 	<key>MaxVertically</key>
 	<false/>
+	<key>MinimalSplitPaneDividerProminence</key>
+	<real>0.20000000298023224</real>
+	<key>MinimalTabStyleBackgroundColorDifference</key>
+	<real>0.25</real>
+	<key>MinimalTabStyleOutlineStrength</key>
+	<real>0.0</real>
+	<key>MinimalTabStyleTreatLeftInsetAsPartOfFirstTab</key>
+	<false/>
+	<key>MinimalTextLegibilityAdjustment</key>
+	<real>1</real>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -373,6 +387,8 @@
 				<key>Red Component</key>
 				<real>0.80138093233108521</real>
 			</dict>
+			<key>Badge Text</key>
+			<string></string>
 			<key>Blend</key>
 			<real>0.30000001192092896</real>
 			<key>Blink Allowed</key>
@@ -426,6 +442,8 @@
 			<string>Yes</string>
 			<key>Custom Directory</key>
 			<string>No</string>
+			<key>Custom Window Title</key>
+			<string></string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Disable Printing</key>
@@ -950,6 +968,10 @@
 			<true/>
 			<key>Use Canonical Parser</key>
 			<false/>
+			<key>Use Custom Tab Title</key>
+			<false/>
+			<key>Use Custom Window Title</key>
+			<false/>
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Selected Text Color</key>
@@ -1203,16 +1225,24 @@
 			<string>A7F0F166-1143-458E-B6DE-F71627C4F052</string>
 			<key>Has Hotkey</key>
 			<true/>
+			<key>Hide After Opening</key>
+			<false/>
 			<key>Horizontal Spacing</key>
 			<real>1</real>
+			<key>HotKey Activated By Modifier</key>
+			<false/>
+			<key>HotKey Alternate Shortcuts</key>
+			<array/>
 			<key>HotKey Characters</key>
 			<string>C</string>
 			<key>HotKey Characters Ignoring Modifiers</key>
 			<string>C</string>
 			<key>HotKey Key Code</key>
 			<integer>8</integer>
+			<key>HotKey Modifier Activation</key>
+			<integer>0</integer>
 			<key>HotKey Modifier Flags</key>
-			<integer>1179914</integer>
+			<integer>1179648</integer>
 			<key>HotKey Window Animates</key>
 			<true/>
 			<key>HotKey Window AutoHides</key>
@@ -1657,6 +1687,8 @@
 	<true/>
 	<key>QuitWhenAllWindowsClosed</key>
 	<false/>
+	<key>RemoveAddTabButton</key>
+	<true/>
 	<key>RightCommand</key>
 	<integer>8</integer>
 	<key>RightOption</key>
@@ -1684,7 +1716,7 @@
 	<key>SwitchWindowModifier</key>
 	<integer>6</integer>
 	<key>TabStyleWithAutomaticOption</key>
-	<integer>1</integer>
+	<integer>5</integer>
 	<key>TabViewType</key>
 	<integer>0</integer>
 	<key>ThreeFingerEmulates</key>
