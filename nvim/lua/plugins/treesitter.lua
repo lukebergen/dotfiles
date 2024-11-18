@@ -16,7 +16,7 @@ return {
         enable = true,
       },
       -- Enable indentation
-      indent = { enable = false },
+      indent = { enable = true },
       -- Ensure these language parsers are installed
       ensure_installed = {
         "c",

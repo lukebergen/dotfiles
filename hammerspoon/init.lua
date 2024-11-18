@@ -8,7 +8,6 @@ local canvas = require("hs.canvas")
 local eventtap = require("hs.eventtap")
 local silly = require("silly")
 
-
 local function safeRequire(moduleName)
   local status, result = pcall(require, moduleName)
   if status then
