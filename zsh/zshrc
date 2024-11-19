@@ -15,6 +15,7 @@ export XDG_DATA_HOME=~/.local/share/
 export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/lib:/usr/local/lib"
 
 # PATH setup
+export PATH="$HOME/.local/earlyBin:$PATH"  # careful with this. Anything in this directory will get priority over everything including system junk
 export PATH="$PATH:/usr/local/bin:/usr/local/sbin"        # local bins and such
 export PATH="$PATH:$HOME/.local/bin"
 #export PATH="$PATH:$HOME/.rbenv/bin:$HOME/.rbenv/shims"   # rbenv

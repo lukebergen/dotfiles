@@ -29,10 +29,10 @@ vim.keymap.set('n', '<Leader>6', '6gt')
 
 -- telescope
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {desc = "[f]ind [f]ile"})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {desc = "[f]ind files [g]repping through their content"})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {desc = "[f]ind open [b]uffer"})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {desc = "[f]ind in [h]elp"})
 
 -- hop
 local hop = require('hop')
@@ -62,16 +62,17 @@ vim.keymap.set('n', '<UP>', '<C-y>')
 vim.keymap.set('n', '<DOWN>', '<C-e>')
 
 -- Move selected lines down
-vim.keymap.set("v", "J", function()
-  local count = vim.v.count1
-  return string.format(":m '>+%d<CR>gv=gv", count)
-end, { expr = true })
-
--- Move selected lines up
-vim.keymap.set("v", "K", function()
-  local count = vim.v.count1
-  return string.format(":m '<-%d<CR>gv=gv", count + 1)
-end, { expr = true })
+-- neat binding, but interferes with super common work flow of visually selecting a bunch of lines and then [J]oining them
+--vim.keymap.set("v", "J", function()
+--  local count = vim.v.count1
+--  return string.format(":m '>+%d<CR>gv=gv", count)
+--end, { expr = true })
+--
+---- Move selected lines up
+--vim.keymap.set("v", "K", function()
+--  local count = vim.v.count1
+--  return string.format(":m '<-%d<CR>gv=gv", count + 1)
+--end, { expr = true })
 
 
 -- overriding plugins to make use of their mappings for myself (or keep default behavior like c-y)
