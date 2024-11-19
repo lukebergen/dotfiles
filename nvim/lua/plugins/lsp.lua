@@ -196,6 +196,22 @@ return {
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {
+          handlers = {
+            ["textDocument/publishDiagnostics"] = function( _, result, ctx, config)
+              local codes_to_ignore = { 80001 }
+              if result.diagnostics == nil then
+                return
+              end
+              for idx, error in ipairs(result.diagnostics) do
+                if vim.tbl_contains(codes_to_ignore, error.code) then
+                  table.remove(result.diagnostics, idx)
+                end
+              end
+
+              --local formatter = require('format-ts-errors')[entry.code]
+              vim.lsp.diagnostic.on_publish_diagnostics( _, result, ctx, config)
+            end,
+          },
           settings = {
             diagnostics = { disable = { } } -- when consistent issues come up that I don't actually care about, ignore them here
           }
