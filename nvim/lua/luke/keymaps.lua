@@ -27,13 +27,6 @@ vim.keymap.set('n', '<Leader>4', '4gt')
 vim.keymap.set('n', '<Leader>5', '5gt')
 vim.keymap.set('n', '<Leader>6', '6gt')
 
--- telescope
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {desc = "[f]ind [f]ile"})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {desc = "[f]ind files [g]repping through their content"})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {desc = "[f]ind open [b]uffer"})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {desc = "[f]ind in [h]elp"})
-
 -- hop
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
