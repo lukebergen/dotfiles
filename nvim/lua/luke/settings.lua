@@ -20,6 +20,13 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.scrolloff = 3
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "help",
+  callback = function()
+    vim.opt_local.conceallevel = 0
+  end,
+})
+
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   pattern = {"*"}, -- file types that we don't want newlines to continue a comment
   callback = function()

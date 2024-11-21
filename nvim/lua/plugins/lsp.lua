@@ -1,27 +1,20 @@
 vim.diagnostic.config({
   virtual_text = false, -- default to false, below keymap will toggle it
-  float = {
-    focusable = false,
-    --close_events = {"CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave"},
-  },
+  float = false,
 })
-vim.keymap.set('n', '<leader>d', function()
-  local current = vim.diagnostic.config().virtual_text
-  vim.diagnostic.config({virtual_text = not current})
-
-  -- doesn't actually work. TODO: have <leader>d cycle through 3 options. 0 = off, 1 = virtual_text, 2 = float
-  --local opts = {
-  --  focusable = false,
-  --  close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
-  --  border = 'rounded',
-  --  source = 'always',
-  --  prefix = ' ',
-  --}
-  --vim.diagnostic.config({
-  --  virtual_text = false,
-  --  float = opts,
-  --})
+vim.keymap.set('n', "<leader>d", function()
+  vim.diagnostic.open_float(nil, {
+    focusable = false,
+    header = "",
+    border = "single",
+    --border = {"/", "-", "\\", "|", "/", "-", "\\", "|"}, -- kinda slick. Don't know what I'd do with it though...
+    scope = "cursor",
+    source = "if_many",
+    close_events = {"CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave"},
+  })
 end)
+
+-- to make esc close the hover text from typing "K"
 vim.api.nvim_set_keymap('n', '<Esc>', 'hl', {noremap = true, silent = true}) -- not the most elegant. TODO: figure out a "proper" way to do this I guess?
 
 vim.api.nvim_set_hl(0, "@lsp.type.comment.lua", {})

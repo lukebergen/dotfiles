@@ -16,12 +16,7 @@ return {
       vim.keymap.set('n', '<leader>fc', builtin.git_commits, { noremap = true, desc = "[f]ind from [c]ommits"})
       vim.keymap.set('n', '<leader>fb', builtin.buffers, { noremap = true, desc = "[f]ind open [b]uffer"})
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, { noremap = true, desc = "[f]ind in [h]elp"})
-
-    end,
-
-    --config = function()
-    --  require('telescope').load_extension('live_grep_args')
-    --  vim.keymap.set('n', '<leader>fg', require("telescope").extensions.live_grep_args.live_grep_args, { noremap = true })
-    --end,
+      vim.keymap.set('n', '<leader>fi', builtin.highlights, { noremap = true, desc = "[f]ind in [h]elp"})
+    end
   }
 }
