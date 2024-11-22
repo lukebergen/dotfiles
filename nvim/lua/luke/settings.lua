@@ -75,7 +75,6 @@ vim.filetype.add({
 -- also check plugins.lua for some stuff that has to be initialized there
 
 vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = "*/diary/[0-9-]*.{wiki,md}", callback = function()
-  print("autocommand ran")
   local template = {}
   local today = os.date("!%Y-%m-%d")
   -- TODO: this could be cleaner. Also, figure out, from usage, what a good starting template might look like
