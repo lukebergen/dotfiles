@@ -163,21 +163,6 @@ hs.fnutils.each(registers, function(char)
   end)
 end)
 
-userChooserCb = function(choice)
-  local tempPasteboard = hs.pasteboard.getContents()
-  hs.pasteboard.setContents(choice.email)
-  hs.eventtap.keyStroke("cmd", "v")
-  if choice.password then
-    hs.pasteboard.setContents(choice.password)
-  else
-    hs.pasteboard.setContents(strings["p"]) -- for convenience, if we've just inserted a test user, probably about to login...
-  end
-  userChooser:query("")
-  hs.timer.doAfter(5, function()
-    hs.pasteboard.setContents(tempPasteboard)
-  end)
-end
-
 -- begin MM specific stuff (if applicable)
 local userChoices = safeRequire("mm-test-users") -- only local to MM machine
 if userChoices then
@@ -185,7 +170,13 @@ if userChoices then
     local tempPasteboard = hs.pasteboard.getContents()
     hs.pasteboard.setContents(choice.email)
     hs.eventtap.keyStroke("cmd", "v")
-    hs.pasteboard.setContents(strings["p"]) -- for convenience, if we've just inserted a test user, probably about to login...
+
+    if choice.password then
+      hs.pasteboard.setContents(choice.password)
+    else
+      hs.pasteboard.setContents(strings["p"]) -- for convenience, if we've just inserted a test user, probably about to login...
+    end
+
     userChooser:query("")
     hs.timer.doAfter(5, function()
       hs.pasteboard.setContents(tempPasteboard)
