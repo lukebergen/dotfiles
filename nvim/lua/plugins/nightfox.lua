@@ -33,6 +33,9 @@
 return {
   {
     "EdenEast/nightfox.nvim", version = "*",
+    lazy = false,
+    priority = 1000,
+    name = "nightfox-theme",
     config = function()
 
       -- let s:lightcyan   = { "gui": "#AFD7D7", "cterm": "152" }
