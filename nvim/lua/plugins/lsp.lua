@@ -1,6 +1,7 @@
 vim.diagnostic.config({
   virtual_text = false, -- default to false, below keymap will toggle it
   float = false,
+  update_in_insert = true,
 })
 vim.keymap.set('n', "<leader>d", function()
   vim.diagnostic.open_float(nil, {
