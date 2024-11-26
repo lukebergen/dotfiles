@@ -1,0 +1,39 @@
+#!/opt/homebrew/bin/node
+//#!/usr/bin/env node
+// hate this but when launched by kitty, /usr/bin/env doesn't know about node
+// TODO: probably a more correct way to do this
+
+const { exec } = require('node:child_process');
+
+const fs = require("fs");
+const TOGGLE_ON = "33"
+const TOGGLE_OFF = "0"
+
+fs.writeFileSync(`${process.env.HOME}/r.txt`, "ok");
+fs.writeFileSync(`${process.env.HOME}/r.txt`, JSON.stringify(process.env));
+
+const kittyConfFile = `${process.env.XDG_CONFIG_HOME}/kitty/kitty.conf`;
+const kittyConfig = fs.readFileSync(kittyConfFile).toString();
+
+const lines = kittyConfig.split("\n");
+const newLines = [];
+lines.forEach((line) => {
+  if (line.startsWith("tab_bar_margin_height")) {
+    const bits = line.split(" ");
+    if (bits[1] === TOGGLE_ON) {
+      bits[1] = TOGGLE_OFF
+    } else {
+      bits[1] = TOGGLE_ON
+    }
+    newLines.push(bits.join(" "));
+  } else {
+    newLines.push(line);
+  }
+});
+
+const newConfig = newLines.join("\n");
+//fs.writeFileSync(`${process.env.HOME}/newConfig.txt`, newConfig);
+fs.writeFileSync(kittyConfFile, newConfig);
+fs.writeFileSync(`${process.env.HOME}/r.txt`, "finished");
+
+exec("kitten @ load-config")
