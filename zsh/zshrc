@@ -136,6 +136,9 @@ source <(fzf --zsh)
 # Load auto-jump
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
+# So I don't forget about this again. jp foo will jump to any directory _within_ the current directory
+# So for example, while in code `jp foo` will jump to the best match within foo/** instead of to
+# an even higher weighted "foo" directory that's somewhere else on the filesystem
 jp() {
   pushd -q $(pwd)
   if [[ ${1} == -* ]] && [[ ${1} != "--" ]]; then
@@ -144,6 +147,17 @@ jp() {
   else
     j $(pwd) ${@}
   fi
+}
+
+# normally when you quit `yazi` it leaves you right where you started. But if you start it with `y`
+# while in yazi, `q` will quit and set the cwd to wherever you were. `Q` exits yazi normally
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
 }
 
 function n() {
