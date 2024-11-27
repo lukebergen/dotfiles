@@ -1,7 +1,9 @@
 return {
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
     -- why does this not work? It's supposed to
     --opts = {
     --  defaults = {
@@ -13,7 +15,7 @@ return {
     config = function()
       require("telescope").setup({
         defaults = {
-          winblend = 30, -- let's see if this just ends up annoying us
+          winblend = 20, -- let's see if this just ends up annoying us
           file_ignore_patterns = { "node_modules" },
         },
       })
