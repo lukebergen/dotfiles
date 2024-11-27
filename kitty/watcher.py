@@ -1,16 +1,10 @@
 from typing import Any, Dict
-
+from kitty.boss import Boss
 from kitty.window import Window
 
-def on_focus_change(boss: Boss, window: Window, data: Dict[str, Any])-> None:
-    boss.call_remote_control(window, ('send-text', f'--match=id:{window.id}', "entry"))
-    # data["focused"] will be True or False
-    boss.call_remote_control(window, ('send-text', f'--match=id:{window.id}', str(data)))
-    if data['focused']:
-        boss.call_remote_control(window, ('send-text', f'--match=id:{window.id}', "focus"))
-        boss.call_remote_control(window, ('set-background-opacity', 0.9))
-    else:
-        boss.call_remote_control(window, ('send-text', f'--match=id:{window.id}', "unfocus"))
-        boss.call_remote_control(window, ('set-background-opacity', 0.4))
-
-kitty.watchers.register(on_focus_change)
+def on_focus_change(boss: Boss, window: Window, data: Dict[str, Any]) -> None:
+    # If --match actually worked as advertised, this should work great...
+    #boss.call_remote_control(window, ('set-background-opacity', '0.7'))
+    #boss.call_remote_control(window, ('set-background-opacity', '--match=state:focused', '0.9'))
+    boss.call_remote_control(window, ('set-colors', '--all', 'background=#111'))
+    boss.call_remote_control(window, ('set-colors', '--match=state:focused', 'background=#000'))

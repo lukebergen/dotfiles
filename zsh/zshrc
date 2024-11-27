@@ -6,44 +6,7 @@ cd
 [ -f ~/.local/share/zsh/pre.zsh ] && source ~/.local/share/zsh/pre.zsh
 
 source ~/.dotfiles/zsh/themes/luke-bergen.zsh
-
-# these are supposed to be the defaults, but I like to be explicit
-export XDG_CONFIG_HOME=~/.config/
-export XDG_DATA_HOME=~/.local/share/
-
-# currently only used by SDL2
-export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/lib:/usr/local/lib"
-
-# PATH setup
-export PATH="$HOME/.local/earlyBin:$PATH"  # careful with this. Anything in this directory will get priority over everything including system junk
-export PATH="$PATH:/usr/local/bin:/usr/local/sbin"        # local bins and such
-export PATH="$PATH:$HOME/.local/bin"
-#export PATH="$PATH:$HOME/.rbenv/bin:$HOME/.rbenv/shims"   # rbenv
-export PATH="$PATH:$HOME/.dotfiles/bin"                   # personal scripts and such
-#export PATH="$PATH:$HOME/.nodenv/versions/16.1.0/bin"
-#export PATH="/usr/local/opt/node@16/bin:$PATH"
-export PATH="/usr/local/opt/node@18/bin:$PATH"
-export PATH="$PATH:/usr/local/Cellar/python@3.9/3.9.1_7/Frameworks/Python.framework/Versions/3.9/bin"
-export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
-
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-
-# Old postgres version :-/
-#export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
-#export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
-export PATH="/opt/homebrew/opt/postgresql@14/bin:$PATH"
-
-# Go stuff
-export GOPATH=$HOME/code/go
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
-
-# Curl override
-export PATH="/usr/local/opt/curl/bin:$PATH"
-
-# Racket stuff
-export PATH=$PATH:/Applications/Racket\ v8.0/bin
+source ~/.dotfiles/zsh/env
 
 # Python stuff
 #export WORKON_HOME=~/.python-envs
@@ -129,6 +92,11 @@ function rc() {
   then
     pushd ~/.dotfiles/zsh > /dev/null
     nvim ./zshrc
+    popd > /dev/null
+  elif [ "$1" = "k" ] || [ "$1" = "kitty" ]
+  then
+    pushd ~/.dotfiles/kitty > /dev/null
+    nvim ./kitty.conf
     popd > /dev/null
   else
     pushd ~/.dotfiles/ > /dev/null
