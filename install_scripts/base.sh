@@ -33,8 +33,10 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.dotfiles/vim/bundle/Vundle
 # curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > ~/.dotfiles/zsh/antigen.zsh
 
 # link everything up
+# todo: we should probably just ln the entire .config directory instead of all this piecemeal nonsense
 mkdir ~/.config
 ln -s ~/.dotfiles/nvim ~/.config/nvim
+ln -s ~/.dotfiles/yazi ~/.config
 ln -s ~/.dotfiles/vim/rcs/vimrc ~/.vimrc
 mkdir -p ~/.vim
 ln -s ~/.dotfiles/vim/syntax ~/.vim
