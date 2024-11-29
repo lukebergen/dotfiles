@@ -58,3 +58,13 @@ end, {range = true})
 vim.api.nvim_create_user_command("CCReset", function()
   vim.cmd('CopilotChatReset')
 end, {range = true})
+
+vim.api.nvim_create_user_command("UD", function(opts)
+  local param = opts.args
+  print(string.char(tonumber(param, 16)))
+end, {nargs = 1, desc = "print arg1 [U]rl[D]ecoded"})
+
+vim.api.nvim_create_user_command("UE", function(opts)
+  local param = opts.args
+  print(string.format("%02X", string.byte(param)))
+end, {nargs = 1, desc = "print arg1 [U]rl[E]ncode"})
