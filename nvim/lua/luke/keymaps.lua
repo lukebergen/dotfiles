@@ -54,7 +54,10 @@ function NextSearchResult(dir)
   -- Save the current view
   local view = vim.fn.winsaveview()
   -- Jump to the next search result
-  vim.cmd('normal! ' .. dir)
+  local success, _ = pcall(vim.api.nvim_command, 'normal! ' .. dir)
+  if not success then
+    return
+  end
   -- Get the new cursor position
   local new_pos = vim.fn.getpos('.')
   -- Restore the view
