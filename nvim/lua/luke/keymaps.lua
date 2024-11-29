@@ -48,6 +48,34 @@ vim.keymap.set({'n', 'v'}, 'T', function()
 end, {remap=true})
 --]]
 
+-- better `n`
+-- Function to jump to the next search result with custom behavior
+function NextSearchResult(dir)
+  -- Save the current view
+  local view = vim.fn.winsaveview()
+  -- Jump to the next search result
+  vim.cmd('normal! ' .. dir)
+  -- Get the new cursor position
+  local new_pos = vim.fn.getpos('.')
+  -- Restore the view
+  vim.fn.winrestview(view)
+  -- Check if the new position is visible in the current view
+  local win_height = vim.fn.winheight(0)
+  local top_line = view.topline
+  local bottom_line = view.topline + win_height - 1
+
+  -- no matter what, jump to the next result
+  vim.cmd('normal! ' .. dir)
+  if not (new_pos[2] >= top_line and new_pos[2] <= bottom_line) then
+    -- But if the location of the new result wasn't in the window, re-center the screen
+    vim.cmd('normal! zz')
+  end
+end
+
+-- Map the 'n' key to the custom function
+vim.keymap.set('n', 'n', ':lua NextSearchResult("n")<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', 'N', ':lua NextSearchResult("N")<CR>', { noremap = true, silent = true })
+
 -- misc
 vim.keymap.set('n', '<Leader>r', '<CMD>mode<CR>')
 vim.keymap.set('n', '<Leader>c', '<CMD>nohl<CR>')
