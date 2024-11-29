@@ -31,7 +31,7 @@ vim.keymap.set('n', '<Leader>6', '6gt')
 local hop = require('hop')
 --local directions = require('hop.hint').HintDirection
 vim.keymap.set('n', 's', function()
-  hop.hint_char1({ direction = nil, current_line_only = false })
+  hop.hint_char1({ current_line_only = false })
 end, {remap=true})
 --[[
 vim.keymap.set('n', 'f', function()
