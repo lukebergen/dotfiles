@@ -163,6 +163,57 @@ hs.fnutils.each(registers, function(char)
   end)
 end)
 
+-- very much still work in progress. Hence cmd+shift+x instead of cmd+shift+c. Still using iterm2
+-- for hotkey window for now I guess. But getting closer
+local originalFocus
+-- this isn't quite what we're looking for but could be a start
+hs.hotkey.bind({"cmd", "shift"}, "x", function()
+  -- just do sendkeys or something. Isn't there a way to send an app command keys or something?
+  local kitty = hs.application.get("kitty")
+  if kitty then
+    --hs.eventtap.keyStroke({"cmd", "shift"}, "c", kitty)
+    local hotkeyWin = kitty:getWindow("hotkey")
+    if hotkeyWin then
+      local frame = hotkeyWin:frame()
+      if frame.y == 0 then
+        frame.y = -10000
+        hotkeyWin:setFrame(frame)
+        if originalFocus then
+          print("found a window to focus: ", originalFocus)
+          originalFocus:focus()
+          originalFocus = nil
+        else
+          print("no newFocusWin found")
+        end
+      else
+        originalFocus = hs.window.frontmostWindow()
+        frame.y = 0
+        hotkeyWin:setFrame(frame)
+        --hotkeyWin:orderAbove(nil)
+        kitty:activate()
+        hotkeyWin:raise()
+        hotkeyWin:focus()
+      end
+    else
+      -- todo
+      print("debug: ", "window not found")
+    end
+    --hs.eventtap.keyStrokes("foo", kitty)
+  --  hs.task.new("/opt/homebrew/bin/kitty", function(exitCode, stdOut, stdErr)
+  --    print("Task completed with exit code: " .. exitCode)
+  --    print("Standard output: " .. stdOut)
+  --    print("Standard error: " .. stdErr)
+  --  end, {"@", "launch", "--type=window"}):start()
+  --  --if kitty:isFrontmost() then
+  --  --  kitty:hide()
+  --  --else
+  --  --  kitty:activate()
+  --  --end
+  --else
+  --  hs.application.launchOrFocus("kitty")
+  end
+end)
+
 -- begin MM specific stuff (if applicable)
 local userChoices = safeRequire("mm-test-users") -- only local to MM machine
 if userChoices then
