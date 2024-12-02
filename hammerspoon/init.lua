@@ -5,7 +5,6 @@
 -- See this for best info on this issue: https://github.com/Hammerspoon/hammerspoon/issues/1743#issuecomment-631598824
 
 local canvas = require("hs.canvas")
-local eventtap = require("hs.eventtap")
 local silly = require("silly")
 
 local function safeRequire(moduleName)
@@ -244,3 +243,74 @@ if userChoices then
     userChooser:show()
   end)
 end
+-- end MM specific stuff
+
+
+-- just playing around...
+local myCanvas = nil
+local isDragging = false
+local draggedShape = nil
+local dragOffset = {x = 0, y = 0}
+
+local function createCanvas()
+  myCanvas = canvas.new({x = 100, y = 100, w = 400, h = 300})
+
+  myCanvas:appendElements({
+    {
+      type = "rectangle",
+      action = "fill",
+      fillColor = {red = 1, green = 0, blue = 0, alpha = 0.5},
+      frame = {x = "10%", y = "10%", w = "20%", h = "20%"},
+      id = "redSquare"
+    },
+    {
+      type = "circle",
+      action = "fill",
+      fillColor = {red = 0, green = 0, blue = 1, alpha = 0.5},
+      center = {x = "70%", y = "50%"},
+      radius = "15%",
+      id = "blueCircle"
+    }
+  })
+
+  myCanvas:mouseCallback(function(cv, message, _canvasId, mouseX, mouseY)
+    print("mouse callback at all?")
+    if message == "mouseDown" then
+      local clickedShape = cv:elementAtPoint(mouseX, mouseY)
+      if clickedShape then
+        print("and we got a shape")
+        isDragging = true
+        draggedShape = clickedShape
+        local frame = cv:elementAttribute(clickedShape, "frame")
+        dragOffset.x = mouseX - frame.x
+        dragOffset.y = mouseY - frame.y
+      end
+    elseif message == "mouseUp" then
+      print("mouseup")
+      isDragging = false
+      draggedShape = nil
+    elseif message == "mouseMove" and isDragging then
+      print("mousedrag")
+      cv:elementAttribute(draggedShape, "frame", {
+        x = mouseX - dragOffset.x,
+        y = mouseY - dragOffset.y,
+        w = cv:elementAttribute(draggedShape, "frame").w,
+        h = cv:elementAttribute(draggedShape, "frame").h
+      })
+    end
+  end)
+
+  myCanvas:canvasMouseEvents(true, true, true, true)
+  myCanvas:show()
+end
+
+local function toggleCanvas()
+    if myCanvas then
+        myCanvas:delete()
+        myCanvas = nil
+    else
+        createCanvas()
+    end
+end
+
+hs.hotkey.bind({"cmd", "alt"}, "C", toggleCanvas)
