@@ -14,6 +14,7 @@ TODO:
   - figure out a way to search in kitty (kitty_mod+g looks promising, but doesn't seem to be the full result of the last command)
 - NeoVim
   - rejigger neovim config under luke/. Splitting things by keymap vs command vs etc doesn't make as much sense as it once did. Maybe split things up by function/section (navigation, layout, utils?, etc)
+  - get option key things working again (option+arrows). option+delete already works?
 - Misc
   - fix up install_scripts. So many `brew install` this that and the other. But we haven't kept it up to date. So, update it (neovim, yazi, chafa, glow, miller, hexyl)
   - document the shit out of everything
