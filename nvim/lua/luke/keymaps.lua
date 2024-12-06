@@ -27,27 +27,6 @@ vim.keymap.set('n', '<Leader>4', '4gt')
 vim.keymap.set('n', '<Leader>5', '5gt')
 vim.keymap.set('n', '<Leader>6', '6gt')
 
--- hop
-local hop = require('hop')
---local directions = require('hop.hint').HintDirection
-vim.keymap.set('n', 's', function()
-  hop.hint_char1({ current_line_only = false })
-end, {remap=true})
---[[
-vim.keymap.set('n', 'f', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
-end, {remap=true})
-vim.keymap.set('n', 'F', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
-end, {remap=true})
-vim.keymap.set({'n', 'v'}, 't', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
-end, {remap=true})
-vim.keymap.set({'n', 'v'}, 'T', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
-end, {remap=true})
---]]
-
 -- better `n`
 -- Function to jump to the next search result with custom behavior
 function NextSearchResult(dir)
@@ -84,6 +63,7 @@ vim.keymap.set('n', '<Leader>r', '<CMD>mode<CR>')
 vim.keymap.set('n', '<Leader>c', '<CMD>nohl<CR>')
 vim.keymap.set('n', '<UP>', '<C-y>')
 vim.keymap.set('n', '<DOWN>', '<C-e>')
+vim.keymap.set('n', '<Leader>l', '<CMD>set relativenumber!<CR>')
 
 -- Move selected lines down
 -- neat binding, but interferes with super common work flow of visually selecting a bunch of lines and then [J]oining them
