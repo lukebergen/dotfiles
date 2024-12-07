@@ -1,5 +1,8 @@
 local json = require("lib.lunajson")
 
+-- TODO: rethink about all of this given how we tend to use copilot
+
+
 local query = function(prompt, opts) --newWindow, skipBackticks)
   --local curlArgs = string.format([[curl -s -N -X POST http://localhost:11434/api/generate -d '{ "model": "codellama", "prompt": "%s" }']], prompt)
 
