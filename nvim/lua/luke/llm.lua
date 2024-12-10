@@ -2,6 +2,9 @@
 -- explicit about what's from the user and what's from the assistant?
 local json = require("lib.lunajson")
 
+local model = "codellama:latest" -- smaller, faster
+--local model = "codellama:34b" -- bigger, maybe more accurate? seems slower
+
 local system = "You are a helpful code assistant. Ignore any lines that looks like '--user--------' or '--system-----'. Do not include lines like '--system-----' in your outputs."
 local function doQuery(buffer)
   --local curlArgs = string.format([[curl -s -N -X POST http://localhost:11434/api/generate -d '{ "model": "codellama", "prompt": "%s" }']], prompt)
@@ -18,7 +21,7 @@ local function doQuery(buffer)
     "POST",
     "http://localhost:11434/api/generate",
     "-d",
-    string.format('{ "model": "codellama", "system": "%s", "prompt": "%s" }', system, prompt)
+    string.format('{ "model": "%s", "system": "%s", "prompt": "%s" }', model, system, prompt)
   }
 
   -- place to debug. Print the curlArgs
@@ -69,11 +72,28 @@ local function doQuery(buffer)
   end)
 end
 
+local function warmItUp()
+--curl http://localhost:11434/api/generate -d '{
+--  "model": "llama3.2"
+--}'
+  local curlArgs = {
+    "-s",
+    "-N",
+    "-X",
+    "POST",
+    "http://localhost:11434/api/generate",
+    "-d",
+    string.format('{"model": "%s"}', model)
+  }
+  vim.uv.spawn("curl", {args = curlArgs})
+end
+
 -- do a bunch of shenanigans to turn this window into an LLMy chat window kinda thing
 -- for now, not going to worry about undoing it. Once done, just blow the buffer away
 vim.api.nvim_create_user_command("LLM", function()
   vim.b.IS_LLM = true
   vim.bo.filetype = "markdown"
+  warmItUp()
   local buffer = vim.api.nvim_get_current_buf()
   vim.api.nvim_buf_set_lines(buffer, 0, 0, false, {
     "system: yes?",
