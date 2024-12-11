@@ -1,0 +1,16 @@
+main ./Brewfile.base
+
+brew "transmission-cli"
+
+cask "1password"
+cask "caffeine"
+cask "discord"
+cask "dropbox"
+cask "expressvpn"
+cask "flux"
+cask "love"
+cask "skype"
+cask "steam"
+cask "transmission"
+cask "vlc"
+cask "zoom"
