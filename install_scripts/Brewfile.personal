@@ -1,6 +1,7 @@
 main ./Brewfile.base
 
 brew "transmission-cli"
+brew "ollama
 
 cask "1password"
 cask "caffeine"
@@ -9,6 +10,7 @@ cask "dropbox"
 cask "expressvpn"
 cask "flux"
 cask "love"
+cask "ollama"
 cask "skype"
 cask "steam"
 cask "transmission"
