@@ -93,6 +93,7 @@ end
 vim.api.nvim_create_user_command("LLM", function()
   vim.b.IS_LLM = true
   vim.bo.filetype = "markdown"
+  vim.bo.buftype = "nofile"
   warmItUp()
   local buffer = vim.api.nvim_get_current_buf()
   vim.api.nvim_buf_set_lines(buffer, 0, 0, false, {
