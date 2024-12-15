@@ -5,7 +5,7 @@ local json = require("lib.lunajson")
 local model = "codellama:latest" -- smaller, faster
 --local model = "codellama:34b" -- bigger, maybe more accurate? seems slower
 
-local system = "You are a helpful code assistant. Ignore any lines that looks like '--user--------' or '--system-----'. Do not include lines like '--system-----' in your outputs."
+local system = "You are a helpful code assistant. Ignore any lines that looks like '# User---' or '# System---'. Do not include lines like '# System---' in your outputs."
 local function doQuery(buffer)
   --local curlArgs = string.format([[curl -s -N -X POST http://localhost:11434/api/generate -d '{ "model": "codellama", "prompt": "%s" }']], prompt)
 
@@ -44,16 +44,19 @@ local function doQuery(buffer)
     vim.schedule(function()
       vim.api.nvim_buf_set_lines(buffer, -1, -1, false, {
         "",
-        "--user-------",
+        "# User---",
+        "",
         "",
       })
+      vim.api.nvim_feedkeys("G$", "n", true)
     end)
     -- we're done getting things back
   end)
 
   vim.api.nvim_buf_set_lines(buffer, -1, -1, false, {
     "",
-    "--system-----",
+    "# System---",
+    "",
     "",
   })
 
@@ -66,6 +69,8 @@ local function doQuery(buffer)
           local lastLine = vim.api.nvim_buf_get_lines(buffer, -2, -1, false)[1] or ""
           local newLastLine = vim.split(lastLine .. cleaned, "\n")
           vim.api.nvim_buf_set_lines(buffer, -2, -1, false, newLastLine)
+
+          vim.api.nvim_feedkeys("G$", "n", true)
         end
       end)
     end
@@ -97,9 +102,11 @@ vim.api.nvim_create_user_command("LLM", function()
   warmItUp()
   local buffer = vim.api.nvim_get_current_buf()
   vim.api.nvim_buf_set_lines(buffer, 0, 0, false, {
-    "system: yes?",
+    "# System---",
     "",
-    "--user--------",
+    "yes?",
+    "",
+    "# User---",
     "",
   })
 
