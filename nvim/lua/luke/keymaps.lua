@@ -13,9 +13,7 @@ vim.keymap.set('n', '<C-H>', '<C-W><C-H>')
 vim.keymap.set('n', '<C-J>', '<C-W><C-J>')
 vim.keymap.set('n', '<C-K>', '<C-W><C-K>')
 vim.keymap.set('n', '<C-L>', '<C-W><C-L>')
-vim.keymap.set('n', '<Leader>n', '<CMD>Explore<CR>')
-vim.keymap.set('n', '<Leader>ev', '<CMD>Vexplore!<CR>')
-vim.keymap.set('n', '<Leader>eh', '<CMD>Hexplore<CR>')
+--vim.keymap.set('n', '<Leader>n', '<CMD>Explore<CR>')
 vim.keymap.set('n', '<C-W>0', '<C-W>_<C-W>|')
 
 -- tab management
