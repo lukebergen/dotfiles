@@ -111,7 +111,7 @@ local function warmItUp()
     "POST",
     "http://localhost:11434/api/generate",
     "-d",
-    string.format('{"model": "%s"}', model)
+    string.format('{"model": "%s", "messages": []}', model)
   }
   vim.uv.spawn("curl", {args = curlArgs})
 end
