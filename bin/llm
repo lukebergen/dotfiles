@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+const text = process.argv[2];
+
+const query = async (text) => {
+  const resp = await fetch("http://localhost:11434/api/generate", {
+    method: "POST",
+    body: JSON.stringify({
+      model: "llama3.2:latest",
+      stream: false,
+      prompt: text
+    })
+  });
+
+  const respBody = await resp.json();
+  return respBody;
+};
+
+const go = async () => {
+  const resp = await query(text);
+  console.log(resp);
+}
+
+go();
