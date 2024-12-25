@@ -17,20 +17,20 @@ return {
       skip_confirm_for_simple_edits = true,
       use_default_keymaps = false,
       keymaps = {
-        ["g?"] = { "actions.show_help", mode = "n" },
+        ["?"] = { "actions.show_help", mode = "n" },
         ["<CR>"] = "actions.select",
-        ["<C-v>"] = { "actions.select", opts = { vertical = true } },
+        --["<C-v>"] = { "actions.select", opts = { vertical = true } },
         --["<C-h>"] = { "actions.select", opts = { horizontal = true } },
         ["<C-r>"] = "actions.refresh",
         ["-"] = { "actions.parent", mode = "n" },
         ["_"] = { "actions.open_cwd", mode = "n" },
-        ["`"] = { "actions.cd", mode = "n" },
+        --["`"] = { "actions.cd", mode = "n" },
         ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
-        ["gs"] = { "actions.change_sort", mode = "n" },
-        ["gx"] = "actions.open_external",
+        ["<C-s>"] = { "actions.change_sort", mode = "n" },
+        ["<C-x>"] = "actions.open_external",
         ["<ESC>"] = { "actions.close", mode = "n" },
-        ["<leader>."] = { "actions.toggle_hidden", mode = "n" },
-        ["<leader>i"] = {
+        ["<C-.>"] = { "actions.toggle_hidden", mode = "n" },
+        ["<C-i>"] = {
           desc = "Toggle file detail view",
           callback = function()
             detail = not detail
