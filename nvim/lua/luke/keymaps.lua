@@ -78,7 +78,7 @@ vim.keymap.set('n', '<Leader>l', '<CMD>set relativenumber!<CR>')
 
 
 -- overriding plugins to make use of their mappings for myself (or keep default behavior like c-y)
-vim.keymap.set('n', '<C-Z><C-R>', '<Plug>NetrwRefresh') -- gotta re-map this one away from netrw before we can use it below
+--vim.keymap.set('n', '<C-Z><C-R>', '<Plug>NetrwRefresh') -- gotta re-map this one away from netrw before we can use it below
 --vim.g.user_emmet_leader_key='<C-B>'
 
 vim.keymap.set('n', '<Leader>xg', '<CMD>Gitsigns toggle_signs<CR>')
