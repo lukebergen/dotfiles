@@ -69,3 +69,4 @@ Or just new mappings that I'm trying for myself.
   - zo => open fold
   - zd => delete current fold
 - <leader>xg => toggle git signs (maybe check out zen mode though?)
+- if helpfile looks bland: check ft and `set ft=help` if it isn't already
