@@ -5,19 +5,17 @@ local model = "codellama:latest" -- smaller, faster
 
 local state = {messages = {}, nextResponse = ""}
 
--- definitely a work in progress, this one.
--- TODO: different system prompts for different situations
-local system = "You are a helpful code assistant. You answer in concise but polite messages. When you give code examples you wrap them in markdown code blocks for the appropriate language."
--- e.g. pirate mode? lol
---local system = "You are a helpful code assistant. You answer in concise but polite messages. When you give code examples you wrap them in markdown code blocks for the appropriate language."
-
--- can do as buf local commands (see Debug and Reset exampels at bottom)
+local current_prompt = "explain"
+local prompts = {
+  explain = "You are a helpful code assistant. You answer in concise but polite messages. When you give code examples you wrap them in markdown code blocks for the appropriate language.",
+  code = "You are a skilled programmer who responds only with code. You always wrap code blocks in markdown code blocks for the appropriate language. You do not explain your work. You only reply in code that would run or compile if it was copy and pasted exactly as you provide it.",
+}
 
 local function reset()
   for i = 1, #state.messages do
     state.messages[i] = nil
   end
-  table.insert(state.messages, {role = "system", content = system})
+  table.insert(state.messages, {role = "system", content = prompts[current_prompt]})
 end
 
 local function doQuery(buffer)
@@ -32,6 +30,9 @@ local function doQuery(buffer)
       prompt = prompt .. line .. "\n"
     end
   end
+
+  -- set the system prompt based on current_prompt
+  state.messages[1].content = prompts[current_prompt]
 
   prompt = prompt:gsub("\n", "\\n"):gsub('"', '\\"')
   table.insert(state.messages, {role = "user", content = prompt})
@@ -142,7 +143,20 @@ vim.api.nvim_create_user_command("LLM", function()
     end
   })
 
-  vim.api.nvim_buf_create_user_command(0, "Reset", function()
+  vim.api.nvim_buf_create_user_command(0, "System", function(opts)
+    if #opts.args == 0 then
+      print(current_prompt)
+    elseif prompts[opts.args] then
+      current_prompt = opts.args
+    else
+      print("that's not an option. Current options: explain, code")
+    end
+  end, {
+    desc = "set the system prompt to one of the pre-built ones [explain|code]",
+    nargs = '*',
+  })
+
+  vim.api.nvim_buf_create_user_command(0, "Clear", function()
     reset()
     vim.api.nvim_feedkeys("ggVGd", "n", true)
     vim.schedule(function()
@@ -156,7 +170,7 @@ vim.api.nvim_create_user_command("LLM", function()
       })
     end)
   end, {
-    desc = 'Reset the conversation'
+    desc = 'Clear/reset the conversation'
   })
   vim.api.nvim_buf_create_user_command(0, "Debug", function()
     local str = json.encode(state)
