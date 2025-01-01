@@ -56,8 +56,16 @@ In the spec, the init function is run before the plugin loads even if the the pl
 
 ---
 
-random stuff that's either new (to me) enough that I don't have it in muscle memory yet or I use it infrequently enough that I forget it...
+Random stuff that's either new (to me) enough that I don't have it in muscle memory yet or I use it infrequently enough that I forget it...
+
+Or just new mappings that I'm trying for myself.
 
 - gc => commenting
 - ga => encoding info (ascii, hex, octal)
 - K => look up info about thing under cursor (K again to enter the float window if it requires scrolling or searching)
+- z => fold stuff
+  - zf => motion or visual: create fold
+  - zc => close whatever fold the cursor is currently in
+  - zo => open fold
+  - zd => delete current fold
+- <leader>xg => toggle git signs (maybe check out zen mode though?)
