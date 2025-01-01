@@ -53,3 +53,11 @@ In the spec, the init function is run before the plugin loads even if the the pl
 :Lazy            => bring up the Lazy plugin manager interface
 :SessionSave     => save the current session (saves based on pwd)
 :SessionRestore  => load the saved session (if one exists) based on pwd
+
+---
+
+random stuff that's either new (to me) enough that I don't have it in muscle memory yet or I use it infrequently enough that I forget it...
+
+- gc => commenting
+- ga => encoding info (ascii, hex, octal)
+- K => look up info about thing under cursor (K again to enter the float window if it requires scrolling or searching)
