@@ -13,9 +13,7 @@ vim.keymap.set('n', '<C-H>', '<C-W><C-H>')
 vim.keymap.set('n', '<C-J>', '<C-W><C-J>')
 vim.keymap.set('n', '<C-K>', '<C-W><C-K>')
 vim.keymap.set('n', '<C-L>', '<C-W><C-L>')
-vim.keymap.set('n', '<Leader>n', '<CMD>Explore<CR>')
-vim.keymap.set('n', '<Leader>ev', '<CMD>Vexplore!<CR>')
-vim.keymap.set('n', '<Leader>eh', '<CMD>Hexplore<CR>')
+--vim.keymap.set('n', '<Leader>n', '<CMD>Explore<CR>')
 vim.keymap.set('n', '<C-W>0', '<C-W>_<C-W>|')
 
 -- tab management
@@ -80,5 +78,7 @@ vim.keymap.set('n', '<Leader>l', '<CMD>set relativenumber!<CR>')
 
 
 -- overriding plugins to make use of their mappings for myself (or keep default behavior like c-y)
-vim.keymap.set('n', '<C-Z><C-R>', '<Plug>NetrwRefresh') -- gotta re-map this one away from netrw before we can use it below
+--vim.keymap.set('n', '<C-Z><C-R>', '<Plug>NetrwRefresh') -- gotta re-map this one away from netrw before we can use it below
 --vim.g.user_emmet_leader_key='<C-B>'
+
+vim.keymap.set('n', '<Leader>xg', '<CMD>Gitsigns toggle_signs<CR>')

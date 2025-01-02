@@ -46,6 +46,7 @@ alias gc="git checkout \$1"
 alias gl="git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --no-merges \$1"
 alias glm="git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" \$1"
 alias gd="git diff"
+alias lg="lazygit"
 alias ll="ls -al"
 #alias serve="ruby -run -e httpd . -p \$1"
 alias fix_video="sudo killall VDCAssistant"
@@ -68,7 +69,7 @@ DEFAULT_OLLAMA_MODEL='llama3.2:latest'
 DEFAULT_OLLAMA_CODE_MODEL='codellama:latest'
 alias ol="ollama run $DEFAULT_OLLAMA_MODEL"  # default
 alias ols='ollama run $DEFAULT_OLLAMA_MODEL "Answer succinctly and concisely in as few words as reasonable\n\n"' # *s*hort
-alias olc='ollama run $DEFAULT_OLLAMA_CODE_MODEL "Answer succinctly and concisely in as few words as resonable\n\n"' *c*ode
+alias olc='ollama run $DEFAULT_OLLAMA_CODE_MODEL "Answer succinctly and concisely in as few words as resonable\n\n"' # *c*ode
 
 # *m*arkdown
 function olm() {
