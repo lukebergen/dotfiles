@@ -228,6 +228,7 @@ return {
           }
         },
         --
+        ocamllsp = {},
 
         lua_ls = {
           -- cmd = {...},
