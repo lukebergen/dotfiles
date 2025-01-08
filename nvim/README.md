@@ -70,3 +70,13 @@ Or just new mappings that I'm trying for myself.
   - zd => delete current fold
 - <leader>xg => toggle git signs (maybe check out zen mode though?)
 - if helpfile looks bland: check ft and `set ft=help` if it isn't already
+
+Hate the neovim pager or want to do somethign with a command output?
+
+```
+:redir @x<CR>
+:someCommand<CR>
+"xp
+```
+
+after running `:redir @{register}<CR>` anything that outputs text will instead be written to the `x` register (or whichever you specify). Redir can also take a file if you want to write to an actual file instead of a temp thing like a register. (obviously, see `h redir` for all the deets)
