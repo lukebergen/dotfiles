@@ -8,7 +8,10 @@
 --  end
 --end, { noremap = true, silent = true })
 
-vim.keymap.set('n', '<Leader>mac', function()
+-- again. In the spirit of things being commands and only being "promoted"
+-- to mappings when they're used very frequently...
+vim.api.nvim_create_user_command("AutoCompleteToggle", function()
+--vim.keymap.set('n', '<Leader>mac', function()
   if require("cmp").get_config().completion.autocomplete then
     print("autosuggest off")
     require("cmp").get_config().completion.autocomplete = false
@@ -16,7 +19,8 @@ vim.keymap.set('n', '<Leader>mac', function()
     print("autosuggest on")
     require("cmp").get_config().completion.autocomplete = { "TextChanged" }
   end
-end, { desc = "[m]y stuff toggle [a]uto[c]omplete", noremap = true, silent = true })
+--end, { desc = "[m]y stuff toggle [a]uto[c]omplete", noremap = true, silent = true })
+end, { desc = "Toggle autocomplete suggestions" })
 
 return {
   { -- Autocompletion

@@ -70,6 +70,7 @@ Or just new mappings that I'm trying for myself.
   - zd => delete current fold
 - <leader>xg => toggle git signs (maybe check out zen mode though?)
 - if helpfile looks bland: check ft and `set ft=help` if it isn't already
+- verbose command SomeCommand => can't figure out where `SomeCommand` comes from? Try this
 
 Hate the neovim pager or want to do somethign with a command output?
 
