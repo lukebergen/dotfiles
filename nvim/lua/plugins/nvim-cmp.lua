@@ -8,7 +8,7 @@
 --  end
 --end, { noremap = true, silent = true })
 
-vim.keymap.set('n', '<Leader>xac', function()
+vim.keymap.set('n', '<Leader>mac', function()
   if require("cmp").get_config().completion.autocomplete then
     print("autosuggest off")
     require("cmp").get_config().completion.autocomplete = false
@@ -16,7 +16,7 @@ vim.keymap.set('n', '<Leader>xac', function()
     print("autosuggest on")
     require("cmp").get_config().completion.autocomplete = { "TextChanged" }
   end
-end, { noremap = true, silent = true })
+end, { desc = "[m]y stuff toggle [a]uto[c]omplete", noremap = true, silent = true })
 
 return {
   { -- Autocompletion
