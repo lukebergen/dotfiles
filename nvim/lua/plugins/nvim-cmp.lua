@@ -1,3 +1,23 @@
+--vim.keymap.set('i', '<C-n>', function()
+--  print("doing the thing")
+--  local cmp = require("cmp")
+--  if cmp.visible() then
+--    cmp.mapping.select_next_item()
+--  else
+--    cmp.mapping.complete()
+--  end
+--end, { noremap = true, silent = true })
+
+vim.keymap.set('n', '<Leader>xac', function()
+  if require("cmp").get_config().completion.autocomplete then
+    print("autosuggest off")
+    require("cmp").get_config().completion.autocomplete = false
+  else
+    print("autosuggest on")
+    require("cmp").get_config().completion.autocomplete = { "TextChanged" }
+  end
+end, { noremap = true, silent = true })
+
 return {
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -30,29 +50,46 @@ return {
           -- let's see how we feel about this
           -- will automatically show completion options. false requires a keymap to trigger your options
           -- note: autocomplete needs to be either false or a table
-          autocomplete=false,
+          --autocomplete=false, -- off
+          --autocomplete = { "TextChanged" }, -- on
           completeopt = 'menu,menuone,noinsert',
         },
 
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
-        mapping = cmp.mapping.preset.insert {
+        mapping = {
+          --['<C-n>'] = cmp.mapping.select_next_item(),
+          -- does not work as advertised (unless I'm missing something):
+          --['<C-n>'] = function(fallback)
+          --  print("doing the thing")
+          --  if cmp.visible() then
+          --    cmp.mapping.select_next_item()
+          --  else
+          --    cmp.mapping.complete()
+          --  end
+          --end,
           ['<C-n>'] = cmp.mapping.select_next_item(),
           ['<C-p>'] = cmp.mapping.select_prev_item(),
           ['<C-y>'] = cmp.mapping.confirm { select = true },
-          ['<C-z>'] = cmp.mapping.complete(),
-          -- default: in command-line mode, for some reason C-z opens suggestions...
-          ['<C-l>'] = cmp.mapping(function()
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            end
-          end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            end
-          end, { 'i', 's' }),
+          ['<C-c>'] = cmp.mapping.complete(),
         },
+        --mapping = cmp.mapping.preset.insert {
+        --  ['<C-n>'] = cmp.mapping.select_next_item(),
+        --  ['<C-p>'] = cmp.mapping.select_prev_item(),
+        --  ['<C-y>'] = cmp.mapping.confirm { select = true },
+        --  ['<C-z>'] = cmp.mapping.complete(),
+        --  -- default: in command-line mode, for some reason C-z opens suggestions...
+        --  ['<C-l>'] = cmp.mapping(function()
+        --    if luasnip.expand_or_locally_jumpable() then
+        --      luasnip.expand_or_jump()
+        --    end
+        --  end, { 'i', 's' }),
+        --  ['<C-h>'] = cmp.mapping(function()
+        --    if luasnip.locally_jumpable(-1) then
+        --      luasnip.jump(-1)
+        --    end
+        --  end, { 'i', 's' }),
+        --},
         sources = {
           { name = "buffer" },
           {

@@ -61,7 +61,7 @@ Random stuff that's either new (to me) enough that I don't have it in muscle mem
 Or just new mappings that I'm trying for myself.
 
 - gc => commenting
-- ga => encoding info (ascii, hex, octal)
+- ga => encoding info (ascii, hex, octal, utf)
 - K => look up info about thing under cursor (K again to enter the float window if it requires scrolling or searching)
 - z => fold stuff
   - zf => motion or visual: create fold
