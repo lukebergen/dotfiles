@@ -61,7 +61,7 @@ Random stuff that's either new (to me) enough that I don't have it in muscle mem
 Or just new mappings that I'm trying for myself.
 
 - gc => commenting
-- ga => encoding info (ascii, hex, octal)
+- ga => encoding info (ascii, hex, octal, utf)
 - K => look up info about thing under cursor (K again to enter the float window if it requires scrolling or searching)
 - z => fold stuff
   - zf => motion or visual: create fold
@@ -70,3 +70,14 @@ Or just new mappings that I'm trying for myself.
   - zd => delete current fold
 - <leader>xg => toggle git signs (maybe check out zen mode though?)
 - if helpfile looks bland: check ft and `set ft=help` if it isn't already
+- verbose command SomeCommand => can't figure out where `SomeCommand` comes from? Try this
+
+Hate the neovim pager or want to do somethign with a command output?
+
+```
+:redir @x<CR>
+:someCommand<CR>
+"xp
+```
+
+after running `:redir @{register}<CR>` anything that outputs text will instead be written to the `x` register (or whichever you specify). Redir can also take a file if you want to write to an actual file instead of a temp thing like a register. (obviously, see `h redir` for all the deets)

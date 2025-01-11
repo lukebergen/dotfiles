@@ -59,12 +59,12 @@ vim.api.nvim_create_user_command("CCReset", function()
   vim.cmd('CopilotChatReset')
 end, {range = true})
 
-vim.api.nvim_create_user_command("UD", function(opts)
+vim.api.nvim_create_user_command("UrlDecode", function(opts)
   local param = opts.args
   print(string.char(tonumber(param, 16)))
-end, {nargs = 1, desc = "print arg1 [U]rl[D]ecoded"})
+end, {nargs = 1, desc = "print arg1 url decoded"})
 
-vim.api.nvim_create_user_command("UE", function(opts)
+vim.api.nvim_create_user_command("UrlEncode", function(opts)
   local param = opts.args
   print(string.format("%02X", string.byte(param)))
-end, {nargs = 1, desc = "print arg1 [U]rl[E]ncode"})
+end, {nargs = 1, desc = "print arg1 url encoded"})

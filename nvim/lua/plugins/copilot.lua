@@ -10,7 +10,7 @@ return {
     end,
     opts = {
       suggestion = {
-        enabled = true,
+        enabled = false,
         auto_trigger = false,
         hide_during_completion = true,
         debounce = 75,
@@ -42,13 +42,17 @@ return {
     priority = 100, -- lower because it's not important that it load faster than anything else. In fact, we can wait for a while for it to load most of the time
     build = "make tiktoken", -- Only on MacOS or Linux
     cmd = "CopilotChat",
-    opts = {
-      debug = false,
-      -- clear_chat_on_new_prompt = true,
-    },
     enabled = function()
       return os.getenv("COPILOT_AVAILABLE") == "true"
     end,
+    config = function()
+      require("CopilotChat").setup({
+        debug = false,
+
+        -- doesn't actually work. TODO: figure out how to disable default system prompts so I can actually type the character "/" &co
+        prompts = {Never = "!@#$%^&* I said never"},
+      })
+    end
     -- see `:help CopilotChat` for more info
     -- See Commands section for default commands if you want to lazy load on them
   },
