@@ -17,6 +17,18 @@ return {
         defaults = {
           winblend = 20, -- let's see if this just ends up annoying us
           file_ignore_patterns = { "node_modules" },
+          -- todo: turn <C-q> into a function that dynamically detects whether selections have been made or not and then do the right action
+          -- see telescope.actions.state.get_selected_entry() maybe?
+          mappings = {
+            i = {
+              ["<C-q>"] = require('telescope.actions').send_to_qflist + require('telescope.actions').open_qflist,
+              ["<C-s>"] = require('telescope.actions').send_selected_to_qflist + require('telescope.actions').open_qflist,
+            },
+            n = {
+              ["<C-q>"] = require('telescope.actions').send_to_qflist + require('telescope.actions').open_qflist,
+              ["<C-s>"] = require('telescope.actions').send_selected_to_qflist + require('telescope.actions').open_qflist,
+            },
+          },
           preview = {
             mime_hook = function(filepath, bufnr, opts)
               local is_image = function(fp)
