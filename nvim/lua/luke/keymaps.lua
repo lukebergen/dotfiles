@@ -61,7 +61,8 @@ vim.keymap.set('n', '<Leader>r', '<CMD>mode<CR>')
 vim.keymap.set('n', '<Leader>c', '<CMD>nohl<CR>')
 vim.keymap.set('n', '<UP>', '<C-y>')
 vim.keymap.set('n', '<DOWN>', '<C-e>')
-vim.keymap.set('n', '<Leader>l', '<CMD>set relativenumber!<CR>')
+vim.keymap.set('n', '<Leader>xl', '<CMD>set relativenumber!<CR>', {noremap = true, desc = 'toggle relative line numbers'})
+vim.keymap.set('n', '<Leader>xw', '<CMD>set list!<CR>', {noremap = true, desc = 'toggle whitespace visibility'})
 
 -- Move selected lines down
 -- neat binding, but interferes with super common work flow of visually selecting a bunch of lines and then [J]oining them

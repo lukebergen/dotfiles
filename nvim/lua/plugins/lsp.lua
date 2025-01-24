@@ -214,9 +214,6 @@ return {
             }
           }
         },
-        --
-        ocamllsp = {},
-
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},

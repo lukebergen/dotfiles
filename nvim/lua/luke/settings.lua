@@ -20,6 +20,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.scrolloff = 3
 vim.opt.foldcolumn = 'auto:2' -- a single nesting of folds... fine. But let's go no deeper than that
+vim.opt.listchars = { tab = '▸ ', trail = '·', extends = '>', precedes = '<', space = '·' }
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "help",
