@@ -57,29 +57,24 @@ vim.keymap.set('n', 'n', ':lua NextSearchResult("n")<CR>', { noremap = true, sil
 vim.keymap.set('n', 'N', ':lua NextSearchResult("N")<CR>', { noremap = true, silent = true })
 
 -- misc
-vim.keymap.set('n', '<Leader>r', '<CMD>mode<CR>')
-vim.keymap.set('n', '<Leader>c', '<CMD>nohl<CR>')
-vim.keymap.set('n', '<UP>', '<C-y>')
-vim.keymap.set('n', '<DOWN>', '<C-e>')
-vim.keymap.set('n', '<Leader>xl', '<CMD>set relativenumber!<CR>', {noremap = true, desc = 'toggle relative line numbers'})
-vim.keymap.set('n', '<Leader>xw', '<CMD>set list!<CR>', {noremap = true, desc = 'toggle whitespace visibility'})
+vim.keymap.set('n', '<Leader>r', '<CMD>mode<CR>', { noremap = true, desc = 'clear and redraw screen (commands leave things janky or something)' })
+vim.keymap.set('n', '<Leader>c', '<CMD>nohl<CR>', { noremap = true, desc = 'clear highlights (usually after searching)' })
+vim.keymap.set('n', '<UP>', '<C-y>', { noremap = true, desc = 'preferred behavior for arrow keys (when we even use them at all)' })
+vim.keymap.set('n', '<DOWN>', '<C-e>', { noremap = true, desc = 'preferred behavior for arrow keys (when we even use them at all)' })
+vim.keymap.set('n', '<Leader>xl', '<CMD>set relativenumber!<CR>', { noremap = true, desc = 'toggle relative line numbers' })
+vim.keymap.set('n', '<Leader>xw', '<CMD>set list!<CR>', { noremap = true, desc = 'toggle whitespace visibility'})
+vim.keymap.set('n', '<Leader>xg', '<CMD>Gitsigns toggle_signs<CR>', { noremap = true, desc = 'toggle git gutter signs' })
 
+-- neat pair of keymaps, but interferes with super common work flow of visually selecting a bunch of lines and then [J]oining them
+-- maybe <C-J>/<C-K>?
 -- Move selected lines down
--- neat binding, but interferes with super common work flow of visually selecting a bunch of lines and then [J]oining them
---vim.keymap.set("v", "J", function()
---  local count = vim.v.count1
---  return string.format(":m '>+%d<CR>gv=gv", count)
---end, { expr = true })
+vim.keymap.set("v", "<C-J>", function()
+  local count = vim.v.count1
+  return string.format(":m '>+%d<CR>gv=gv", count)
+end, { expr = true })
 --
 ---- Move selected lines up
---vim.keymap.set("v", "K", function()
---  local count = vim.v.count1
---  return string.format(":m '<-%d<CR>gv=gv", count + 1)
---end, { expr = true })
-
-
--- overriding plugins to make use of their mappings for myself (or keep default behavior like c-y)
---vim.keymap.set('n', '<C-Z><C-R>', '<Plug>NetrwRefresh') -- gotta re-map this one away from netrw before we can use it below
---vim.g.user_emmet_leader_key='<C-B>'
-
-vim.keymap.set('n', '<Leader>xg', '<CMD>Gitsigns toggle_signs<CR>')
+vim.keymap.set("v", "<C-K>", function()
+  local count = vim.v.count1
+  return string.format(":m '<-%d<CR>gv=gv", count + 1)
+end, { expr = true })
