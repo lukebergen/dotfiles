@@ -34,7 +34,7 @@ local function centerYourself()
     row = (editor_height - float_height) / 2,
     col = (editor_width - float_width) / 2,
     style = "minimal",
-    border = "rounded", -- consider: single, rounded, and solid
+    border = "solid", -- consider: single, rounded, and solid
     --title = "mantra",  -- just see how this looks
     --title_pos = "center",
   })
