@@ -4,6 +4,7 @@ if (os.getenv("CODE_LLM") == "ollama") then
 end
 require("luke.commands")
 require("luke.keymaps")
+require("luke.misc")
 
 local curl = require('plenary.curl')
 -- local json = require("lib.lunajson")
