@@ -64,6 +64,7 @@ alias rgf='rg --files | rg'
 alias ver="vercel"
 alias ibrew="arch -x86_64 /usr/local/bin/brew"
 alias trustbin="sudo xattr -dr com.apple.quarantine $1"
+alias clearhist='echo -e "\033c"'
 
 DEFAULT_OLLAMA_MODEL='llama3.2:latest'
 DEFAULT_OLLAMA_CODE_MODEL='codellama:latest'
