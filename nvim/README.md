@@ -64,10 +64,13 @@ Or just new mappings that I'm trying for myself.
 - ga => encoding info (ascii, hex, octal, utf)
 - K => look up info about thing under cursor (K again to enter the float window if it requires scrolling or searching)
 - z => fold stuff
-  - zf => motion or visual: create fold
+  - not builtin, but <leader>xf => toggle between foldmethod=indent and manual
   - zc => close whatever fold the cursor is currently in
   - zo => open fold
-  - zd => delete current fold
+  - in manual fold method...
+    - zf => motion or visual: create fold
+    - zd => delete current fold
+    - zE => delete all folds (in buffer? in window?)
 - <leader>xg => toggle git signs (maybe check out zen mode though?)
 - if helpfile looks bland: check ft and `set ft=help` if it isn't already
 - verbose command SomeCommand => can't figure out where `SomeCommand` comes from? Try this

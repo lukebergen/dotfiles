@@ -64,6 +64,13 @@ vim.keymap.set('n', '<DOWN>', '<C-e>', { noremap = true, desc = 'preferred behav
 vim.keymap.set('n', '<Leader>xl', '<CMD>set relativenumber!<CR>', { noremap = true, desc = 'toggle relative line numbers' })
 vim.keymap.set('n', '<Leader>xw', '<CMD>set list!<CR>', { noremap = true, desc = 'toggle whitespace visibility'})
 vim.keymap.set('n', '<Leader>xg', '<CMD>Gitsigns toggle_signs<CR>', { noremap = true, desc = 'toggle git gutter signs' })
+vim.keymap.set('n', '<Leader>xf', function()
+  if vim.wo.foldmethod == 'manual' then
+    vim.wo.foldmethod = 'indent'
+  else
+    vim.wo.foldmethod = 'manual'
+  end
+end, { noremap = true, desc = 'toggle between manual and indent [f]olds' })
 
 -- neat pair of keymaps, but interferes with super common work flow of visually selecting a bunch of lines and then [J]oining them
 -- maybe <C-J>/<C-K>?
