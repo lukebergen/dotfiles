@@ -52,6 +52,20 @@ return {
         -- doesn't actually work. TODO: figure out how to disable default system prompts so I can actually type the character "/" &co
         prompts = {Never = "!@#$%^&* I said never"},
       })
+      -- see https://github.com/CopilotC-Nvim/CopilotChat.nvim/issues/691
+      -- however, I think we're actually fine to just set this globally. Set over in nvim-cmp config
+--      vim.api.nvim_create_autocmd('BufEnter', {
+--        pattern = "copilot-*",
+--        callback = function()
+--          vim.opt.completeopt = vim.opt.completeopt + "noinsert" + "noselect"
+--        end
+--      })
+--      vim.api.nvim_create_autocmd('BufLeave', {
+--        pattern = "copilot-*",
+--        callback = function()
+--          vim.opt.completeopt = vim.opt.completeopt - "noinsert" - "noselect"
+--        end
+--      })
     end
     -- see `:help CopilotChat` for more info
     -- See Commands section for default commands if you want to lazy load on them

@@ -44,6 +44,9 @@ return {
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
 
+      -- see https://github.com/CopilotC-Nvim/CopilotChat.nvim/issues/691
+      vim.opt.completeopt = "menu,preview,noinsert,noselect"
+
       cmp.setup {
         snippet = {
           expand = function(args)
