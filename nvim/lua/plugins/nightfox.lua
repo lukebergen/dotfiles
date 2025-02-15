@@ -67,6 +67,7 @@ return {
           netrwDir = { fg = "palette.blue.bright" },
           netrwExe = { fg = "palette.red.bright" },
           MatchParen = { fg = "palette.red.bright" },
+          Conditional = { fg = "palette.pink.bright" },
           gitcommitSummary = { fg = "palette.blue.bright" },
           HopNextKey = { fg = "palette.red.bright" },
           SpecialKey = { bg = "palette.magenta.bright", fg = "palette.white.bright" },
