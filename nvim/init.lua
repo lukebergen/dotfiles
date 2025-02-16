@@ -3,3 +3,7 @@ vim.g.mapleader = ","
 
 require("lazyvim")
 require("luke")
+
+if vim.g.zen_mode == 1 then
+  require("profiles/zen")
+end

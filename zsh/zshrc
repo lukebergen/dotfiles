@@ -25,6 +25,9 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey "^xe" edit-command-line
 bindkey "^x^e" edit-command-line
+bindkey '^E' end-of-line
+bindkey '^A' beginning-of-line
+
 # Vi style:
 # zle -N edit-command-line
 # bindkey -M vicmd v edit-command-line
@@ -71,6 +74,12 @@ DEFAULT_OLLAMA_CODE_MODEL='codellama:latest'
 alias ol="ollama run $DEFAULT_OLLAMA_MODEL"  # default
 alias ols='ollama run $DEFAULT_OLLAMA_MODEL "Answer succinctly and concisely in as few words as reasonable\n\n"' # *s*hort
 alias olc='ollama run $DEFAULT_OLLAMA_CODE_MODEL "Answer succinctly and concisely in as few words as resonable\n\n"' # *c*ode
+
+# nothing is coming up as clean as I want it. there just isn't that much to improve upon cmd+tab to a term window and running vim + CC
+#alias assist_win='/opt/homebrew/bin/kitty --config ~/.config/kitty/float.conf > /dev/null 2>&1 & echo $! > ~/.local/state/kitty/assist.pid'
+alias assist_win='env SHELL=$SHELL kitty --config ~/.config/kitty/float.conf > /dev/null 2>&1 &'
+alias assist_vim='nvim --cmd "let g:zen_mode = 1" -c CC'
+alias assist_vim2='nvim --cmd "let g:zen_mode = 1" -c LLM'
 
 # *m*arkdown
 function olm() {
@@ -179,5 +188,5 @@ stty sane
 #   - the correct directories to the PATH
 #   - auto-completion for the opam binary
 # This section can be safely removed at any time if needed.
-[[ ! -r '/Users/lukebergen/.opam/opam-init/init.zsh' ]] || source '/Users/lukebergen/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
+#[[ ! -r '/Users/lukebergen/.opam/opam-init/init.zsh' ]] || source '/Users/lukebergen/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
 # END opam configuration

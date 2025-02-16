@@ -4,8 +4,10 @@
 -- `ioreg -l -w 0 | grep SecureInput`
 -- See this for best info on this issue: https://github.com/Hammerspoon/hammerspoon/issues/1743#issuecomment-631598824
 
+local utils = require("utils")
 local canvas = require("hs.canvas")
 local silly = require("silly")
+local assist = require("assist")
 
 local function safeRequire(moduleName)
   local status, result = pcall(require, moduleName)
@@ -25,21 +27,12 @@ hs.hotkey.bind({"alt", "ctrl"}, "space", function()
   end
 end)
 
--------------
--- helpers --
--------------
-winWait = function(app, title, interval, callback)
-  win = app:findWindow(title)
-  hs.timer.waitUntil(function()
-    win = app:findWindow(title)
-    return win
-  end, function()
-    callback(win)
-  end, interval)
-end
+--hs.hotkey.bind({"alt"}, "`", function()
+--  assist.toggle()
+--end)
 
 -- used by clipboard thing but reload command also references this so need to delcar it higher up
-strings = hs.settings.get("registers") or {}
+local strings = hs.settings.get("registers") or {}
 
 ---------------------
 -- commander thing --
@@ -47,9 +40,9 @@ strings = hs.settings.get("registers") or {}
 local commands = {}
 commands.zoom = function()
   local zoomApp = hs.application.open("zoom.us", 3, true)
-  winWait(zoomApp, "Zoom", 0.5, function(zoomWindow)
+  utils.winWait(zoomApp, "Zoom", 0.5, function(zoomWindow)
     hs.eventtap.keyStroke({"ctrl", "cmd"}, "V")
-    winWait(zoomApp, "Zoom Meeting", 0.5, function(meetingWin)
+    utils.winWait(zoomApp, "Zoom Meeting", 0.5, function(meetingWin)
       hs.eventtap.keyStroke({"cmd"}, "I")
     end)
   end)
