@@ -134,7 +134,10 @@ hs.fnutils.each(registers, function(char)
     hs.pasteboard.setContents(tempPasteboard)
 
     -- backup to settings so on reboot/crash we preserve all our clipboards
-    hs.settings.set("registers", strings)
+    -- except for special-k
+    local klessStrings = hs.fnutils.copy(strings)
+    klessStrings.k = "special-k"
+    hs.settings.set("registers", klessStrings)
   end)
 
   v:bind('', char, function()
@@ -150,8 +153,12 @@ hs.fnutils.each(registers, function(char)
 
   x:bind('', char, function()
     x:exit()
-
+    local tempPasteboard = hs.pasteboard.getContents()
     hs.pasteboard.setContents(strings[char])
+
+    hs.timer.doAfter(5, function()
+      hs.pasteboard.setContents(tempPasteboard)
+    end)
   end)
 end)
 
@@ -209,6 +216,7 @@ end)
 -- begin MM specific stuff (if applicable)
 local userChoices = safeRequire("mm-test-users") -- only local to MM machine
 if userChoices then
+  local userChooser
   userChooser = hs.chooser.new(function(choice)
     local tempPasteboard = hs.pasteboard.getContents()
     hs.pasteboard.setContents(choice.email)
