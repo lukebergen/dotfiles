@@ -1,7 +1,7 @@
 vim.keymap.set("n", "<leader>n", "<CMD>Oil<CR>", {desc = 'open oil file manager'})
-vim.keymap.set("n", "<leader>ef", function()
+vim.keymap.set("n", "<leader>xe", function()
   require("oil").open_float()
-end, {desc = 'open oil file manager in float window'})
+end, {desc = '[e]xplore current folder in oil float window'})
 
 local detail = false
 

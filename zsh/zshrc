@@ -77,9 +77,18 @@ alias olc='ollama run $DEFAULT_OLLAMA_CODE_MODEL "Answer succinctly and concisel
 
 # nothing is coming up as clean as I want it. there just isn't that much to improve upon cmd+tab to a term window and running vim + CC
 #alias assist_win='/opt/homebrew/bin/kitty --config ~/.config/kitty/float.conf > /dev/null 2>&1 & echo $! > ~/.local/state/kitty/assist.pid'
-alias assist_win='env SHELL=$SHELL kitty --config ~/.config/kitty/float.conf > /dev/null 2>&1 &'
-alias assist_vim='nvim --cmd "let g:zen_mode = 1" -c CC'
-alias assist_vim2='nvim --cmd "let g:zen_mode = 1" -c LLM'
+#alias assist_win='env SHELL=$SHELL kitty --config ~/.config/kitty/float.conf > /dev/null 2>&1 &'
+#alias assist_vim='nvim --cmd "let g:zen_mode = 1" -c CC'
+#alias assist_vim2='nvim --cmd "let g:zen_mode = 1" -c LLM'
+
+# trying everything possible to clear scrollback (kitty_mod+f just keeps seeing more stuff)
+#ctrl_l() {
+#    builtin print -rn -- $'\r\e[0J\e[H\e[22J' >"$TTY"
+#    builtin zle .reset-prompt
+#    builtin zle -R
+#}
+#zle -N ctrl_l
+#bindkey '^l' ctrl_l
 
 # *m*arkdown
 function olm() {
