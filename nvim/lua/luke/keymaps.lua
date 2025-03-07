@@ -25,6 +25,7 @@ vim.keymap.set('n', '<Leader>4', '4gt')
 vim.keymap.set('n', '<Leader>5', '5gt')
 vim.keymap.set('n', '<Leader>6', '6gt')
 
+-- TODO: figure out why this sometimes causes results to look like `[1/50]` => `[3/50]` => `[3/50]` => `[5/50]` etc...
 -- better `n`
 -- Function to jump to the next search result with custom behavior
 function NextSearchResult(dir)
@@ -53,8 +54,8 @@ function NextSearchResult(dir)
 end
 
 -- Map the 'n' key to the custom function
-vim.keymap.set('n', 'n', ':lua NextSearchResult("n")<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', 'N', ':lua NextSearchResult("N")<CR>', { noremap = true, silent = true })
+--vim.keymap.set('n', 'n', ':lua NextSearchResult("n")<CR>', { noremap = true, silent = true })
+--vim.keymap.set('n', 'N', ':lua NextSearchResult("N")<CR>', { noremap = true, silent = true })
 
 -- misc
 vim.keymap.set('n', '<Leader>r', '<CMD>mode<CR>', { noremap = true, desc = 'clear and redraw screen (commands leave things janky or something)' })
