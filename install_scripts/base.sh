@@ -27,6 +27,7 @@ ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc
 ln -s ~/.dotfiles/zsh/zshenv ~/.zshenv
 ln -s ~/.dotfiles/git/gitconfig ~/.gitconfig
 ln -s ~/.dotfiles/hammerspoon ~/.hammerspoon
+ln -s ~/.dotfiles/sqlite3/.sqliterc ~/
 
 # byyyyeeee vim
 #ln -s ~/.dotfiles/vim/rcs/vimrc ~/.vimrc
