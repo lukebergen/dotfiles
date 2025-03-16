@@ -2,7 +2,7 @@ return {
   "nvim-treesitter/nvim-treesitter",
   tag = "v0.9.2",
   build = function()
-      require("nvim-treesitter.install").update({ with_sync = true })()
+    require("nvim-treesitter.install").update({ with_sync = true })()
   end,
   --event = { "BufReadPost", "BufNewFile" },
   dependencies = {
@@ -26,6 +26,7 @@ return {
         "html",
         "javascript",
         "typescript",
+        "tsx",
         "json",
         "lua",
         "markdown",

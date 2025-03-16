@@ -67,6 +67,8 @@ Or just new mappings that I'm trying for myself.
   - not builtin, but <leader>xf => toggle between foldmethod=indent and manual
   - zc => close whatever fold the cursor is currently in
   - zo => open fold
+  - zM => close all folds
+  - zR => open all folds
   - in manual fold method...
     - zf => motion or visual: create fold
     - zd => delete current fold

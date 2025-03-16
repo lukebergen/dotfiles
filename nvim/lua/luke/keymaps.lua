@@ -65,6 +65,9 @@ vim.keymap.set('n', '<DOWN>', '<C-e>', { noremap = true, desc = 'preferred behav
 vim.keymap.set('n', '<Leader>xl', '<CMD>set relativenumber!<CR>', { noremap = true, desc = 'toggle relative line numbers' })
 vim.keymap.set('n', '<Leader>xw', '<CMD>set list!<CR>', { noremap = true, desc = 'toggle whitespace visibility'})
 vim.keymap.set('n', '<Leader>xg', '<CMD>Gitsigns toggle_signs<CR>', { noremap = true, desc = 'toggle git gutter signs' })
+
+vim.opt.foldcolumn = 'auto:2' -- a single nesting of folds... fine. But let's go no deeper than that
+vim.opt.foldmethod = 'manual'
 vim.keymap.set('n', '<Leader>xf', function()
   if vim.wo.foldmethod == 'manual' then
     vim.wo.foldmethod = 'indent'
