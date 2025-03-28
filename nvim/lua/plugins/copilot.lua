@@ -48,6 +48,7 @@ return {
     config = function()
       require("CopilotChat").setup({
         debug = false,
+        model = 'gpt-4o-2024-11-20',
 
         -- doesn't actually work. TODO: figure out how to disable default system prompts so I can actually type the character "/" &co
         prompts = {Never = "!@#$%^&* I said never"},
