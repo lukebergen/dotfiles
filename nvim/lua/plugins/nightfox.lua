@@ -63,6 +63,7 @@ return {
           StatusLineNC = { fg = "white", bg = "sel0" },
           --StatusLine = { fg = "bg3", bg = "lightcyan" },
           CursorLine = { bg = "bg1" },
+          QuickFixLine = { bg = "bg3" },
           --netrwDir = { fg = "palette.magenta.dim" },
           netrwDir = { fg = "palette.blue.bright" },
           netrwExe = { fg = "palette.red.bright" },
