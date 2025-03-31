@@ -41,6 +41,8 @@ return {
           table.insert(template, "")
           table.insert(template, "## Todo")
           table.insert(template, "")
+          table.insert(template, "")
+          table.insert(template, "## Actual")
         else
           table.insert(template, string.format("[[/]] > [[/diary/diary|diary]] > %s", today))
           table.insert(template, string.format("= %s =", today))
@@ -49,6 +51,8 @@ return {
           table.insert(template, "")
           table.insert(template, "== Todo ==")
           table.insert(template, "")
+          table.insert(template, "")
+          table.insert(template, "== Actual ==")
 
           -- TODO: copy incomplete stuff from yesterday?
         end
