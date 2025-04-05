@@ -7,22 +7,38 @@ vim.diagnostic.config({
   -- update_in_insert = true,
   update_in_insert = false,
 })
+
 vim.keymap.set('n', "<leader>d", function()
-  local diag = vim.diagnostic.get(0, { lnum = vim.fn.line('.') - 1, col = vim.fn.col('.') - 1 })
-  if #diag > 0 then
-    vim.diagnostic.open_float(nil, {
-      focusable = false,
-      header = "",
-      border = "single",
-      --border = {"/", "-", "\\", "|", "/", "-", "\\", "|"}, -- kinda slick. Don't know what I'd do with it though...
-      scope = "cursor",
-      source = "if_many",
-      close_events = {"CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave"},
-    })
-  else
-    vim.lsp.buf.hover()
-  end
+  vim.diagnostic.open_float(nil, {
+    focusable = false,
+    header = "",
+    border = "single",  -- valid values: none, single, double, rounded, solid, shadow, or an array of characters
+    --border = {"/", "-", "\\", "|", "/", "-", "\\", "|"}, -- kinda slick. Don't know what I'd do with it though...
+    --border = {""},
+    scope = "cursor",
+    source = "if_many",
+    close_events = {"CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave"},
+  })
 end)
+
+--vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
+--  if not (result and result.contents) then
+--    vim.notify("No hover information available", vim.log.levels.INFO)
+--    return
+--  end
+--
+--  local contents = result.contents
+--  local x = table.concat(contents, "\n")
+--  --print(vim.inspect(contents))
+--  --if type(contents) == "table" then
+--  --  contents = table.concat(contents, "\n")
+--  --end
+--
+--  -- Open a floating window with hover information
+--  vim.lsp.util.open_floating_preview(contents, "markdown", config)
+--
+--  -- Optionally fetch definition and resolve constant values here
+--end
 
 -- to make esc close the hover text from typing "K"
 vim.api.nvim_set_keymap('n', '<Esc>', 'hl', {noremap = true, silent = true}) -- not the most elegant. TODO: figure out a "proper" way to do this I guess?
