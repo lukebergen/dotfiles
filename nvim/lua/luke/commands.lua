@@ -68,3 +68,10 @@ vim.api.nvim_create_user_command("UrlEncode", function(opts)
   local param = opts.args
   print(string.format("%02X", string.byte(param)))
 end, {nargs = 1, desc = "print arg1 url encoded"})
+
+vim.api.nvim_create_user_command("Encrypt", function(opts)
+  local l = vim.fn.getline(opts.line1)
+  local l2 = vim.fn.getline(opts.line2)
+  print(l)
+  print(l2)
+end, {range = 1, desc = "Encrypt the visual selection with a passphrase"})

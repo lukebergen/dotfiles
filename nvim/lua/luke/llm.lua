@@ -8,7 +8,7 @@ local state = {messages = {}, nextResponse = ""}
 local current_prompt = "explain"
 local prompts = {
   explain = "You are a helpful code assistant. You answer in concise but polite messages. When you give code examples you wrap them in markdown code blocks for the appropriate language.",
-  code = "You are a skilled programmer who responds only with code. You always wrap code blocks in markdown code blocks for the appropriate language. You do not explain your work. You only reply in code that would run or compile if it was copy and pasted exactly as you provide it.",
+  code = "You respond exclusively in syntactically correct code. You do not explain the code except through inline code comments. You do not surround your code in backticks",
 }
 
 local function reset()
