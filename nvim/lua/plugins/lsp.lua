@@ -1,18 +1,27 @@
 vim.diagnostic.config({
   virtual_text = false, -- default to false, below keymap will toggle it
   float = false,
-  update_in_insert = true,
+
+  -- update diagnostics and such while in insert. vs only updating diag's
+  -- on returning to normal. Waffling on true vs false
+  -- update_in_insert = true,
+  update_in_insert = false,
 })
 vim.keymap.set('n', "<leader>d", function()
-  vim.diagnostic.open_float(nil, {
-    focusable = false,
-    header = "",
-    border = "single",
-    --border = {"/", "-", "\\", "|", "/", "-", "\\", "|"}, -- kinda slick. Don't know what I'd do with it though...
-    scope = "cursor",
-    source = "if_many",
-    close_events = {"CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave"},
-  })
+  local diag = vim.diagnostic.get(0, { lnum = vim.fn.line('.') - 1, col = vim.fn.col('.') - 1 })
+  if #diag > 0 then
+    vim.diagnostic.open_float(nil, {
+      focusable = false,
+      header = "",
+      border = "single",
+      --border = {"/", "-", "\\", "|", "/", "-", "\\", "|"}, -- kinda slick. Don't know what I'd do with it though...
+      scope = "cursor",
+      source = "if_many",
+      close_events = {"CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave"},
+    })
+  else
+    vim.lsp.buf.hover()
+  end
 end)
 
 -- to make esc close the hover text from typing "K"
