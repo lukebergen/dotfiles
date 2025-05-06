@@ -7,7 +7,7 @@
 local utils = require("utils")
 local canvas = require("hs.canvas")
 local silly = require("silly")
-local assist = require("assist")
+--local assist = require("assist")
 
 local function safeRequire(moduleName)
   local status, result = pcall(require, moduleName)
@@ -32,7 +32,7 @@ end)
 --end)
 
 -- used by clipboard thing but reload command also references this so need to delcar it higher up
-local strings = hs.settings.get("registers") or {}
+local registers = hs.settings.get("registers") or {}
 
 ---------------------
 -- commander thing --
@@ -40,22 +40,22 @@ local strings = hs.settings.get("registers") or {}
 local commands = {}
 commands.zoom = function()
   local zoomApp = hs.application.open("zoom.us", 3, true)
-  utils.winWait(zoomApp, "Zoom", 0.5, function(zoomWindow)
+  utils.winWait(zoomApp, "Zoom", 0.5, function()
     hs.eventtap.keyStroke({"ctrl", "cmd"}, "V")
-    utils.winWait(zoomApp, "Zoom Meeting", 0.5, function(meetingWin)
+    utils.winWait(zoomApp, "Zoom Meeting", 0.5, function()
       hs.eventtap.keyStroke({"cmd"}, "I")
     end)
   end)
 end
 
 commands.reload = function()
-  hs.settings.set("registers", strings)
+  hs.settings.set("registers", utils.cleanRegisters(registers))
   hs.reload()
 end
 
 commands.clearRegisters = function()
   hs.settings.set("registers", {})
-  strings = {}
+  registers = {}
 end
 
 commands.shrug = function()
@@ -101,9 +101,9 @@ end)
 --------------
 -- alt keys --
 --------------
-s = hs.hotkey.modal.new('alt', 's')
+local s = hs.hotkey.modal.new('alt', 's')
 s:bind('', 'escape', function() s:exit() end)
-map = {l = "λ", d = "◊", j = "👇", h = "👈", l = "👉", k = "👆"}
+local map = {d = "◊", j = "👇", h = "👈", l = "👉", k = "👆"}
 for key, value in pairs(map) do
   s:bind('', key, function()
     s:exit()
@@ -114,38 +114,33 @@ end
 --------------------------------
 -- register-like copy/pasting --
 --------------------------------
-c = hs.hotkey.modal.new('alt', 'c') -- copy into following key
-v = hs.hotkey.modal.new('alt', 'v') -- paste from following key
-x = hs.hotkey.modal.new('alt', 'x') -- copy from following key into system clipboard
-tempPasteboard = ""
-registers = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
+local c = hs.hotkey.modal.new('alt', 'c') -- copy into following key
+local v = hs.hotkey.modal.new('alt', 'v') -- paste from following key
+local x = hs.hotkey.modal.new('alt', 'x') -- copy from following key into system clipboard
+local registerLetters = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
 
 c:bind('', 'escape', function() c:exit() end)
 v:bind('', 'escape', function() v:exit() end)
 x:bind('', 'escape', function() v:exit(); c:exit(); x:exit(); end)
 
-hs.fnutils.each(registers, function(char)
+hs.fnutils.each(registerLetters, function(char)
   c:bind('', char, function()
     c:exit()
 
-    tempPasteboard = hs.pasteboard.getContents()
+    local tempPasteboard = hs.pasteboard.getContents()
     hs.eventtap.keyStroke("cmd", "c")
-    strings[char] = hs.pasteboard.getContents()
+    registers[char] = hs.pasteboard.getContents()
     hs.pasteboard.setContents(tempPasteboard)
 
-    -- backup to settings so on reboot/crash we preserve all our clipboards
-    -- except for special-k
-    local klessStrings = hs.fnutils.copy(strings)
-    klessStrings.k = "special-k"
-    hs.settings.set("registers", klessStrings)
+    hs.settings.set("registers", utils.cleanRegisters(registers))
   end)
 
   v:bind('', char, function()
     v:exit()
 
-    if strings[char] then
-      tempPasteboard = hs.pasteboard.getContents()
-      hs.pasteboard.setContents(strings[char])
+    if registers[char] then
+      local tempPasteboard = hs.pasteboard.getContents()
+      hs.pasteboard.setContents(registers[char])
       hs.eventtap.keyStroke("cmd", "v")
       hs.pasteboard.setContents(tempPasteboard)
     end
@@ -154,7 +149,7 @@ hs.fnutils.each(registers, function(char)
   x:bind('', char, function()
     x:exit()
     local tempPasteboard = hs.pasteboard.getContents()
-    hs.pasteboard.setContents(strings[char])
+    hs.pasteboard.setContents(registers[char])
 
     hs.timer.doAfter(5, function()
       hs.pasteboard.setContents(tempPasteboard)
@@ -225,7 +220,7 @@ if userChoices then
     if choice.password then
       hs.pasteboard.setContents(choice.password)
     else
-      hs.pasteboard.setContents(strings["p"]) -- for convenience, if we've just inserted a test user, probably about to login...
+      hs.pasteboard.setContents(registers["p"]) -- for convenience, if we've just inserted a test user, probably about to login...
     end
 
     userChooser:query("")
@@ -275,7 +270,6 @@ local function createCanvas()
   })
 
   myCanvas:mouseCallback(function(cv, message, _canvasId, mouseX, mouseY)
-    print("mouse callback at all?")
     if message == "mouseDown" then
       local clickedShape = cv:elementAtPoint(mouseX, mouseY)
       if clickedShape then

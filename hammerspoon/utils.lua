@@ -19,5 +19,10 @@ M.winWait = function(app, title, interval, callback)
   end, interval)
 end
 
+M.cleanRegisters = function(strings)
+  local klessStrings = hs.fnutils.copy(strings)
+  klessStrings.k = "special-k"
+  return klessStrings
+end
 
 return M
