@@ -79,6 +79,18 @@ return {
           ['<C-p>'] = cmp.mapping.select_prev_item(),
           ['<C-y>'] = cmp.mapping.confirm { select = true },
           ['<C-c>'] = cmp.mapping.complete(),
+          ['<C-s>'] = cmp.mapping(function(fallback)
+            local copilot = require('copilot.suggestion')
+            if copilot.is_visible() then
+              copilot.accept()
+            elseif vim.fn.pumvisible() == 1 then
+              vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-y>', true, true, true), 'n')
+            elseif vim.lsp.buf.signature_help then
+              vim.lsp.buf.signature_help()
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
           ['<C-l>'] = cmp.mapping(function()
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()

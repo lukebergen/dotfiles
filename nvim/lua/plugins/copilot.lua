@@ -1,3 +1,12 @@
+vim.keymap.set({'n'}, '<leader>xc', function()
+  local input = vim.fn.input("Quick Chat: ")
+  if input ~= "" then
+    require("CopilotChat").ask(input, {
+      selection = require("CopilotChat.select").buffer
+    })
+  end
+end, { desc = "CopilotChat - Quick chat" })
+
 return {
   {
     "zbirenbaum/copilot.lua",
@@ -10,7 +19,7 @@ return {
     end,
     opts = {
       suggestion = {
-        enabled = false,
+        enabled = true,
         auto_trigger = false,
         hide_during_completion = true,
         debounce = 75,
@@ -52,6 +61,32 @@ return {
 
         -- doesn't actually work. TODO: figure out how to disable default system prompts so I can actually type the character "/" &co
         prompts = {Never = "!@#$%^&* I said never"},
+
+        context = { "buffers:listed" },
+
+        mappings = {
+          show_info = {
+            normal = 'gi'
+          },
+          show_context = {
+            normal = 'gc'
+          },
+          show_help = {
+            normal = 'gh'
+          },
+          reset = {
+            normal = 'gx'
+          }
+        }
+
+        -- Noooooope. Hate this
+        --window = {
+        --  layout = 'float',
+        --  relative = 'cursor',
+        --  width = 1,
+        --  height = 0.4,
+        --  row = 1
+        --},
       })
       -- see https://github.com/CopilotC-Nvim/CopilotChat.nvim/issues/691
       -- however, I think we're actually fine to just set this globally. Set over in nvim-cmp config

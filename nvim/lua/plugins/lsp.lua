@@ -231,6 +231,7 @@ return {
           --    vim.lsp.diagnostic.on_publish_diagnostics( _, result, ctx, config)
           --  end,
           --},
+          capabilities = capabilities,
           settings = {
             diagnostics = {
               -- js/ts things to ignore
@@ -243,6 +244,7 @@ return {
           -- cmd = {...},
           -- filetypes = { ...},
           -- capabilities = {},
+          capabilities = capabilities,
           settings = {
             Lua = {
               completion = {
