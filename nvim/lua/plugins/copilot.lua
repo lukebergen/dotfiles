@@ -1,11 +1,28 @@
-vim.keymap.set({'n'}, '<leader>xc', function()
-  local input = vim.fn.input("Quick Chat: ")
-  if input ~= "" then
-    require("CopilotChat").ask(input, {
-      selection = require("CopilotChat.select").buffer
-    })
-  end
+-- some days you feel like a keymap
+vim.keymap.set({'n', 'v'}, '<leader>xc', function()
+  require("CopilotChat").toggle()
 end, { desc = "CopilotChat - Quick chat" })
+
+-- some days you feel like a command
+vim.api.nvim_create_user_command("CC", function()
+  vim.cmd('CopilotChat')
+end, {range = true})
+
+vim.api.nvim_create_user_command("CCExplain", function()
+  vim.cmd('CopilotChatExplain')
+end, {range = true})
+
+vim.api.nvim_create_user_command("CCReview", function()
+  vim.cmd('CopilotChatReview')
+end, {range = true})
+
+vim.api.nvim_create_user_command("CCReset", function()
+  vim.cmd('CopilotChatReset')
+end, {range = true})
+
+vim.api.nvim_create_user_command("CCStop", function()
+  vim.cmd('CopilotChatStop')
+end, {range = true})
 
 return {
   {

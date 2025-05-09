@@ -43,22 +43,6 @@ vim.api.nvim_create_user_command("SR", function()
   vim.cmd('SessionRestore')
 end, {})
 
-vim.api.nvim_create_user_command("CC", function()
-  vim.cmd('CopilotChat')
-end, {range = true})
-
-vim.api.nvim_create_user_command("CCExplain", function()
-  vim.cmd('CopilotChatExplain')
-end, {range = true})
-
-vim.api.nvim_create_user_command("CCReview", function()
-  vim.cmd('CopilotChatReview')
-end, {range = true})
-
-vim.api.nvim_create_user_command("CCReset", function()
-  vim.cmd('CopilotChatReset')
-end, {range = true})
-
 vim.api.nvim_create_user_command("UrlDecode", function(opts)
   local param = opts.args
   print(string.char(tonumber(param, 16)))
