@@ -10,5 +10,17 @@ return {
         changedelete = { text = '~' },
       },
     },
+    config = function(_, opts)
+      local gitsigns = require("gitsigns")
+      gitsigns.setup(opts)
+
+      -- surround doesn't come with gitsigns support so just simulate it ourselves
+      vim.keymap.set('n', '[g', function()
+        gitsigns.nav_hunk('prev')
+      end)
+      vim.keymap.set('n', ']g', function()
+        gitsigns.nav_hunk('next')
+      end)
+    end
   },
 }
