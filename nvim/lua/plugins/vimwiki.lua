@@ -30,6 +30,13 @@ return {
       -- vim.g.vimwiki_dir_link = 'index'
     end,
     config = function()
+
+      -- to keymap:
+      vim.keymap.set('n', '<leader>ww', function()
+        vim.cmd('lcd ~/.vimwiki')
+        vim.cmd('VimwikiIndex')
+      end)
+
       vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = "*/diary/[0-9-]*.{wiki,md}", callback = function()
         local template = {}
         local today = os.date("!%Y-%m-%d")
