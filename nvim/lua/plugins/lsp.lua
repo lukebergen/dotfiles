@@ -19,7 +19,33 @@ vim.keymap.set('n', "<leader>d", function()
     source = "if_many",
     close_events = {"CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave"},
   })
-end)
+end, {noremap = true, desc = "show [d]iagnostic for error under cursor"})
+
+vim.keymap.set('n', "<leader>xd", function()
+  if not os.getenv("COPILOT_AVAILABLE") then
+    print("CopilotChat not available")
+    return
+  end
+  local cursorPos = vim.api.nvim_win_get_cursor(0)
+  local lineNr = cursorPos[1]
+  -- local colNr = cursorPos[2] -- TODO: multiple diags per line
+  local diags = vim.diagnostic.get(0, {lnum = lineNr - 1})
+  if diags and diags[1] then
+    local first = diags[1]
+    local cop = require("CopilotChat")
+    local select = require("CopilotChat.select")
+    cop.ask("why am I getting this error?\n\n" .. first.message, {
+      --headless = true,
+      clear_chat_on_new_prompt = true,
+      show_help = false,
+      show_folds = false,
+      selection = function(source) return select.line(source) end,
+      window = {
+        layout = "float"
+      }
+    })
+  end
+end, {noremap = true, desc = "ask CopilotChat about [d]iagnostic"})
 
 --vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
 --  if not (result and result.contents) then

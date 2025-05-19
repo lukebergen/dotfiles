@@ -1,7 +1,10 @@
 -- some days you feel like a keymap
-vim.keymap.set({'n', 'v'}, '<leader>xc', function()
+vim.keymap.set({'n', 'v'}, '<leader>xct', function()
   require("CopilotChat").toggle()
-end, { desc = "CopilotChat - Quick chat" })
+end, { desc = "[c]opilotChat - [t]oggle" })
+vim.keymap.set({'n', 'v'}, '<leader>xcr', function()
+  require("CopilotChat").reset()
+end, { desc = "[c]opilotChat - [r]eset" })
 
 -- some days you feel like a command
 vim.api.nvim_create_user_command("CC", function()
