@@ -5,20 +5,29 @@ vim.api.nvim_create_user_command('Rg', 'silent! grep! <args>|botright cwindow|se
 vim.api.nvim_create_user_command('Json', function()
   vim.opt.syntax = "json"
   vim.cmd("%!jq -S .")
-end, {})
+end, {desc = 'Convert & format buffer for json'})
 
 vim.api.nvim_create_user_command('Xml', function()
   vim.opt.syntax = "xml"
   vim.cmd("%!xmllint --format --recover -")
-end, {})
+end, {desc = 'Convert & format buffer for xml'})
+
+vim.api.nvim_create_user_command('Html', function()
+  vim.opt.syntax = "html"
+  -- if complains, consider additional blocklevel-tags. Or dig furhter
+  local block_tags = "article,aside,details,figcaption,figure,footer,header,main,mark,nav,section,summary,time"
+  local inline_tags = "time,mark"
+  local cmd = "silent! %!tidy -i -wrap 120 -q --show-body-only yes --show-warnings no --doctype omit --new-blocklevel-tags " .. block_tags .. " --new-inline-tags " .. inline_tags
+  vim.cmd(cmd)
+end, {desc = 'Convert & format buffer for html'})
 
 vim.api.nvim_create_user_command('Hex', function()
   vim.cmd("%!xxd")
-end, {})
+end, {desc = 'Convert & format buffer for hex'})
 
 vim.api.nvim_create_user_command('Nohex', function()
   vim.cmd("%!xxd -r")
-end, {})
+end, {desc = 'Convert & format buffer for back to text (from hex)'})
 
 vim.api.nvim_create_user_command('ClearVirt', function()
   vim.api.nvim_buf_clear_namespace(0, -1, 0, -1)
