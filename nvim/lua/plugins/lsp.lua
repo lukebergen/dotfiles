@@ -21,7 +21,7 @@ vim.keymap.set('n', "<leader>d", function()
   })
 end, {noremap = true, desc = "show [d]iagnostic for error under cursor"})
 
-vim.keymap.set('n', "<leader>xd", function()
+vim.keymap.set('n', "<leader>xcd", function()
   if not os.getenv("COPILOT_AVAILABLE") then
     print("CopilotChat not available")
     return
