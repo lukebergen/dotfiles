@@ -17,6 +17,15 @@ This is easily one of the more complicated sections of this dotfiles repo. So gi
   - styles.lua    - defunct. Using nightfox colorscheme now (long-term dreams of making my own custom colorscheme with lush.nvim)
 - syntax/         - defunct. Was only using it for plantuml syntax definitions. But we handle that with treesitter and a plantuml specific plugin
 
+## General Keymaps Pattern
+
+- Common AND used in rapid sequence (e.g. navigating splits): C-<whatever>
+- Common but typically used once (tab navigation, create split, etc): <leader>-<whatever>
+- Less common (toggle relative line numbers, toggle whitespace visibility, etc): <leader>-x-<whatever>
+- More or less common but a family of things (like telescope over lots of types of searches): <leader>-<family-key>-<whaever> (e.g. <leader>-f-f for find files)
+  - in general, make <leader>-<family-key>-<family-key> something useful. Kind of like a "main function"
+- Less common than any of above OR "family" of functions is starting to feel like parameters: just make it a user command
+
 ## Plugins
 
 ### Random notes

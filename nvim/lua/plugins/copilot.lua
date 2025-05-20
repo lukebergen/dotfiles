@@ -1,7 +1,7 @@
 -- some days you feel like a keymap
-vim.keymap.set({'n', 'v'}, '<leader>xct', function()
+vim.keymap.set({'n', 'v'}, '<leader>xcc', function()
   require("CopilotChat").toggle()
-end, { desc = "[c]opilotChat - [t]oggle" })
+end, { desc = "[c]opilotChat - toggle" })
 vim.keymap.set({'n', 'v'}, '<leader>xcr', function()
   require("CopilotChat").reset()
 end, { desc = "[c]opilotChat - [r]eset" })
