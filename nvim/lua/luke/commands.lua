@@ -31,12 +31,19 @@ end, {desc = 'Convert & format buffer for back to text (from hex)'})
 
 vim.api.nvim_create_user_command('ClearVirt', function()
   vim.api.nvim_buf_clear_namespace(0, -1, 0, -1)
-end, {})
+end, {desc = 'Clear Virtual text'})
 
 vim.api.nvim_create_user_command("RC", function()
   vim.cmd('lcd ~/.dotfiles/nvim')
   vim.cmd('e .')
-end, {})
+end, {desc = 'Reload [R][C]'})
+
+vim.api.nvim_create_user_command('CT', function()
+  local windows = vim.api.nvim_tabpage_list_wins(0)
+  for _, win in ipairs(windows) do
+    vim.api.nvim_win_close(win, true) -- Close each window forcefully
+  end
+end, {desc = '[C]lose all splits in [T]ab'})
 
 vim.api.nvim_create_user_command('VimwikiDiaryGenerateIndex', function()
   vim.cmd("VimwikiDiaryIndex")
