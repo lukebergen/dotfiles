@@ -89,3 +89,33 @@ vim.keymap.set("v", "<C-K>", function()
   local count = vim.v.count1
   return string.format(":m '<-%d<CR>gv=gv", count + 1)
 end, { expr = true })
+
+local crosshair_mode = {
+  enabled = false,
+  original_highlight = {
+    line = vim.api.nvim_get_hl(0, {name = "CursorLine" }),
+    col = vim.api.nvim_get_hl(0, {name = "CursorColumn" }),
+  },
+  crosshair_highlight = {
+    line = {bg = "#cb7985", fg = "#000000" },
+    col = {bg = "#cb7985", fg = "#000000" },
+  }
+}
+vim.keymap.set("n", "<C-=>", function()
+  crosshair_mode.enabled = not crosshair_mode.enabled
+  if crosshair_mode.enabled then
+    print("enabled true")
+    vim.opt.cursorline = true
+    vim.opt.cursorcolumn = true
+
+    vim.api.nvim_set_hl(0, "CursorLine", crosshair_mode.crosshair_highlight.line)
+    vim.api.nvim_set_hl(0, "CursorColumn", crosshair_mode.crosshair_highlight.col)
+  else
+    print("enabled false")
+    vim.opt.cursorline = true
+    vim.opt.cursorcolumn = false
+
+    vim.api.nvim_set_hl(0, "CursorLine", crosshair_mode.original_highlight.line)
+    vim.api.nvim_set_hl(0, "CursorColumn", crosshair_mode.original_highlight.col)
+  end
+end, {desc = 'toggle cursor crosshair mode'})
