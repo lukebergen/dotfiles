@@ -16,7 +16,10 @@ return {
         enable = true,
       },
       -- Enable indentation
-      indent = { enable = true },
+      indent = {
+        enable = true,
+        disable = { "tsx" },
+      },
       -- Ensure these language parsers are installed
       ensure_installed = {
         "c",
