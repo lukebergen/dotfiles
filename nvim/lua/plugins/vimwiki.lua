@@ -33,7 +33,11 @@ return {
 
       -- to keymap:
       vim.keymap.set('n', '<leader>ww', function()
-        vim.cmd('lcd ~/.vimwiki')
+        if (os.getenv("WIKI_FORMAT") == "md") then
+          vim.cmd('lcd ~/.vimwiki-md')
+        else
+          vim.cmd('lcd ~/.vimwiki')
+        end
         vim.cmd('VimwikiIndex')
       end)
 

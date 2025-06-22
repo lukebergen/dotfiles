@@ -56,7 +56,7 @@ alias fix_video="sudo killall VDCAssistant"
 alias fix_audio="sudo killall coreaudiod"
 alias R="R --silent"
 alias vimx='vim -x --cmd "set cryptmethod=blowfish2" --cmd "set nobackup" --cmd "set noswapfile" --cmd "set viminfo=\"\"" -u NONE'
-alias vimw="nvim -c 'VimwikiIndex'"
+alias vimw="nvim -c 'normal ,ww'"
 alias vim="nvim"
 alias oldvim="command vim"
 alias dockclean='docker rm $(docker ps -a -q -f status=exited); docker rmi $(docker images -f "dangling=true" -q)'
@@ -69,11 +69,9 @@ alias ibrew="arch -x86_64 /usr/local/bin/brew"
 alias trustbin="sudo xattr -dr com.apple.quarantine $1"
 alias clearhist='echo -e "\033c"'
 
-DEFAULT_OLLAMA_MODEL='llama3.2:latest'
+DEFAULT_OLLAMA_MODEL='quen3:8b' #'llama3.2:latest'
 DEFAULT_OLLAMA_CODE_MODEL='codellama:latest'
 alias ol="ollama run $DEFAULT_OLLAMA_MODEL"  # default
-alias ols='ollama run $DEFAULT_OLLAMA_MODEL "Answer succinctly and concisely in as few words as reasonable\n\n"' # *s*hort
-alias olc='ollama run $DEFAULT_OLLAMA_CODE_MODEL "Answer succinctly and concisely in as few words as resonable\n\n"' # *c*ode
 
 # nothing is coming up as clean as I want it. there just isn't that much to improve upon cmd+tab to a term window and running vim + CC
 #alias assist_win='/opt/homebrew/bin/kitty --config ~/.config/kitty/float.conf > /dev/null 2>&1 & echo $! > ~/.local/state/kitty/assist.pid'

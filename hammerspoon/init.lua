@@ -62,10 +62,6 @@ commands.shrug = function()
   hs.eventtap.keyStrokes("¯\\_(ツ)_/¯")
 end
 
-commands.sillytime = function()
-  silly.toggle()
-end
-
 hs.hotkey.bind({"alt"}, "space", function()
   local command = ""
   local alert = hs.alert("", 9999)
@@ -299,13 +295,19 @@ local function createCanvas()
   myCanvas:show()
 end
 
-local function toggleCanvas()
-    if myCanvas then
-        myCanvas:delete()
-        myCanvas = nil
-    else
-        createCanvas()
-    end
+-- just having some fun
+
+commands.sillytime = function()
+  silly.toggle()
 end
 
-hs.hotkey.bind({"cmd", "alt"}, "C", toggleCanvas)
+-- local function toggleCanvas()
+--     if myCanvas then
+--         myCanvas:delete()
+--         myCanvas = nil
+--     else
+--         createCanvas()
+--     end
+-- end
+--
+-- hs.hotkey.bind({"cmd", "alt"}, "C", toggleCanvas)
