@@ -20,6 +20,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.scrolloff = 3
 vim.opt.listchars = { tab = '▸ ', trail = '·', extends = '>', precedes = '<', space = '·' }
+vim.opt.swapfile = false
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "help",
