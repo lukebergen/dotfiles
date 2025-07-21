@@ -41,6 +41,10 @@ return {
         vim.cmd('VimwikiIndex')
       end)
 
+      vim.keymap.set('n', '<C-Space>', function()
+        vim.cmd('VimwikiToggleListItem')
+      end)
+
       vim.api.nvim_create_autocmd({"BufNewFile"}, {pattern = "*/diary/[0-9-]*.{wiki,md}", callback = function()
         local template = {}
         local today = os.date("!%Y-%m-%d")
