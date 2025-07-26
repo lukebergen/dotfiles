@@ -5,6 +5,7 @@ return {
     -- ⚠️ must add this setting! ! !
     build = "make",
     event = "VeryLazy",
+    enabled = false,
     version = false, -- Never set this value to "*"! Never!
     ---@module 'avante'
     ---@type avante.Config
@@ -12,7 +13,7 @@ return {
       -- add any opts here
       -- for example
       provider = "copilot",
-     providers = {
+      providers = {
        copilot = {
          model = "gpt-4o"
        },
@@ -51,6 +52,11 @@ return {
         ask = {
         },
       },
+      selector = {
+        --- @alias avante.SelectorProvider "native" | "fzf_lua" | "mini_pick" | "snacks" | "telescope" | fun(selector: avante.ui.Selector): nil
+        --- @type avante.SelectorProvider
+        provider = "telescope",
+      },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -81,14 +87,14 @@ return {
       --    },
       --  },
       --},
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-      },
+      --{
+      --  -- Make sure to set this up properly if you have lazy=true
+      --  'MeanderingProgrammer/render-markdown.nvim',
+      --  opts = {
+      --    file_types = { "markdown", "Avante" },
+      --  },
+      --  ft = { "markdown", "Avante" },
+      --},
     },
   }
 }
