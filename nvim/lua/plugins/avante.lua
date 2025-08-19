@@ -7,6 +7,7 @@ return {
     event = "VeryLazy",
     enabled = false,
     version = false, -- Never set this value to "*"! Never!
+    enabled = false,
     ---@module 'avante'
     ---@type avante.Config
     opts = {
@@ -45,6 +46,9 @@ return {
           enabled = true,
         },
         input = {
+          height = 10,
+        },
+        todos = { -- these don't actually work. See if there's some other way to do this
           height = 10,
         },
         edit = {

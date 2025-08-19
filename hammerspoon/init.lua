@@ -31,12 +31,42 @@ end)
 --  assist.toggle()
 --end)
 
--- used by clipboard thing but reload command also references this so need to delcar it higher up
-local registers = hs.settings.get("registers") or {}
+-- TODO: this would be neat
+--hs.hotkey.bind({"cmd", "shift"}, "c", function()
+--  local chrome = hs.application.get("Google Chrome")
+--  if chrome then
+--    local copilotWin = hs.fnutils.find(chrome:allWindows(), function(win)
+--      print("title: " .. win:title())
+--      return win:title() == "Microsoft 365 Copilot Chat - Google Chrome"
+--    end)
+--    if copilotWin then
+--      if copilotWin:isVisible() then
+--        if not copilotWin:isFocused() then
+--          copilotWin:moveToScreen(hs.screen.mainScreen()) -- Move to current desktop
+--          copilotWin:raise()
+--          copilotWin:focus()
+--        end
+--      else
+--        copilotWin:unminimize()
+--        copilotWin:moveToScreen(hs.screen.mainScreen()) -- Move to current desktop
+--        copilotWin:raise()
+--        copilotWin:focus()
+--      end
+--    else
+--      hs.alert("No 'Copilot' window found")
+--    end
+--  else
+--    hs.alert("Google Chrome is not running")
+--  end
+--end)
 
 ---------------------
 -- commander thing --
 ---------------------
+
+-- used by clipboard thing but reload command also references this so need to delcar it higher up
+local registers = hs.settings.get("registers") or {}
+
 local commands = {}
 commands.zoom = function()
   local zoomApp = hs.application.open("zoom.us", 3, true)
