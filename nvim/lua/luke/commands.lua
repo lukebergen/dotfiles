@@ -1,6 +1,24 @@
 -- honestly, are we really going to use this that much? Start using <leader>fg
 -- actually, I think so. <Leader>fg is nice for if you're looking for one specific thing. Rg is useful for if you want to make changes across a bunch of places (and will want your full editor space for each change (using ]q and [q to move between matches in quickfix window)
-vim.api.nvim_create_user_command('Rg', 'silent! grep! <args>|botright cwindow|setlocal nocursorline|redraw!', {nargs = '+', complete = 'file', bar = true})
+--vim.api.nvim_create_user_command('Rg', 'silent! grep! <args>|botright cwindow|setlocal nocursorline|redraw!', {nargs = '+', complete = 'file', bar = true})
+vim.api.nvim_create_user_command('Rg', function(opts)
+  local args = opts.fargs
+  local search_term = args[1]
+  local sub_dir = args[2] or "."
+
+  if not search_term then
+    print("Usage: :Rg <search_term> [sub_dir]")
+    return
+  end
+
+  local cmd = string.format("rg --vimgrep %s %s", search_term, vim.fn.shellescape(sub_dir))
+  vim.fn.setqflist({}, 'r', { title = 'Ripgrep Search', lines = vim.fn.systemlist(cmd) })
+  vim.cmd("botright cwindow")
+end, {
+  nargs = "+",
+  complete = "file",
+  desc = "Search for a pattern using ripgrep with optional sub-directory"
+})
 
 vim.api.nvim_create_user_command('Json', function()
   vim.opt.syntax = "json"
