@@ -8,6 +8,9 @@ cd
 source ~/.dotfiles/zsh/themes/luke-bergen.zsh
 source ~/.dotfiles/zsh/env
 
+# set cursor to block
+echo -ne '\e[2 q'
+
 # Python stuff
 #export WORKON_HOME=~/.python-envs
 #source /usr/local/bin/virtualenvwrapper.sh
@@ -62,16 +65,21 @@ alias oldvim="command vim"
 alias dockclean='docker rm $(docker ps -a -q -f status=exited); docker rmi $(docker images -f "dangling=true" -q)'
 alias xml_pp='xmllint --format -'
 alias pcp="rsync -r --progress"
-alias ctags="`brew --prefix`/bin/ctags"
+#alias ctags="`brew --prefix`/bin/ctags"
 alias rgf='rg --files | rg'
 alias ver="vercel"
-alias ibrew="arch -x86_64 /usr/local/bin/brew"
+#alias ibrew="arch -x86_64 /usr/local/bin/brew"
 alias trustbin="sudo xattr -dr com.apple.quarantine $1"
 alias clearhist='echo -e "\033c"'
 
 DEFAULT_OLLAMA_MODEL='quen3:8b' #'llama3.2:latest'
 DEFAULT_OLLAMA_CODE_MODEL='codellama:latest'
 alias ol="ollama run $DEFAULT_OLLAMA_MODEL"  # default
+
+# hyprland specific stuff
+alias rewaybar='pkill waybar; nohup waybar > /dev/null 2>&1 & disown'
+alias hyp0='hyprctl keyword decoration:active_opacity 1.0'
+alias hyp9='hyprctl keyword decoration:active_opacity 0.95'
 
 # nothing is coming up as clean as I want it. there just isn't that much to improve upon cmd+tab to a term window and running vim + CC
 #alias assist_win='/opt/homebrew/bin/kitty --config ~/.config/kitty/float.conf > /dev/null 2>&1 & echo $! > ~/.local/state/kitty/assist.pid'
@@ -149,10 +157,12 @@ unsetopt share_history
 # TODO: Need a better way to do this. Maybe git submodules?
 source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+source /usr/share/nvm/init-nvm.sh
+
 source <(fzf --zsh)
 
 # Load auto-jump
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+#[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # So I don't forget about this again. jp foo will jump to any directory _within_ the current directory
 # So for example, while in code `jp foo` will jump to the best match within foo/** instead of to
@@ -197,3 +207,29 @@ stty sane
 # This section can be safely removed at any time if needed.
 #[[ ! -r '/Users/lukebergen/.opam/opam-init/init.zsh' ]] || source '/Users/lukebergen/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
 # END opam configuration
+
+# bun completions
+[ -s "/home/luke/.bun/_bun" ] && source "/home/luke/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+# TODO: variablize this based on an env or something
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+#__conda_setup="$('/home/luke/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+#else
+#    if [ -f "/home/luke/miniconda3/etc/profile.d/conda.sh" ]; then
+#        . "/home/luke/miniconda3/etc/profile.d/conda.sh"
+#    else
+#        export PATH="/home/luke/miniconda3/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
+# <<< conda initialize <<<
+

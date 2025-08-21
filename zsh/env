@@ -3,7 +3,7 @@ export XDG_CONFIG_HOME=~/.config/
 export XDG_DATA_HOME=~/.local/share/
 
 # currently only used by SDL2
-export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/lib:/usr/local/lib"
+#export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/lib:/usr/local/lib"
 
 # PATH setup
 export PATH="$HOME/.local/earlyBin:$PATH"  # careful with this. Anything in this directory will get priority over everything including system junk
@@ -25,8 +25,8 @@ export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@14/bin:$PATH"
 
 # Go stuff
-export GOPATH=$HOME/code/go
-export GOROOT=/usr/local/opt/go/libexec
+#export GOPATH=$HOME/code/go
+#export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
