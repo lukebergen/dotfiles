@@ -151,21 +151,22 @@ source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 
 source <(fzf --zsh)
 
+alias j="echo 'trying zoxide. Remember?' && return"
 # Load auto-jump
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
-
-# So I don't forget about this again. jp foo will jump to any directory _within_ the current directory
-# So for example, while in code `jp foo` will jump to the best match within foo/** instead of to
-# an even higher weighted "foo" directory that's somewhere else on the filesystem
-jp() {
-  pushd -q $(pwd)
-  if [[ ${1} == -* ]] && [[ ${1} != "--" ]]; then
-    autojump ${@}
-    return
-  else
-    j $(pwd) ${@}
-  fi
-}
+#[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+#
+## So I don't forget about this again. jp foo will jump to any directory _within_ the current directory
+## So for example, while in code `jp foo` will jump to the best match within foo/** instead of to
+## an even higher weighted "foo" directory that's somewhere else on the filesystem
+#jp() {
+#  pushd -q $(pwd)
+#  if [[ ${1} == -* ]] && [[ ${1} != "--" ]]; then
+#    autojump ${@}
+#    return
+#  else
+#    j $(pwd) ${@}
+#  fi
+#}
 
 # normally when you quit `yazi` it leaves you right where you started. But if you start it with `y`
 # while in yazi, `q` will quit and set the cwd to wherever you were. `Q` exits yazi normally
@@ -182,7 +183,7 @@ function n() {
   node -e "console.log($*)"
 }
 
-command -v zoxide &> /dev/null && eval "$(zoxide init zsh)"
+command -v zoxide &> /dev/null && eval "$(zoxide init --cmd cd zsh)"
 
 # This fixes the <enter> inserting ^M instead of actually sending enter to some programs issue that came up for god knows what reason
 stty icrnl
