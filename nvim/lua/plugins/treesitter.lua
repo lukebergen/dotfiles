@@ -26,7 +26,7 @@ return {
         "cpp",
         "csv",
         "comment",
-        "html",
+        --"html",
         "javascript",
         "typescript",
         "tsx",
