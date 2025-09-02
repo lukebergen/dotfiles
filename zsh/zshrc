@@ -196,6 +196,8 @@ function n() {
 
 command -v zoxide &> /dev/null && eval "$(zoxide init --cmd cd zsh)"
 
+alias pbcopy='xsel --clipboard --input'
+
 # This fixes the <enter> inserting ^M instead of actually sending enter to some programs issue that came up for god knows what reason
 stty icrnl
 stty sane
