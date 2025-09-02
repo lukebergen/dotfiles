@@ -17,6 +17,9 @@ echo -ne '\e[2 q'
 alias pip=pip3
 alias python=python3
 
+# override the insecure one to be actually secure to make it so everywhere else just works correctly
+alias node_insecure=node
+
 # Ignore commands that start with a space (curling with passwords, etc...)
 setopt HIST_IGNORE_SPACE
 setopt CHASE_LINKS
