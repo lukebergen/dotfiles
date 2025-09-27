@@ -183,7 +183,7 @@ function n() {
   node -e "console.log($*)"
 }
 
-command -v zoxide &> /dev/null && eval "$(zoxide init --cmd cd zsh)"
+command -v zoxide &> /dev/null && eval "$(zoxide init --cmd z zsh)"
 
 # This fixes the <enter> inserting ^M instead of actually sending enter to some programs issue that came up for god knows what reason
 stty icrnl
