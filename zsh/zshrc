@@ -14,6 +14,9 @@ source ~/.dotfiles/zsh/env
 alias pip=pip3
 alias python=python3
 
+export VIRTUAL_ENV_DISABLE_PROMPT=true
+source ~/code/venv/bin/activate
+
 # Ignore commands that start with a space (curling with passwords, etc...)
 setopt HIST_IGNORE_SPACE
 setopt CHASE_LINKS
