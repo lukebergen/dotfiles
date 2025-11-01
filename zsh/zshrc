@@ -21,6 +21,8 @@ alias python=python3
 
 # override the insecure one to be actually secure to make it so everywhere else just works correctly
 alias node_insecure=node
+export VIRTUAL_ENV_DISABLE_PROMPT=true
+source ~/code/venv/bin/activate
 
 # Ignore commands that start with a space (curling with passwords, etc...)
 setopt HIST_IGNORE_SPACE

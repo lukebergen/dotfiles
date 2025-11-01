@@ -4,7 +4,7 @@
 --vim.api.nvim_create_user_command('Rg', 'silent! grep! <args>|botright cwindow|setlocal nocursorline|redraw!', {nargs = '+', complete = 'file', bar = true})
 
 vim.api.nvim_create_user_command('Rg', function(opts)
-  local cmd = string.format("rg --vimgrep %s", opts.args)
+  local cmd = string.format("rg -i --vimgrep %s", opts.args)
   local result = vim.fn.system(cmd)
   local lines = vim.split(result, '\n')
 
