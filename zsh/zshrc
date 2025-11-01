@@ -11,6 +11,8 @@ source ~/.dotfiles/zsh/env
 # set cursor to block
 echo -ne '\e[2 q'
 
+alias upgrade-system='pacman -Syu'
+
 # Python stuff
 #export WORKON_HOME=~/.python-envs
 #source /usr/local/bin/virtualenvwrapper.sh
@@ -81,8 +83,8 @@ alias ol="ollama run $DEFAULT_OLLAMA_MODEL"  # default
 
 # hyprland specific stuff
 alias rewaybar='pkill waybar; nohup waybar > /dev/null 2>&1 & disown'
-alias hyp0='hyprctl keyword decoration:active_opacity 1.0'
-alias hyp9='hyprctl keyword decoration:active_opacity 0.95'
+alias hypT='hyprctl keyword decoration:active_opacity 1.0; hyprctl keyword decoration:inactive_opacity 0.9'
+alias hyp-T='hyprctl keyword decoration:active_opacity 1.0; hyprctl keyword decoration:inactive_opacity 1.0'
 
 # nothing is coming up as clean as I want it. there just isn't that much to improve upon cmd+tab to a term window and running vim + CC
 #alias assist_win='/opt/homebrew/bin/kitty --config ~/.config/kitty/float.conf > /dev/null 2>&1 & echo $! > ~/.local/state/kitty/assist.pid'
@@ -134,18 +136,23 @@ function rc() {
   fi
 }
 
-function task() {
-  if [ "$1" = "ls" ] || [ "$1" = "" ]
-  then
-    for f in ~/Documents/taskell/*.md; do
-      echo "- $(basename $f .md)"
-    done
-  else
-    pushd ~ > /dev/null
-    taskell "Documents/taskell/$1.md"
-    popd > /dev/null
-  fi
-}
+# taskwarrior
+alias t=task
+alias ttui=taskwarrior-tui
+
+# taskell
+#function task() {
+#  if [ "$1" = "ls" ] || [ "$1" = "" ]
+#  then
+#    for f in ~/Documents/taskell/*.md; do
+#      echo "- $(basename $f .md)"
+#    done
+#  else
+#    pushd ~ > /dev/null
+#    taskell "Documents/taskell/$1.md"
+#    popd > /dev/null
+#  fi
+#}
 
 # miscelanious configuration stuff
 #export PGDATA="/usr/local/var/postgres"
@@ -162,7 +169,7 @@ source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 
 source /usr/share/nvm/init-nvm.sh
 
-source <(fzf --zsh)
+#source <(fzf --zsh)
 
 alias j="echo 'trying zoxide. Remember?' && return"
 # Load auto-jump
