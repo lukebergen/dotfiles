@@ -186,6 +186,30 @@ function n() {
   node -e "console.log($*)"
 }
 
+function msc() {
+  local script_name
+  local description
+
+  if [ $# -eq 1 ]; then
+    script_name="script"
+    description="$1"
+  elif [ $# -eq 2 ]; then
+    script_name="$1"
+    description="$2"
+  else
+    echo "usage: msc [script-name] <description>"
+    return 1
+  fi
+
+  if [[ ! "$script_name" =~ ^[a-zA-Z0-9_-]{1,50}$ ]]; then
+    echo "usage: msc [script-name] <description>"
+    echo "  script-name must be a short filename (letters, numbers, _, - only)"
+    return 1
+  fi
+
+  claude --allowedTools "Read,Write" -p "Create a bun script in the current directory and do nothing else. When done, also print out the content of the script verbatim and no other text. The name of the script should be $script_name.ts and the script should do the following: $description"
+}
+
 command -v zoxide &> /dev/null && eval "$(zoxide init --cmd z zsh)"
 
 # This fixes the <enter> inserting ^M instead of actually sending enter to some programs issue that came up for god knows what reason

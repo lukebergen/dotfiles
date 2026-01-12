@@ -4,6 +4,8 @@
 -- `ioreg -l -w 0 | grep SecureInput`
 -- See this for best info on this issue: https://github.com/Hammerspoon/hammerspoon/issues/1743#issuecomment-631598824
 
+local spaces = require("hs.spaces") -- Ensure the spaces module is loaded
+
 local utils = require("utils")
 local canvas = require("hs.canvas")
 local silly = require("silly")
@@ -26,6 +28,33 @@ hs.hotkey.bind({"alt", "ctrl"}, "space", function()
     hs.spotify.playpause()
   end
 end)
+
+-- TODO: new version of "this would be neat" from block below.
+-- There's a native app, does that help? Not so much
+--hs.hotkey.bind({"cmd"}, "p", function()
+--  local app = hs.application.get("Microsoft 365 Copilot")
+--  if app then
+--    local window = app:mainWindow()
+--    if window then
+--      if window:isVisible() then
+--        app:hide()
+--      else
+--        app:unhide()
+--
+--        local currentSpace = spaces.focusedSpace()
+--        if currentSpace then
+--          spaces.moveWindowToSpace(window:id(), currentSpace)
+--        end
+--
+--        window:focus()
+--      end
+--    else
+--      hs.alert.show("No main window found for the application")
+--    end
+--  else
+--    hs.alert.show("Application not found")
+--  end
+--end)
 
 --hs.hotkey.bind({"alt"}, "`", function()
 --  assist.toggle()

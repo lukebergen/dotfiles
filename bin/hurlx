@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+hurl --variables-file "/Users/MM11499/hurl/.hurl.variables" --secrets-file "/Users/MM11499/hurl/.hurl.secrets" "$@"

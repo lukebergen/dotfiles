@@ -9,6 +9,8 @@ vim.diagnostic.config({
 })
 
 vim.keymap.set('n', "<leader>d", function()
+  local before_wins = vim.api.nvim_list_wins()
+
   vim.diagnostic.open_float(nil, {
     focusable = false,
     header = "",
@@ -17,9 +19,42 @@ vim.keymap.set('n', "<leader>d", function()
     --border = {""},
     scope = "cursor",
     source = "if_many",
-    close_events = {"CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave"},
+    --close_events = {"CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave"},
+    close_events = {"CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre"},
   })
+
+  -- Get the list of windows after opening the diagnostic float
+  local after_wins = vim.api.nvim_list_wins()
+
+print(vim.inspect(before_wins))
+print(vim.inspect(after_wins))
+
+  vim.g.last_float_win = nil
+  local it = "NONE"
+  -- Find the new floating window
+  for _, win in ipairs(after_wins) do
+    if not vim.tbl_contains(before_wins, win) then
+      it = win
+      vim.g.last_float_win = win
+    end
+  end
+
+  print("made it to after. last_float_win: " .. it)
+
+  -- If no new window is found, clear the stored window ID
+  --vim.g.last_float_win = nil
 end, {noremap = true, desc = "show [d]iagnostic for error under cursor"})
+
+vim.keymap.set('n', "<leader>xd", function()
+  local float_win = vim.g.last_float_win
+  print("last float: " .. vim.g.last_float_win)
+  if float_win and vim.api.nvim_win_is_valid(float_win) then
+    print("inside if. Thing: " .. float_win)
+    vim.api.nvim_set_current_win(float_win)  -- Focus the floating window
+  else
+    vim.notify("No valid floating window to focus", vim.log.levels.WARN)
+  end
+end, {noremap = true, desc = "toggle focus to floating window"})
 
 vim.keymap.set('n', "<leader>xcd", function()
   if not os.getenv("COPILOT_AVAILABLE") then
