@@ -184,20 +184,35 @@ end)
 -- State-based clipboard register system
 local clipboardState = {
   action = nil,  -- "copy", "paste", or "recopy"
-  timer = nil    -- hs.timer object for 5s timeout
+  timer = nil,   -- hs.timer object for 5s timeout
+  hotkeys = {}   -- table to store register hotkey objects
 }
+
+local function disableRegisterHotkeys()
+  for _, hotkey in pairs(clipboardState.hotkeys) do
+    hotkey:disable()
+  end
+end
+
+local function enableRegisterHotkeys()
+  for _, hotkey in pairs(clipboardState.hotkeys) do
+    hotkey:enable()
+  end
+end
 
 local function resetClipboardState()
   if clipboardState.timer then
     clipboardState.timer:stop()
     clipboardState.timer = nil
   end
+  disableRegisterHotkeys()
   clipboardState.action = nil
 end
 
 local function setClipboardAction(actionName)
   resetClipboardState()
   clipboardState.action = actionName
+  enableRegisterHotkeys()
   clipboardState.timer = hs.timer.doAfter(5, resetClipboardState)
 end
 
@@ -248,19 +263,19 @@ local function handleRegisterAction(char)
 end
 
 -- Action trigger bindings
-hs.hotkey.bind({"cmd", "shift"}, "c", function()
+hs.hotkey.bind({"cmd", "ctrl"}, "c", function()
   setClipboardAction("copy")
 end)
 
-hs.hotkey.bind({"cmd", "shift"}, "v", function()
+hs.hotkey.bind({"cmd", "ctrl"}, "v", function()
   setClipboardAction("paste")
 end)
 
-hs.hotkey.bind({"cmd", "shift"}, "x", function()
+hs.hotkey.bind({"cmd", "ctrl"}, "x", function()
   setClipboardAction("recopy")
 end)
 
-hs.hotkey.bind({"cmd", "shift"}, "escape", function()
+hs.hotkey.bind({"cmd", "ctrl"}, "escape", function()
   resetClipboardState()
 end)
 
@@ -271,8 +286,9 @@ local registerLetters = {
   "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
 }
 
+-- Create register hotkeys as disabled by default
 hs.fnutils.each(registerLetters, function(char)
-  hs.hotkey.bind({"cmd", "shift"}, char, function()
+  clipboardState.hotkeys[char] = hs.hotkey.new({"cmd", "ctrl"}, char, function()
     handleRegisterAction(char)
   end)
 end)
