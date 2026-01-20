@@ -6,6 +6,8 @@
 
 local spaces = require("hs.spaces") -- Ensure the spaces module is loaded
 
+local hs = hs
+
 local utils = require("utils")
 local canvas = require("hs.canvas")
 local silly = require("silly")
@@ -23,11 +25,11 @@ end
 -------------
 -- hotkeys --
 -------------
-hs.hotkey.bind({"alt", "ctrl"}, "space", function()
-  if (hs.spotify.isRunning()) then
-    hs.spotify.playpause()
-  end
-end)
+--hs.hotkey.bind({"alt", "ctrl"}, "space", function()
+--  if (hs.spotify.isRunning()) then
+--    hs.spotify.playpause()
+--  end
+--end)
 
 -- TODO: new version of "this would be neat" from block below.
 -- There's a native app, does that help? Not so much
@@ -121,7 +123,7 @@ commands.shrug = function()
   hs.eventtap.keyStrokes("¯\\_(ツ)_/¯")
 end
 
-hs.hotkey.bind({"alt"}, "space", function()
+hs.hotkey.bind({"ctrl", "alt"}, "space", function()
   local command = ""
   local alert = hs.alert("", 9999)
   local et
@@ -156,7 +158,7 @@ end)
 --------------
 -- alt keys --
 --------------
-local s = hs.hotkey.modal.new('alt', 's')
+local s = hs.hotkey.modal.new({'ctrl', 'alt'}, 's')
 s:bind('', 'escape', function() s:exit() end)
 local map = {d = "◊", j = "👇", h = "👈", l = "👉", k = "👆"}
 for key, value in pairs(map) do
@@ -166,13 +168,121 @@ for key, value in pairs(map) do
   end)
 end
 
+
+hs.hotkey.bind({'ctrl', 'alt'}, 't', function()
+  hs.eventtap.keyStrokes("foobar")
+end)
+
+hs.hotkey.bind('ctrl', 't', function()
+  hs.eventtap.keyStrokes("foobar")
+end)
+
 --------------------------------
 -- register-like copy/pasting --
 --------------------------------
-local c = hs.hotkey.modal.new('alt', 'c') -- copy into following key
-local v = hs.hotkey.modal.new('alt', 'v') -- paste from following key
-local x = hs.hotkey.modal.new('alt', 'x') -- copy from following key into system clipboard
+
+-- State-based clipboard register system
+local clipboardState = {
+  action = nil,  -- "copy", "paste", or "recopy"
+  timer = nil    -- hs.timer object for 5s timeout
+}
+
+local function resetClipboardState()
+  if clipboardState.timer then
+    clipboardState.timer:stop()
+    clipboardState.timer = nil
+  end
+  clipboardState.action = nil
+end
+
+local function setClipboardAction(actionName)
+  resetClipboardState()
+  clipboardState.action = actionName
+  clipboardState.timer = hs.timer.doAfter(5, resetClipboardState)
+end
+
+local function performCopy(char)
+  local tempPasteboard = hs.pasteboard.getContents()
+  hs.eventtap.keyStroke("cmd", "c")
+  registers[char] = hs.pasteboard.getContents()
+  hs.pasteboard.setContents(tempPasteboard)
+  hs.settings.set("registers", utils.cleanRegisters(registers))
+end
+
+local function performPaste(char)
+  if not registers[char] then
+    return
+  end
+  local tempPasteboard = hs.pasteboard.getContents()
+  hs.pasteboard.setContents(registers[char])
+  hs.eventtap.keyStroke("cmd", "v")
+  hs.pasteboard.setContents(tempPasteboard)
+end
+
+local function performRecopy(char)
+  if not registers[char] then
+    return
+  end
+  local tempPasteboard = hs.pasteboard.getContents()
+  hs.pasteboard.setContents(registers[char])
+  hs.timer.doAfter(5, function()
+    hs.pasteboard.setContents(tempPasteboard)
+  end)
+end
+
+local function handleRegisterAction(char)
+  local action = clipboardState.action
+  if not action then
+    return
+  end
+
+  resetClipboardState()
+
+  if action == "copy" then
+    performCopy(char)
+  elseif action == "paste" then
+    performPaste(char)
+  elseif action == "recopy" then
+    performRecopy(char)
+  end
+end
+
+-- Action trigger bindings
+hs.hotkey.bind({"cmd", "shift"}, "c", function()
+  setClipboardAction("copy")
+end)
+
+hs.hotkey.bind({"cmd", "shift"}, "v", function()
+  setClipboardAction("paste")
+end)
+
+hs.hotkey.bind({"cmd", "shift"}, "x", function()
+  setClipboardAction("recopy")
+end)
+
+hs.hotkey.bind({"cmd", "shift"}, "escape", function()
+  resetClipboardState()
+end)
+
+-- Exclude c, v, x (used for action triggers)
+local registerLetters = {
+  "a", "b", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+  "n", "o", "p", "q", "r", "s", "t", "u", "w", "y", "z",
+  "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
+}
+
+hs.fnutils.each(registerLetters, function(char)
+  hs.hotkey.bind({"cmd", "shift"}, char, function()
+    handleRegisterAction(char)
+  end)
+end)
+
+--[[ OLD MODAL-BASED CLIPBOARD SYSTEM (deprecated: macOS broke modals)
+-- Kept for reference during transition period
 local registerLetters = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
+local c = hs.hotkey.modal.new({'ctrl', 'alt', 'shift'}, 'c') -- copy into following key
+local v = hs.hotkey.modal.new({'ctrl', 'alt', 'shift'}, 'v') -- paste from following key
+local x = hs.hotkey.modal.new({'ctrl', 'alt', 'shift'}, 'x') -- copy from following key into system clipboard
 
 c:bind('', 'escape', function() c:exit() end)
 v:bind('', 'escape', function() v:exit() end)
@@ -211,7 +321,9 @@ hs.fnutils.each(registerLetters, function(char)
     end)
   end)
 end)
+]]
 
+--[[ KITTY HOTKEY WINDOW (currently broken, commented out to avoid keybind conflict with clipboard recopy)
 -- very much still work in progress. Hence cmd+shift+x instead of cmd+shift+c. Still using iterm2
 -- for hotkey window for now I guess. But getting closer
 local originalFocus
@@ -262,6 +374,7 @@ hs.hotkey.bind({"cmd", "shift"}, "x", function()
   --  hs.application.launchOrFocus("kitty")
   end
 end)
+]]
 
 -- begin MM specific stuff (if applicable)
 local userChoices = safeRequire("mm-test-users") -- only local to MM machine
@@ -290,7 +403,7 @@ if userChoices then
     userChooser:query("")
   end)
 
-  hs.hotkey.bind({"alt"}, "u", function()
+  hs.hotkey.bind({"ctrl", "alt"}, "u", function()
     userChooser:show()
   end)
 end
