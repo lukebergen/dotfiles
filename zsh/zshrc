@@ -21,8 +21,8 @@ alias python=python3
 
 # override the insecure one to be actually secure to make it so everywhere else just works correctly
 alias node_insecure=node
-export VIRTUAL_ENV_DISABLE_PROMPT=true
-source ~/code/venv/bin/activate
+#export VIRTUAL_ENV_DISABLE_PROMPT=true
+#source ~/code/venv/bin/activate
 
 # Ignore commands that start with a space (curling with passwords, etc...)
 setopt HIST_IGNORE_SPACE
@@ -102,6 +102,10 @@ alias hyp-T='hyprctl keyword decoration:active_opacity 1.0; hyprctl keyword deco
 #}
 #zle -N ctrl_l
 #bindkey '^l' ctrl_l
+
+function msc() {
+  claude --allowedTools "Read,Write" -p "Create a bun script in the current directory and do nothing else. When done, also print out the content of the script verbatim and no other text. The name of the script should be $1.ts and the script should do the following: $2"
+}
 
 # *m*arkdown
 function olm() {

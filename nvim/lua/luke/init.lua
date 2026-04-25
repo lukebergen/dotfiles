@@ -5,6 +5,7 @@ end
 require("luke.commands")
 require("luke.keymaps")
 require("luke.misc")
+require("luke.claudething")
 
 local curl = require('plenary.curl')
 -- local json = require("lib.lunajson")
