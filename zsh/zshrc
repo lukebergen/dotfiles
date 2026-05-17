@@ -176,8 +176,6 @@ if [[ $(uname) == 'Linux' ]]; then
   source /usr/share/nvm/init-nvm.sh
 fi
 
-alias j="echo 'trying zoxide. Remember?' && return"
-
 # normally when you quit `yazi` it leaves you right where you started. But if you start it with `y`
 # while in yazi, `q` will quit and set the cwd to wherever you were. `Q` exits yazi normally
 function y() {
