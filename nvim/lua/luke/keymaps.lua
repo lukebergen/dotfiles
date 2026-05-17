@@ -25,6 +25,10 @@ vim.keymap.set('n', '<Leader>4', '4gt')
 vim.keymap.set('n', '<Leader>5', '5gt')
 vim.keymap.set('n', '<Leader>6', '6gt')
 
+-- special characters
+vim.keymap.set('i', '<C-,>', '«');
+vim.keymap.set('i', '<C-.>', '»');
+
 -- TODO: figure out why this sometimes causes results to look like `[1/50]` => `[3/50]` => `[3/50]` => `[5/50]` etc...
 -- better `n`
 -- Function to jump to the next search result with custom behavior
