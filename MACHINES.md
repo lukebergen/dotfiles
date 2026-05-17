@@ -47,6 +47,13 @@ The neovim config is now targeting nvim **0.12+** (treesitter config, `vim.uv` A
 - **Lappy** and **Work**: need to upgrade nvim before using this branch. Use your package manager
   (homebrew: `brew upgrade neovim`).
 
+`tree-sitter-cli` must also be installed before launching neovim — it's needed to compile treesitter
+parsers. It's in `Brewfile.base` but install it manually if you're not doing a full fresh setup:
+```
+brew install tree-sitter tree-sitter-cli
+```
+(`tree-sitter` is the library, `tree-sitter-cli` is the compiler — both are needed.)
+
 ---
 
 ## Vimwiki path change
