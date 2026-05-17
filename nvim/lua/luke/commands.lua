@@ -96,3 +96,66 @@ vim.api.nvim_create_user_command("Encrypt", function(opts)
   print(l)
   print(l2)
 end, {range = 1, desc = "Encrypt the visual selection with a passphrase"})
+
+local function encrypt_visual_selection()
+  -- Get the password securely
+  local password = vim.fn.inputsecret("password: ")
+  if password == "" then
+    print("Encryption cancelled: No password provided.")
+    return
+  end
+
+  -- Get the visually selected text
+  local start_pos = vim.fn.getpos("'<")
+  local end_pos = vim.fn.getpos("'>")
+  local lines = vim.fn.getline(start_pos[2], end_pos[2])
+  local selected_text = table.concat(lines, "\n")
+
+  -- Encrypt the text using openssl
+  local encrypted = vim.fn.system(
+    { "openssl", "enc", "-aes-256-cbc", "-pbkdf2", "-base64", "-pass", "pass:" .. password },
+    selected_text
+  )
+
+  -- Replace the visual selection with the encrypted text
+  local encrypted_lines = vim.split(encrypted, "\n", { plain = true })
+  vim.fn.setline(start_pos[2], encrypted_lines)
+  if #encrypted_lines < (end_pos[2] - start_pos[2] + 1) then
+    vim.fn.deletebufline(vim.fn.bufnr(), start_pos[2] + #encrypted_lines, end_pos[2])
+  end
+end
+
+local function decrypt_visual_selection()
+  -- Get the password securely
+  local password = vim.fn.inputsecret("password: ")
+  if password == "" then
+    print("Decryption cancelled: No password provided.")
+    return
+  end
+
+  -- Get the visually selected text
+  local start_pos = vim.fn.getpos("'<")
+  local end_pos = vim.fn.getpos("'>")
+  local lines = vim.fn.getline(start_pos[2], end_pos[2])
+  local selected_text = table.concat(lines, "\n")
+
+  -- Decrypt the text using openssl
+  local decrypted = vim.fn.system(
+    { "openssl", "enc", "-aes-256-cbc", "-pbkdf2", "-base64", "-d", "-pass", "pass:" .. password },
+    selected_text
+  )
+
+  -- Replace the visual selection with the decrypted text
+  local decrypted_lines = vim.split(decrypted, "\n", { plain = true })
+  vim.fn.setline(start_pos[2], decrypted_lines)
+
+  -- Adjust the range to delete only the remaining lines in the original selection
+  local lines_to_remove = (end_pos[2] - start_pos[2] + 1) - #decrypted_lines
+  if lines_to_remove > 0 then
+    vim.fn.deletebufline(vim.fn.bufnr(), start_pos[2] + #decrypted_lines, start_pos[2] + #decrypted_lines + lines_to_remove - 1)
+  end
+end
+
+-- Register the commands
+vim.api.nvim_create_user_command("Encrypt", encrypt_visual_selection, { range = true })
+vim.api.nvim_create_user_command("Decrypt", decrypt_visual_selection, { range = true })

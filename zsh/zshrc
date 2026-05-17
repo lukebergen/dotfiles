@@ -11,18 +11,15 @@ source ~/.dotfiles/zsh/env
 # set cursor to block
 echo -ne '\e[2 q'
 
-alias upgrade-system='pacman -Syu'
-
 # Python stuff
 #export WORKON_HOME=~/.python-envs
 #source /usr/local/bin/virtualenvwrapper.sh
 alias pip=pip3
 alias python=python3
+export VIRTUAL_ENV_DISABLE_PROMPT=true
 
 # override the insecure one to be actually secure to make it so everywhere else just works correctly
 alias node_insecure=node
-#export VIRTUAL_ENV_DISABLE_PROMPT=true
-#source ~/code/venv/bin/activate
 
 # Ignore commands that start with a space (curling with passwords, etc...)
 setopt HIST_IGNORE_SPACE
@@ -49,10 +46,6 @@ bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
 # aliases
-# alias be="bundle exec"
-# alias fs="foreman start"
-# alias befs="bundle exec foreman start"
-# alias befr="bundle exec foreman run"
 alias gs="git status -s"
 alias gb="git branch"
 alias gc="git checkout \$1"
@@ -62,8 +55,6 @@ alias gd="git diff"
 alias lg="lazygit"
 alias ll="ls -al"
 #alias serve="ruby -run -e httpd . -p \$1"
-alias fix_video="sudo killall VDCAssistant"
-alias fix_audio="sudo killall coreaudiod"
 alias R="R --silent"
 alias vimx='vim -x --cmd "set cryptmethod=blowfish2" --cmd "set nobackup" --cmd "set noswapfile" --cmd "set viminfo=\"\"" -u NONE'
 alias vimw="nvim -c 'normal ,ww'"
@@ -72,21 +63,30 @@ alias oldvim="command vim"
 alias dockclean='docker rm $(docker ps -a -q -f status=exited); docker rmi $(docker images -f "dangling=true" -q)'
 alias xml_pp='xmllint --format -'
 alias pcp="rsync -r --progress"
-#alias ctags="`brew --prefix`/bin/ctags"
 alias rgf='rg --files | rg'
 alias ver="vercel"
-#alias ibrew="arch -x86_64 /usr/local/bin/brew"
-alias trustbin="sudo xattr -dr com.apple.quarantine $1"
 alias clearhist='echo -e "\033c"'
 
 DEFAULT_OLLAMA_MODEL='quen3:8b' #'llama3.2:latest'
 DEFAULT_OLLAMA_CODE_MODEL='codellama:latest'
 alias ol="ollama run $DEFAULT_OLLAMA_MODEL"  # default
 
-# hyprland specific stuff
-alias rewaybar='pkill waybar; nohup waybar > /dev/null 2>&1 & disown'
-alias hypT='hyprctl keyword decoration:active_opacity 1.0; hyprctl keyword decoration:inactive_opacity 0.9'
-alias hyp-T='hyprctl keyword decoration:active_opacity 1.0; hyprctl keyword decoration:inactive_opacity 1.0'
+if [[ $(uname) == 'Darwin' ]]; then
+  alias fix_video="sudo killall VDCAssistant"
+  alias fix_audio="sudo killall coreaudiod"
+  alias ctags="`brew --prefix`/bin/ctags"
+  alias ibrew="arch -x86_64 /usr/local/bin/brew"
+  alias trustbin="sudo xattr -dr com.apple.quarantine $1"
+fi
+
+if [[ $(uname) == 'Linux' ]]; then
+  alias upgrade-system='pacman -Syu'
+  alias pbcopy='xsel --clipboard --input'
+  # Hyprland
+  alias rewaybar='pkill waybar; nohup waybar > /dev/null 2>&1 & disown'
+  alias hypT='hyprctl keyword decoration:active_opacity 1.0; hyprctl keyword decoration:inactive_opacity 0.9'
+  alias hyp-T='hyprctl keyword decoration:active_opacity 1.0; hyprctl keyword decoration:inactive_opacity 1.0'
+fi
 
 # nothing is coming up as clean as I want it. there just isn't that much to improve upon cmd+tab to a term window and running vim + CC
 #alias assist_win='/opt/homebrew/bin/kitty --config ~/.config/kitty/float.conf > /dev/null 2>&1 & echo $! > ~/.local/state/kitty/assist.pid'
@@ -94,17 +94,28 @@ alias hyp-T='hyprctl keyword decoration:active_opacity 1.0; hyprctl keyword deco
 #alias assist_vim='nvim --cmd "let g:zen_mode = 1" -c CC'
 #alias assist_vim2='nvim --cmd "let g:zen_mode = 1" -c LLM'
 
-# trying everything possible to clear scrollback (kitty_mod+f just keeps seeing more stuff)
-#ctrl_l() {
-#    builtin print -rn -- $'\r\e[0J\e[H\e[22J' >"$TTY"
-#    builtin zle .reset-prompt
-#    builtin zle -R
-#}
-#zle -N ctrl_l
-#bindkey '^l' ctrl_l
-
 function msc() {
-  claude --allowedTools "Read,Write" -p "Create a bun script in the current directory and do nothing else. When done, also print out the content of the script verbatim and no other text. The name of the script should be $1.ts and the script should do the following: $2"
+  local script_name
+  local description
+
+  if [ $# -eq 1 ]; then
+    script_name="script"
+    description="$1"
+  elif [ $# -eq 2 ]; then
+    script_name="$1"
+    description="$2"
+  else
+    echo "usage: msc [script-name] <description>"
+    return 1
+  fi
+
+  if [[ ! "$script_name" =~ ^[a-zA-Z0-9_-]{1,50}$ ]]; then
+    echo "usage: msc [script-name] <description>"
+    echo "  script-name must be a short filename (letters, numbers, _, - only)"
+    return 1
+  fi
+
+  claude --allowedTools "Read,Write" -p "Create a bun script in the current directory and do nothing else. When done, also print out the content of the script verbatim and no other text. The name of the script should be $script_name.ts and the script should do the following: $description"
 }
 
 # *m*arkdown
@@ -146,20 +157,6 @@ function rc() {
 alias t=task
 alias ttui=taskwarrior-tui
 
-# taskell
-#function task() {
-#  if [ "$1" = "ls" ] || [ "$1" = "" ]
-#  then
-#    for f in ~/Documents/taskell/*.md; do
-#      echo "- $(basename $f .md)"
-#    done
-#  else
-#    pushd ~ > /dev/null
-#    taskell "Documents/taskell/$1.md"
-#    popd > /dev/null
-#  fi
-#}
-
 # miscelanious configuration stuff
 #export PGDATA="/usr/local/var/postgres"
 export EDITOR=nvim
@@ -173,27 +170,13 @@ unsetopt share_history
 # TODO: Need a better way to do this. Maybe git submodules?
 source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-source /usr/share/nvm/init-nvm.sh
+source <(fzf --zsh)
 
-#source <(fzf --zsh)
+if [[ $(uname) == 'Linux' ]]; then
+  source /usr/share/nvm/init-nvm.sh
+fi
 
 alias j="echo 'trying zoxide. Remember?' && return"
-# Load auto-jump
-#[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
-
-#
-## So I don't forget about this again. jp foo will jump to any directory _within_ the current directory
-## So for example, while in code `jp foo` will jump to the best match within foo/** instead of to
-## an even higher weighted "foo" directory that's somewhere else on the filesystem
-#jp() {
-#  pushd -q $(pwd)
-#  if [[ ${1} == -* ]] && [[ ${1} != "--" ]]; then
-#    autojump ${@}
-#    return
-#  else
-#    j $(pwd) ${@}
-#  fi
-#}
 
 # normally when you quit `yazi` it leaves you right where you started. But if you start it with `y`
 # while in yazi, `q` will quit and set the cwd to wherever you were. `Q` exits yazi normally
@@ -212,14 +195,18 @@ function n() {
 
 command -v zoxide &> /dev/null && eval "$(zoxide init --cmd z zsh)"
 
-alias pbcopy='xsel --clipboard --input'
+if [[ $(uname) == 'Linux' ]]; then
+  # bun
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+  [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+fi
 
 # This fixes the <enter> inserting ^M instead of actually sending enter to some programs issue that came up for god knows what reason
 stty icrnl
 stty sane
 
 [ -f ~/.local/share/zsh/post.zsh ] && source ~/.local/share/zsh/post.zsh
-
 
 # BEGIN opam configuration
 # This is useful if you're using opam as it adds:
@@ -228,29 +215,3 @@ stty sane
 # This section can be safely removed at any time if needed.
 #[[ ! -r '/Users/lukebergen/.opam/opam-init/init.zsh' ]] || source '/Users/lukebergen/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
 # END opam configuration
-
-# bun completions
-[ -s "/home/luke/.bun/_bun" ] && source "/home/luke/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-
-# TODO: variablize this based on an env or something
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-#__conda_setup="$('/home/luke/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-#if [ $? -eq 0 ]; then
-#    eval "$__conda_setup"
-#else
-#    if [ -f "/home/luke/miniconda3/etc/profile.d/conda.sh" ]; then
-#        . "/home/luke/miniconda3/etc/profile.d/conda.sh"
-#    else
-#        export PATH="/home/luke/miniconda3/bin:$PATH"
-#    fi
-#fi
-#unset __conda_setup
-# <<< conda initialize <<<
-

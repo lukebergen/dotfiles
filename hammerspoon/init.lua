@@ -4,6 +4,10 @@
 -- `ioreg -l -w 0 | grep SecureInput`
 -- See this for best info on this issue: https://github.com/Hammerspoon/hammerspoon/issues/1743#issuecomment-631598824
 
+local spaces = require("hs.spaces") -- Ensure the spaces module is loaded
+
+local hs = hs
+
 local utils = require("utils")
 local canvas = require("hs.canvas")
 local silly = require("silly")
@@ -21,11 +25,42 @@ end
 -------------
 -- hotkeys --
 -------------
-hs.hotkey.bind({"alt", "ctrl"}, "space", function()
+hs.hotkey.bind({"alt", "ctrl", "shift"}, "space", function()
   if (hs.spotify.isRunning()) then
     hs.spotify.playpause()
   end
 end)
+
+hs.hotkey.bind({"alt", "ctrl"}, "b", function()
+  hs.task.new("/usr/bin/open", nil, {"-na", "qutebrowser", "--args", "--target", "window", "about:blank"}):start()
+end)
+
+-- TODO: new version of "this would be neat" from block below.
+-- There's a native app, does that help? Not so much
+--hs.hotkey.bind({"cmd"}, "p", function()
+--  local app = hs.application.get("Microsoft 365 Copilot")
+--  if app then
+--    local window = app:mainWindow()
+--    if window then
+--      if window:isVisible() then
+--        app:hide()
+--      else
+--        app:unhide()
+--
+--        local currentSpace = spaces.focusedSpace()
+--        if currentSpace then
+--          spaces.moveWindowToSpace(window:id(), currentSpace)
+--        end
+--
+--        window:focus()
+--      end
+--    else
+--      hs.alert.show("No main window found for the application")
+--    end
+--  else
+--    hs.alert.show("Application not found")
+--  end
+--end)
 
 --hs.hotkey.bind({"alt"}, "`", function()
 --  assist.toggle()
@@ -92,7 +127,7 @@ commands.shrug = function()
   hs.eventtap.keyStrokes("¯\\_(ツ)_/¯")
 end
 
-hs.hotkey.bind({"alt"}, "space", function()
+hs.hotkey.bind({"ctrl", "alt"}, "space", function()
   local command = ""
   local alert = hs.alert("", 9999)
   local et
@@ -127,23 +162,184 @@ end)
 --------------
 -- alt keys --
 --------------
-local s = hs.hotkey.modal.new('alt', 's')
-s:bind('', 'escape', function() s:exit() end)
-local map = {d = "◊", j = "👇", h = "👈", l = "👉", k = "👆"}
-for key, value in pairs(map) do
-  s:bind('', key, function()
-    s:exit()
+local altKeyState = {
+  active = false,
+  timer = nil,
+  hotkeys = {}
+}
+
+local altKeyMap = {d = "◊", j = "👇", h = "👈", l = "👉", k = "👆", v = "✓"}
+
+local function disableAltKeyHotkeys()
+  for _, hotkey in pairs(altKeyState.hotkeys) do
+    hotkey:disable()
+  end
+end
+
+local function resetAltKeyState()
+  if altKeyState.timer then
+    altKeyState.timer:stop()
+    altKeyState.timer = nil
+  end
+  disableAltKeyHotkeys()
+  altKeyState.active = false
+end
+
+local function enableAltKeyHotkeys()
+  for _, hotkey in pairs(altKeyState.hotkeys) do
+    hotkey:enable()
+  end
+end
+
+hs.hotkey.bind({"ctrl", "alt"}, "s", function()
+  resetAltKeyState()
+  altKeyState.active = true
+  enableAltKeyHotkeys()
+  altKeyState.timer = hs.timer.doAfter(5, resetAltKeyState)
+end)
+
+for key, value in pairs(altKeyMap) do
+  altKeyState.hotkeys[key] = hs.hotkey.new({"ctrl", "alt"}, key, function()
+    resetAltKeyState()
     hs.eventtap.keyStrokes(value)
   end)
 end
 
+hs.hotkey.bind({"ctrl", "alt"}, "escape", function()
+  resetAltKeyState()
+end)
+
+
+hs.hotkey.bind({'ctrl', 'alt'}, 't', function()
+  hs.eventtap.keyStrokes("foobar")
+end)
+
+hs.hotkey.bind('ctrl', 't', function()
+  hs.eventtap.keyStrokes("foobar")
+end)
+
 --------------------------------
 -- register-like copy/pasting --
 --------------------------------
-local c = hs.hotkey.modal.new('alt', 'c') -- copy into following key
-local v = hs.hotkey.modal.new('alt', 'v') -- paste from following key
-local x = hs.hotkey.modal.new('alt', 'x') -- copy from following key into system clipboard
+
+-- State-based clipboard register system
+local clipboardState = {
+  action = nil,  -- "copy", "paste", or "recopy"
+  timer = nil,   -- hs.timer object for 5s timeout
+  hotkeys = {}   -- table to store register hotkey objects
+}
+
+local function disableRegisterHotkeys()
+  for _, hotkey in pairs(clipboardState.hotkeys) do
+    hotkey:disable()
+  end
+end
+
+local function enableRegisterHotkeys()
+  for _, hotkey in pairs(clipboardState.hotkeys) do
+    hotkey:enable()
+  end
+end
+
+local function resetClipboardState()
+  if clipboardState.timer then
+    clipboardState.timer:stop()
+    clipboardState.timer = nil
+  end
+  disableRegisterHotkeys()
+  clipboardState.action = nil
+end
+
+local function setClipboardAction(actionName)
+  resetClipboardState()
+  clipboardState.action = actionName
+  enableRegisterHotkeys()
+  clipboardState.timer = hs.timer.doAfter(5, resetClipboardState)
+end
+
+local function performCopy(char)
+  local tempPasteboard = hs.pasteboard.getContents()
+  hs.eventtap.keyStroke("cmd", "c")
+  registers[char] = hs.pasteboard.getContents()
+  hs.pasteboard.setContents(tempPasteboard)
+  hs.settings.set("registers", utils.cleanRegisters(registers))
+end
+
+local function performPaste(char)
+  if not registers[char] then
+    return
+  end
+  local tempPasteboard = hs.pasteboard.getContents()
+  hs.pasteboard.setContents(registers[char])
+  hs.eventtap.keyStroke("cmd", "v")
+  hs.pasteboard.setContents(tempPasteboard)
+end
+
+local function performRecopy(char)
+  if not registers[char] then
+    return
+  end
+  local tempPasteboard = hs.pasteboard.getContents()
+  hs.pasteboard.setContents(registers[char])
+  hs.timer.doAfter(5, function()
+    hs.pasteboard.setContents(tempPasteboard)
+  end)
+end
+
+local function handleRegisterAction(char)
+  local action = clipboardState.action
+  if not action then
+    return
+  end
+
+  resetClipboardState()
+
+  if action == "copy" then
+    performCopy(char)
+  elseif action == "paste" then
+    performPaste(char)
+  elseif action == "recopy" then
+    performRecopy(char)
+  end
+end
+
+-- Action trigger bindings
+hs.hotkey.bind({"cmd", "ctrl"}, "c", function()
+  setClipboardAction("copy")
+end)
+
+hs.hotkey.bind({"cmd", "ctrl"}, "v", function()
+  setClipboardAction("paste")
+end)
+
+hs.hotkey.bind({"cmd", "ctrl"}, "x", function()
+  setClipboardAction("recopy")
+end)
+
+hs.hotkey.bind({"cmd", "ctrl"}, "escape", function()
+  resetClipboardState()
+end)
+
+-- Exclude c, v, x (used for action triggers)
+local registerLetters = {
+  "a", "b", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+  "n", "o", "p", "q", "r", "s", "t", "u", "w", "y", "z",
+  "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
+}
+
+-- Create register hotkeys as disabled by default
+hs.fnutils.each(registerLetters, function(char)
+  clipboardState.hotkeys[char] = hs.hotkey.new({"cmd", "ctrl"}, char, function()
+    handleRegisterAction(char)
+  end)
+end)
+
+--[[ OLD MODAL-BASED CLIPBOARD SYSTEM (deprecated: macOS broke modals)
+-- Kept for reference during transition period
 local registerLetters = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
+local c = hs.hotkey.modal.new({'ctrl', 'alt', 'shift'}, 'c') -- copy into following key
+local v = hs.hotkey.modal.new({'ctrl', 'alt', 'shift'}, 'v') -- paste from following key
+local x = hs.hotkey.modal.new({'ctrl', 'alt', 'shift'}, 'x') -- copy from following key into system clipboard
 
 c:bind('', 'escape', function() c:exit() end)
 v:bind('', 'escape', function() v:exit() end)
@@ -182,7 +378,9 @@ hs.fnutils.each(registerLetters, function(char)
     end)
   end)
 end)
+]]
 
+--[[ KITTY HOTKEY WINDOW (currently broken, commented out to avoid keybind conflict with clipboard recopy)
 -- very much still work in progress. Hence cmd+shift+x instead of cmd+shift+c. Still using iterm2
 -- for hotkey window for now I guess. But getting closer
 local originalFocus
@@ -233,6 +431,7 @@ hs.hotkey.bind({"cmd", "shift"}, "x", function()
   --  hs.application.launchOrFocus("kitty")
   end
 end)
+]]
 
 -- begin MM specific stuff (if applicable)
 local userChoices = safeRequire("mm-test-users") -- only local to MM machine
@@ -261,7 +460,7 @@ if userChoices then
     userChooser:query("")
   end)
 
-  hs.hotkey.bind({"alt"}, "u", function()
+  hs.hotkey.bind({"ctrl", "alt"}, "u", function()
     userChooser:show()
   end)
 end

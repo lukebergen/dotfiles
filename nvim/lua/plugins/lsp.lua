@@ -8,7 +8,8 @@ vim.diagnostic.config({
   update_in_insert = false,
 })
 
-vim.keymap.set("n", "<leader>d", function()
+vim.keymap.set('n', "<leader>d", function()
+  local before_wins = vim.api.nvim_list_wins()
   vim.diagnostic.open_float(nil, {
     focusable = false,
     header = "",
@@ -17,40 +18,52 @@ vim.keymap.set("n", "<leader>d", function()
     --border = {""},
     scope = "cursor",
     source = "if_many",
-    close_events = {"CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre", "WinLeave"},
+    close_events = {"CursorMoved", "CursorMovedI", "BufHidden", "InsertCharPre"},
   })
+
+  vim.g.last_float_win = nil
+  local after_wins = vim.api.nvim_list_wins()
+  for _, win in ipairs(after_wins) do
+    if not vim.tbl_contains(before_wins, win) then
+      vim.g.last_float_win = win
+    end
+  end
 end, {noremap = true, desc = "show [d]iagnostic for error under cursor"})
 
--- TODO:
-vim.keymap.set("n", "<leader>la", function()
+vim.keymap.set('n', "<leader>xd", function()
+  local float_win = vim.g.last_float_win
+  if float_win and vim.api.nvim_win_is_valid(float_win) then
+    vim.api.nvim_set_current_win(float_win)
+  else
+    vim.notify("No valid floating window to focus", vim.log.levels.WARN)
+  end
+end, {noremap = true, desc = "focus last floating diagnostic window"})
 
-end, {noremap = true, desc = "LSP code [a]ctions"})
-
---vim.keymap.set('n', "<leader>xcd", function()
---  if not os.getenv("COPILOT_AVAILABLE") == "true" then
---    print("CopilotChat not available")
---    return
---  end
---  local cursorPos = vim.api.nvim_win_get_cursor(0)
---  local lineNr = cursorPos[1]
---  -- local colNr = cursorPos[2] -- TODO: multiple diags per line
---  local diags = vim.diagnostic.get(0, {lnum = lineNr - 1})
---  if diags and diags[1] then
---    local first = diags[1]
---    local cop = require("CopilotChat")
---    local select = require("CopilotChat.select")
---    cop.ask("why am I getting this error?\n\n" .. first.message, {
---      --headless = true,
---      clear_chat_on_new_prompt = true,
---      show_help = false,
---      show_folds = false,
---      selection = function(source) return select.line(source) end,
---      window = {
---        layout = "float"
---      }
---    })
---  end
---end, {noremap = true, desc = "ask CopilotChat about [d]iagnostic"})
+vim.keymap.set('n', "<leader>xcd", function()
+  if not os.getenv("COPILOT_AVAILABLE") then
+    print("CopilotChat not available")
+    return
+  end
+  local cursorPos = vim.api.nvim_win_get_cursor(0)
+  local lineNr = cursorPos[1]
+  -- local colNr = cursorPos[2] -- TODO: multiple diags per line
+  local diags = vim.diagnostic.get(0, {lnum = lineNr - 1})
+  if diags and diags[1] then
+    local first = diags[1]
+    local cop = require("CopilotChat")
+    local select = require("CopilotChat.select")
+    cop.ask("why am I getting this error?\n\n" .. first.message, {
+      --headless = true,
+      clear_chat_on_new_prompt = true,
+      show_help = false,
+      show_folds = false,
+      selection = function(source) return select.line(source) end,
+      window = {
+        layout = "float"
+      }
+    })
+  end
+end, {noremap = true, desc = "ask CopilotChat about [d]iagnostic"})
 
 --vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
 --  if not (result and result.contents) then
@@ -173,8 +186,8 @@ return {
           --    See `:help CursorHold` for information about when this is executed
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
-          local client = vim.lsp.get_clients({ id = event.data.client_id })[1]
-          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = event.buf,
@@ -246,6 +259,22 @@ return {
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {
+          --handlers = {
+          --  ["textDocument/publishDiagnostics"] = function( _, result, ctx, config)
+          --    local codes_to_ignore = { 80001 }
+          --    if result.diagnostics == nil then
+          --      return
+          --    end
+          --    for idx, error in ipairs(result.diagnostics) do
+          --      if vim.tbl_contains(codes_to_ignore, error.code) then
+          --        table.remove(result.diagnostics, idx)
+          --      end
+          --    end
+
+          --    --local formatter = require('format-ts-errors')[entry.code]
+          --    vim.lsp.diagnostic.on_publish_diagnostics( _, result, ctx, config)
+          --  end,
+          --},
           capabilities = capabilities,
           settings = {
             diagnostics = {

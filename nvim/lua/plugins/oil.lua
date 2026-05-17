@@ -28,7 +28,7 @@ return {
         ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
         ["<C-p>"] = { "actions.preview", mode = "n" },
         ["<C-s>"] = { "actions.change_sort", mode = "n" },
-        ["<C-z>"] = "actions.open_external",
+        ["<C-x>"] = "actions.open_external",
         ["<ESC>"] = { "actions.close", mode = "n" },
         ["<C-.>"] = { "actions.toggle_hidden", mode = "n" },
         ["<C-i>"] = {

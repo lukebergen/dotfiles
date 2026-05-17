@@ -38,6 +38,14 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   end
 })
 
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  --group = augroup("env_filetype"),
+  pattern = { "*.hurl" },
+  callback = function()
+    vim.opt_local.filetype = "sh"
+  end,
+})
+
 
 vim.opt.grepprg = 'rg -S --vimgrep'
 vim.g.ctrlp_user_command = 'rg %s --files --color=never --glob ""'
