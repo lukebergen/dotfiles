@@ -154,7 +154,7 @@ source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 
 source <(fzf --zsh)
 
-alias j="echo 'trying zoxide. Remember?' && return"
+#alias j="echo 'trying zoxide. Remember?' && return"
 # Load auto-jump
 #[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 #
@@ -226,3 +226,6 @@ stty sane
 # This section can be safely removed at any time if needed.
 #[[ ! -r '/Users/lukebergen/.opam/opam-init/init.zsh' ]] || source '/Users/lukebergen/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
 # END opam configuration
+export PATH="$HOME/.local/bin:$PATH"
+export NODE_EXTRA_CA_CERTS=$HOME/.pki/mm-cert-bundle.pem
+export XDG_CONFIG_HOME=$HOME/.config/

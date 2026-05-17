@@ -25,11 +25,15 @@ end
 -------------
 -- hotkeys --
 -------------
---hs.hotkey.bind({"alt", "ctrl"}, "space", function()
---  if (hs.spotify.isRunning()) then
---    hs.spotify.playpause()
---  end
---end)
+hs.hotkey.bind({"alt", "ctrl", "shift"}, "space", function()
+  if (hs.spotify.isRunning()) then
+    hs.spotify.playpause()
+  end
+end)
+
+hs.hotkey.bind({"alt", "ctrl"}, "b", function()
+  hs.task.new("/usr/bin/open", nil, {"-na", "qutebrowser", "--args", "--target", "window", "about:blank"}):start()
+end)
 
 -- TODO: new version of "this would be neat" from block below.
 -- There's a native app, does that help? Not so much
@@ -158,15 +162,52 @@ end)
 --------------
 -- alt keys --
 --------------
-local s = hs.hotkey.modal.new({'ctrl', 'alt'}, 's')
-s:bind('', 'escape', function() s:exit() end)
-local map = {d = "◊", j = "👇", h = "👈", l = "👉", k = "👆"}
-for key, value in pairs(map) do
-  s:bind('', key, function()
-    s:exit()
+local altKeyState = {
+  active = false,
+  timer = nil,
+  hotkeys = {}
+}
+
+local altKeyMap = {d = "◊", j = "👇", h = "👈", l = "👉", k = "👆", v = "✓"}
+
+local function disableAltKeyHotkeys()
+  for _, hotkey in pairs(altKeyState.hotkeys) do
+    hotkey:disable()
+  end
+end
+
+local function resetAltKeyState()
+  if altKeyState.timer then
+    altKeyState.timer:stop()
+    altKeyState.timer = nil
+  end
+  disableAltKeyHotkeys()
+  altKeyState.active = false
+end
+
+local function enableAltKeyHotkeys()
+  for _, hotkey in pairs(altKeyState.hotkeys) do
+    hotkey:enable()
+  end
+end
+
+hs.hotkey.bind({"ctrl", "alt"}, "s", function()
+  resetAltKeyState()
+  altKeyState.active = true
+  enableAltKeyHotkeys()
+  altKeyState.timer = hs.timer.doAfter(5, resetAltKeyState)
+end)
+
+for key, value in pairs(altKeyMap) do
+  altKeyState.hotkeys[key] = hs.hotkey.new({"ctrl", "alt"}, key, function()
+    resetAltKeyState()
     hs.eventtap.keyStrokes(value)
   end)
 end
+
+hs.hotkey.bind({"ctrl", "alt"}, "escape", function()
+  resetAltKeyState()
+end)
 
 
 hs.hotkey.bind({'ctrl', 'alt'}, 't', function()
