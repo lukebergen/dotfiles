@@ -173,8 +173,8 @@ return {
           --    See `:help CursorHold` for information about when this is executed
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
-          local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+          local client = vim.lsp.get_clients({ id = event.data.client_id })[1]
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = event.buf,
@@ -246,22 +246,6 @@ return {
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {
-          --handlers = {
-          --  ["textDocument/publishDiagnostics"] = function( _, result, ctx, config)
-          --    local codes_to_ignore = { 80001 }
-          --    if result.diagnostics == nil then
-          --      return
-          --    end
-          --    for idx, error in ipairs(result.diagnostics) do
-          --      if vim.tbl_contains(codes_to_ignore, error.code) then
-          --        table.remove(result.diagnostics, idx)
-          --      end
-          --    end
-
-          --    --local formatter = require('format-ts-errors')[entry.code]
-          --    vim.lsp.diagnostic.on_publish_diagnostics( _, result, ctx, config)
-          --  end,
-          --},
           capabilities = capabilities,
           settings = {
             diagnostics = {

@@ -1,92 +1,34 @@
 return {
-  "nvim-treesitter/nvim-treesitter",
-  tag = "v0.9.2",
-  build = function()
-    require("nvim-treesitter.install").update({ with_sync = true })()
-  end,
-  --event = { "BufReadPost", "BufNewFile" },
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter-textobjects",
+  {
+    "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter").setup({})
+
+      -- nvim-treesitter main no longer supports ensure_installed.
+      -- Check for missing parsers on startup and install them.
+      local wanted = {
+        "cpp", "csv", "comment",
+        "javascript", "typescript", "tsx",
+        "json", "python", "rust",
+      }
+      local installed = require("nvim-treesitter").get_installed()
+      local missing = vim.tbl_filter(function(l)
+        return not vim.list_contains(installed, l)
+      end, wanted)
+      if #missing > 0 then
+        require("nvim-treesitter").install(missing)
+      end
+
+      -- nvim-treesitter no longer enables highlighting (parser installer only now).
+      -- Neovim 0.12 bundles c, lua, markdown, markdown_inline, query, vim, vimdoc
+      -- and its own ftplugins handle those automatically.
+      -- Non-bundled languages need this explicit autocmd.
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "cpp", "csv", "javascript", "typescript", "typescriptreact", "json", "python", "rust" },
+        callback = function() pcall(vim.treesitter.start) end,
+      })
+    end,
   },
-  config = function()
-    require("nvim-treesitter.configs").setup({
-      -- Enable syntax highlighting
-      sync_install = true,
-      highlight = {
-        enable = true,
-      },
-      -- Enable indentation
-      indent = {
-        enable = false,
-        --disable = { "tsx" },
-      },
-      -- Ensure these language parsers are installed
-      ensure_installed = {
-        "c",
-        "cpp",
-        "csv",
-        "comment",
-        --"html",
-        "javascript",
-        "typescript",
-        "tsx",
-        "json",
-        "lua",
-        "markdown",
-        "markdown_inline",
-        "python",
-        "query",
-        "rust",
-        "vim",
-        "vimdoc",
-        --"plantuml",  -- ehhhh we'll let polyglot handle it the old-school way
-      },
-
-      -- some example configuration
-
-      -- Enable incremental selection
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = "<C-s>",
-          node_decremental = "<C-backspace>",
-        },
-      },
-      ---- Enable text objects
-      --textobjects = {
-      --  select = {
-      --    enable = true,
-      --    lookahead = true,
-      --    keymaps = {
-      --      ["af"] = "@function.outer",
-      --      ["if"] = "@function.inner",
-      --      ["ac"] = "@class.outer",
-      --      ["ic"] = "@class.inner",
-      --    },
-      --  },
-      --  move = {
-      --    enable = true,
-      --    set_jumps = true,
-      --    goto_next_start = {
-      --      ["]m"] = "@function.outer",
-      --      ["]]"] = "@class.outer",
-      --    },
-      --    goto_next_end = {
-      --      ["]M"] = "@function.outer",
-      --      ["]["] = "@class.outer",
-      --    },
-      --    goto_previous_start = {
-      --      ["[m"] = "@function.outer",
-      --      ["[["] = "@class.outer",
-      --    },
-      --    goto_previous_end = {
-      --      ["[M"] = "@function.outer",
-      --      ["[]"] = "@class.outer",
-      --    },
-      --  },
-      --},
-    })
-  end,
 }

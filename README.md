@@ -1,6 +1,8 @@
-My collection of dotfiles for vim, zsh, and eventually others.
+My collection of dotfiles for neovim, zsh, yazi, kitty, and others.
 
-Also includes an install.sh file for new machines.
+Also includes install scripts under `install_scripts/` for new machines (`base.sh` for setup, `Brewfile.base` for Mac packages).
+
+**Neovim note:** `tree-sitter-cli` must be installed before launching Neovim for the first time (handles treesitter parser compilation). On Mac it's in `Brewfile.base`. On Linux/Arch: `sudo pacman -S tree-sitter-cli`.
 
 Also, looooooootta keymaps break for various tools if MacOS has already laid claim to them. Check `Preferences > Keyboard > Keyboard Shortcuts > (all of the things)` for OS-level keymappings to turn on/off if they collide or just aren't wanted.
 

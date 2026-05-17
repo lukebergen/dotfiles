@@ -57,7 +57,7 @@ return {
           -- let's see how we feel about this
           -- will automatically show completion options. false requires a keymap to trigger your options
           -- note: autocomplete needs to be either false or a table
-          --autocomplete=false, -- off
+          autocomplete=false, -- off
           --autocomplete = { "TextChanged" }, -- on
           completeopt = 'menu,menuone,noinsert',
         },
@@ -78,7 +78,7 @@ return {
           ['<C-n>'] = cmp.mapping.select_next_item(),
           ['<C-p>'] = cmp.mapping.select_prev_item(),
           ['<C-y>'] = cmp.mapping.confirm { select = true },
-          ['<C-c>'] = cmp.mapping.complete(),
+          ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-s>'] = cmp.mapping(function(fallback)
             --local copilot = require('copilot.suggestion')
             --if copilot.is_visible() then
@@ -121,7 +121,6 @@ return {
         --  end, { 'i', 's' }),
         --},
         sources = {
-          { name = "buffer" },
           {
             name = 'lazydev',
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
@@ -130,6 +129,7 @@ return {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = "buffer" },
         },
       }
       cmp.setup.cmdline(':', {

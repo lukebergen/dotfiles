@@ -46,9 +46,9 @@ local function doQuery(buffer)
     string.format('{"model": "%s", "messages": %s}', model, json.encode(state.messages))
   }
 
-  local stdin = vim.loop.new_pipe(false)
-  local stdout = vim.loop.new_pipe(false)
-  local stderr = vim.loop.new_pipe(false)
+  local stdin = vim.uv.new_pipe(false)
+  local stdout = vim.uv.new_pipe(false)
+  local stderr = vim.uv.new_pipe(false)
 
   local handle
   handle, _ = vim.uv.spawn("curl", {

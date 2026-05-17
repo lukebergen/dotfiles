@@ -22,6 +22,7 @@ brew "lazygit"
 brew "luarocks"
 brew "mdcat"
 brew "neovim"
+brew "tree-sitter"          # required for nvim-treesitter to compile parsers
 brew "node"
 brew "pass"
 brew "plantuml"
