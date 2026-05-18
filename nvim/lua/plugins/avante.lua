@@ -58,7 +58,7 @@ return {
       selector = {
         --- @alias avante.SelectorProvider "native" | "fzf_lua" | "mini_pick" | "snacks" | "telescope" | fun(selector: avante.ui.Selector): nil
         --- @type avante.SelectorProvider
-        provider = "telescope",
+        provider = "snacks",
       },
     },
     dependencies = {

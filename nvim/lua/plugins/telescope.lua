@@ -1,4 +1,6 @@
-return {
+-- disabled: migrated to snacks.picker (snacks.lua)
+-- kept for reference
+return {} --[[{
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
     dependencies = {
@@ -69,4 +71,4 @@ return {
       vim.keymap.set('n', '<leader>fr', builtin.resume, { noremap = true, desc = "[r]esume previous search"})
     end
   }
-}
+}--]]

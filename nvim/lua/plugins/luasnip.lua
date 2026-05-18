@@ -23,5 +23,5 @@ return {
       },
     },
   },
-  { "benfowler/telescope-luasnip.nvim" },
+  -- { "benfowler/telescope-luasnip.nvim" }, -- telescope extension, disabled with telescope
 }
