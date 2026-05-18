@@ -8,6 +8,7 @@ vim.diagnostic.config({
   update_in_insert = false,
 })
 
+
 vim.keymap.set('n', "<leader>d", function()
   local before_wins = vim.api.nvim_list_wins()
   vim.diagnostic.open_float(nil, {
@@ -147,6 +148,8 @@ return {
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
+          map('K', function() vim.lsp.buf.hover({ border = "single" }) end, 'Hover Documentation')
+
           map('gd', function() Snacks.picker.lsp_definitions() end, '[G]oto [D]efinition')
 
           -- Find references for the word under your cursor.

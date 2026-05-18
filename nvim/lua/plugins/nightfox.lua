@@ -54,6 +54,10 @@ return {
       local groups = {
         all = {
           WinSeparator = { fg = "bg3", bg = NONE },
+          FloatBorder = { fg = "#a48fd4" },
+          NormalFloat = { bg = "NONE" },
+          SnacksPickerDir = { fg = "palette.comment" }, -- runner up: "fg3" (#587b7b)
+          Pmenu = { bg = "NONE" },
           Normal = { fg = "fg1", bg = "NONE",  },
           NormalNC = { fg = "fg1", bg = "NONE" },
           TabLine = { fg = "black", bg = "fg2" },
