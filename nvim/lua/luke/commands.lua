@@ -73,11 +73,11 @@ vim.api.nvim_create_user_command('VimwikiDiaryGenerateIndex', function()
 end, {})
 
 vim.api.nvim_create_user_command("SS", function()
-  vim.cmd('SessionSave')
+  vim.cmd('AutoSession save')
 end, {})
 
 vim.api.nvim_create_user_command("SR", function()
-  vim.cmd('SessionRestore')
+  vim.cmd('AutoSession restore')
 end, {})
 
 vim.api.nvim_create_user_command("UrlDecode", function(opts)
