@@ -53,10 +53,11 @@ vim.g.ctrlp_use_caching = 0
 
 vim.opt.cursorline = true
 
--- TODO: can we clean this up by just using highlight group "cursorlineNC" (NC being "Not Current")
 vim.api.nvim_create_autocmd({"WinEnter"}, {
   callback = function()
-    vim.opt_local.cursorline = true
+    if vim.go.cursorline then
+      vim.opt_local.cursorline = true
+    end
   end
 })
 vim.api.nvim_create_autocmd({"WinLeave"}, {
