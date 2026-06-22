@@ -53,7 +53,16 @@ alias gl="git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --no-merges \$1"
 alias glm="git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" \$1"
 alias gd="git diff"
 alias lg="lazygit"
-alias ll="ls -al"
+
+if [[ "$OSTYPE" == darwin* ]]; then
+  # macOS version
+  # TODO: get the same group-directories-first behavior on Mac somehow
+  alias ll="LC_ALL=C ls -alF"
+else
+  # non-macOS (Linux, *BSD, etc.)
+  alias ll="LC_ALL=C ls -alF --group-directories-first"
+fi
+
 #alias serve="ruby -run -e httpd . -p \$1"
 alias R="R --silent"
 alias vimx='vim -x --cmd "set cryptmethod=blowfish2" --cmd "set nobackup" --cmd "set noswapfile" --cmd "set viminfo=\"\"" -u NONE'
